@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0; url=tottaps.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting to TotTaps...</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: #0b0e1a;
+      color: white;
+    }
+    .loader {
+      text-align: center;
+    }
+    .emoji {
+      font-size: 64px;
+      animation: bounce 1s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="loader">
+    <div class="emoji">🐾</div>
+    <p>Loading TotTaps...</p>
+  </div>
+  <script>
+    // Fallback redirect if meta refresh doesn't work
+    setTimeout(() => {
+      window.location.href = 'tottaps.html';
+    }, 100);
+  </script>
+</body>
+</html>
