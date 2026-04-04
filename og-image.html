@@ -1,0 +1,193 @@
+<!-- OG IMAGE TEMPLATE — Open in browser at 1200×630, screenshot, save as og-image.png -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1200">
+  <title>OG Image Template — TotTaps</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@900&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand: #ff7a3d;
+      --brand2: #ffcd3c;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      background: #111;
+    }
+
+    /* ── The 1200×630 canvas ── */
+    #og {
+      position: relative;
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      background: #0b0e1a;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Background glows ── */
+    .glow-center {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(255, 122, 61, 0.22) 0%, rgba(255, 205, 60, 0.10) 35%, transparent 70%);
+      pointer-events: none;
+    }
+    .glow-bl {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 15% 85%, rgba(255, 107, 223, 0.12) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .glow-tr {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 85% 15%, rgba(77, 150, 255, 0.12) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    /* ── Star dots ── */
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: #ffffff;
+    }
+
+    /* ── Content stack ── */
+    .content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* ── Paw icon ── */
+    .icon {
+      width: 90px;
+      height: 90px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #ff7a3d, #ffcd3c);
+      box-shadow: 0 12px 48px rgba(255, 122, 61, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 46px;
+      margin-bottom: 20px;
+      line-height: 1;
+    }
+
+    /* ── Wordmark ── */
+    .wordmark {
+      font-family: 'Baloo 2', cursive;
+      font-weight: 900;
+      font-size: 88px;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    /* ── Tagline ── */
+    .tagline {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      color: rgba(240, 240, 248, 0.65);
+      margin-bottom: 32px;
+    }
+
+    /* ── Feature pills ── */
+    .pills {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .pill {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 99px;
+      padding: 10px 22px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: rgba(240, 240, 248, 0.85);
+      white-space: nowrap;
+    }
+
+    /* ── Domain ── */
+    .domain {
+      font-family: 'Baloo 2', cursive;
+      font-weight: 900;
+      font-size: 20px;
+      color: rgba(255, 122, 61, 0.8);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── Helper text below canvas ── */
+    .helper {
+      width: 1200px;
+      margin-top: 16px;
+      font-family: sans-serif;
+      font-size: 13px;
+      color: #888;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="og">
+    <!-- Background layers -->
+    <div class="glow-center"></div>
+    <div class="glow-bl"></div>
+    <div class="glow-tr"></div>
+
+    <!-- Starfield — 12 tiny dots at fixed positions -->
+    <div class="star" style="width:2px;height:2px;top:48px;left:142px;opacity:0.45;"></div>
+    <div class="star" style="width:3px;height:3px;top:83px;left:376px;opacity:0.35;"></div>
+    <div class="star" style="width:1px;height:1px;top:31px;left:608px;opacity:0.55;"></div>
+    <div class="star" style="width:2px;height:2px;top:112px;left:890px;opacity:0.40;"></div>
+    <div class="star" style="width:3px;height:3px;top:55px;left:1074px;opacity:0.30;"></div>
+    <div class="star" style="width:1px;height:1px;top:194px;left:67px;opacity:0.50;"></div>
+    <div class="star" style="width:2px;height:2px;top:278px;left:1142px;opacity:0.45;"></div>
+    <div class="star" style="width:1px;height:1px;top:410px;left:38px;opacity:0.38;"></div>
+    <div class="star" style="width:3px;height:3px;top:502px;left:189px;opacity:0.32;"></div>
+    <div class="star" style="width:2px;height:2px;top:561px;left:744px;opacity:0.42;"></div>
+    <div class="star" style="width:1px;height:1px;top:488px;left:1033px;opacity:0.55;"></div>
+    <div class="star" style="width:2px;height:2px;top:597px;left:923px;opacity:0.35;"></div>
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="icon">🐾</div>
+      <div class="wordmark">TotTaps</div>
+      <div class="tagline">The keyboard toy for tiny tots</div>
+      <div class="pills">
+        <div class="pill">🔒 Safe</div>
+        <div class="pill">🎨 6 Themes</div>
+        <div class="pill">🚫 No Ads</div>
+        <div class="pill">⌨️ Free Forever</div>
+      </div>
+      <div class="domain">tottaps.com</div>
+    </div>
+  </div>
+
+  <p class="helper">Screenshot the box above at exactly 1200×630px and save as og-image.png — then upload to the repo root</p>
+
+</body>
+</html>
