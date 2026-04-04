@@ -47,18 +47,31 @@ body {
   z-index: 5;
 }
 
-/* ─── MOUSE TRAIL ───────────────────────── */
-.trail {
+/* ─── THEME-AWARE TRAIL ─────────────────── */
+.trail-emoji {
   position: fixed;
-  border-radius: 50%;
   pointer-events: none;
   z-index: 6;
-  transform: translate(-50%,-50%);
-  animation: trailFade .7s ease-out forwards;
+  transform: translate(-50%, -50%);
+  animation: emojiTrail 0.9s ease-out forwards;
+  user-select: none;
 }
-@keyframes trailFade {
-  0%   { opacity: .9; transform: translate(-50%,-50%) scale(1); }
-  100% { opacity: 0;  transform: translate(-50%,-50%) scale(.1); }
+@keyframes emojiTrail {
+  0%   { opacity: 1;  transform: translate(-50%, -50%) scale(0.6) rotate(0deg); }
+  40%  { opacity: 1;  transform: translate(-50%, calc(-50% + var(--dy, -14px) * 0.4)) scale(1) rotate(calc(var(--rot, 15deg) * 0.5)); }
+  100% { opacity: 0;  transform: translate(-50%, calc(-50% + var(--dy, -14px))) scale(0.4) rotate(var(--rot, 15deg)); }
+}
+.trail-spark {
+  position: fixed;
+  pointer-events: none;
+  z-index: 6;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: sparkTrail 0.6s ease-out forwards;
+}
+@keyframes sparkTrail {
+  0%   { opacity: 0.9; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0;   transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, -12px))) scale(0.2); }
 }
 
 /* ─── SMASH LETTERS ─────────────────────── */
@@ -404,6 +417,52 @@ body.phase-legend #vignette { background:radial-gradient(ellipse at center,trans
   margin-top: 14px;
 }
 
+/* ─── SHARE ROW (landing) ───────────────── */
+.share-row {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.share-label {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.share-btns {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: 99px;
+  border: 1px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.07);
+  color: rgba(255,255,255,.8);
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s;
+}
+.share-btn:hover {
+  background: rgba(255,255,255,.14);
+  color: #fff;
+  border-color: rgba(255,255,255,.3);
+  transform: translateY(-1px);
+}
+.share-wa:hover   { background: rgba(30,190,93,.18);  border-color: rgba(30,190,93,.4);  color: #1ebe5d; }
+.share-copy:hover { background: rgba(255,205,60,.12);  border-color: rgba(255,205,60,.3); color: var(--brand2); }
+.share-x:hover    { background: rgba(255,255,255,.1);  border-color: rgba(255,255,255,.3);color: #fff; }
+
 /* ─── PARENT PANEL ──────────────────────── */
 #ph { position: fixed; top: 0; left: 0; width: 60px; height: 60px; z-index: 100; cursor: pointer; }
 #ph::after { content:'⚙️'; position:absolute; top:10px; left:10px; font-size:20px; opacity:.15; transition:.3s; }
@@ -692,6 +751,7 @@ select {
     <div class="lnav-links">
       <a href="tottaps-guides.html" class="lnav-link">📖 Guides</a>
       <a href="tottaps-about.html"  class="lnav-link">ℹ️ About</a>
+      <a href="privacy.html"        class="lnav-link">🔒 Privacy</a>
       <a href="mailto:ravibvs91@gmail.com" class="lnav-link">✉️ Contact</a>
     </div>
   </nav>
@@ -715,6 +775,15 @@ select {
     </div>
     <button class="start-btn" id="start-btn">🐾 Start Tapping — It's Free</button>
     <span class="start-note">No account · No ads · Fullscreen kiosk mode · <a href="tottaps.com" style="color:var(--muted)">tottaps.com</a></span>
+    <!-- Share row -->
+    <div class="share-row">
+      <span class="share-label">Share with other parents:</span>
+      <div class="share-btns">
+        <button class="share-btn share-wa"   id="share-wa">💬 WhatsApp</button>
+        <button class="share-btn share-copy" id="share-copy">📋 Copy Link</button>
+        <button class="share-btn share-x"    id="share-x">𝕏 Post</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1355,38 +1424,45 @@ document.addEventListener('mousemove', e => {
   if (active) spawnTrail(mx, my);
 });
 
-function spawnTrail(x, y) {
+function spawnTrailParticle(x, y) {
   if (reduceMotion) return;
   trailTick++;
-  if (trailTick % 3 !== 0) return; // throttle
 
-  const mode = theme.trailMode;
   const el = document.createElement('div');
-  el.className = 'trail';
-  el.style.left = x+'px';
-  el.style.top  = y+'px';
-  const color = theme.colors[Math.floor(Math.random()*theme.colors.length)];
+  const themeEmoji  = (theme.emoji  && theme.emoji.length)  ? theme.emoji  : ['✨'];
+  const themeColors = (theme.colors && theme.colors.length) ? theme.colors : ['#ff7a3d'];
 
-  if (mode === 'bubbles') {
-    const sz = Math.random()*18+8;
-    el.style.cssText += `width:${sz}px;height:${sz}px;border:2.5px solid ${color};background:transparent;animation-duration:.9s`;
-  } else if (mode === 'stars') {
-    el.style.cssText += `width:6px;height:6px;background:${color};box-shadow:0 0 8px 3px ${color};animation-duration:.6s`;
-  } else if (mode === 'fire') {
-    const sz = Math.random()*14+6;
-    el.style.cssText += `width:${sz}px;height:${sz*1.5}px;border-radius:50% 50% 30% 30%;background:${color};animation-duration:.5s`;
-  } else if (mode === 'leaves') {
-    el.style.cssText += `width:12px;height:18px;border-radius:0 50% 0 50%;background:${color};animation-duration:.8s`;
-  } else if (mode === 'sparkles') {
-    const sz = Math.random()*10+4;
-    el.style.cssText += `width:${sz}px;height:${sz}px;background:${color};clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);animation-duration:.7s`;
+  if (trailTick % 3 === 0) {
+    // Emoji particle — pick random emoji from theme.emoji
+    el.className = 'trail-emoji';
+    el.textContent = themeEmoji[Math.floor(Math.random() * themeEmoji.length)];
+    const sz = 12 + Math.random() * 8;
+    el.style.fontSize = sz + 'px';
+    el.style.left = (x + (Math.random()-0.5)*18) + 'px';
+    el.style.top  = (y + (Math.random()-0.5)*18) + 'px';
+    el.style.setProperty('--rot', (Math.random()*60-30) + 'deg');
+    el.style.setProperty('--dy', -(10 + Math.random()*20) + 'px');
   } else {
-    // rainbow default
-    const sz = Math.random()*16+6;
-    el.style.cssText += `width:${sz}px;height:${sz}px;background:${color};animation-duration:.7s`;
+    // Spark dot — use theme color
+    el.className = 'trail-spark';
+    const color = themeColors[Math.floor(Math.random() * themeColors.length)];
+    const sz = 4 + Math.random() * 6;
+    el.style.width  = sz + 'px';
+    el.style.height = sz + 'px';
+    el.style.background = color;
+    el.style.boxShadow = `0 0 ${sz*1.5}px ${color}`;
+    el.style.left = (x + (Math.random()-0.5)*14) + 'px';
+    el.style.top  = (y + (Math.random()-0.5)*14) + 'px';
+    el.style.setProperty('--dx', (Math.random()*20-10) + 'px');
+    el.style.setProperty('--dy', -(8 + Math.random()*16) + 'px');
   }
+
   document.body.appendChild(el);
-  el.addEventListener('animationend', ()=>el.remove());
+  el.addEventListener('animationend', () => el.remove());
+}
+
+function spawnTrail(x, y) {
+  spawnTrailParticle(x, y);
 }
 
 // Touch trail
@@ -2708,6 +2784,32 @@ document.addEventListener('fullscreenchange', () => {
   if (!document.fullscreenElement && active && !endCard.classList.contains('show')) {
     setTimeout(() => showEnd('exit'), 300);
   }
+});
+
+// ─── SHARE BUTTONS (landing) ─────────────
+const SHARE_URL  = 'https://tottaps.com';
+const SHARE_TEXT = '🐾 My toddler is obsessed with TotTaps — a free, safe keyboard toy that turns every key press into colours and sounds! No ads, no account needed. Try it:';
+
+document.getElementById('share-wa').addEventListener('click', () => {
+  window.open('https://wa.me/?text=' + encodeURIComponent(SHARE_TEXT + ' ' + SHARE_URL), '_blank');
+});
+
+document.getElementById('share-copy').addEventListener('click', () => {
+  navigator.clipboard.writeText(SHARE_URL).then(() => {
+    const btn = document.getElementById('share-copy');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✅ Copied!';
+    btn.style.color = '#6bcb77';
+    setTimeout(() => { btn.innerHTML = orig; btn.style.color = ''; }, 2000);
+  }).catch(() => {
+    const btn = document.getElementById('share-copy');
+    btn.innerHTML = SHARE_URL;
+    setTimeout(() => { btn.innerHTML = '📋 Copy Link'; }, 3000);
+  });
+});
+
+document.getElementById('share-x').addEventListener('click', () => {
+  window.open('https://x.com/intent/tweet?text=' + encodeURIComponent(SHARE_TEXT) + '&url=' + encodeURIComponent(SHARE_URL), '_blank');
 });
 </script>
 </body>
