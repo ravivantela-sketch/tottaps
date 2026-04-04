@@ -1429,11 +1429,13 @@ function spawnTrailParticle(x, y) {
   trailTick++;
 
   const el = document.createElement('div');
+  const themeEmoji  = (theme.emoji  && theme.emoji.length)  ? theme.emoji  : ['✨'];
+  const themeColors = (theme.colors && theme.colors.length) ? theme.colors : ['#ff7a3d'];
 
   if (trailTick % 3 === 0) {
     // Emoji particle — pick random emoji from theme.emoji
     el.className = 'trail-emoji';
-    el.textContent = theme.emoji[Math.floor(Math.random() * theme.emoji.length)];
+    el.textContent = themeEmoji[Math.floor(Math.random() * themeEmoji.length)];
     const sz = 12 + Math.random() * 8;
     el.style.fontSize = sz + 'px';
     el.style.left = (x + (Math.random()-0.5)*18) + 'px';
@@ -1443,7 +1445,7 @@ function spawnTrailParticle(x, y) {
   } else {
     // Spark dot — use theme color
     el.className = 'trail-spark';
-    const color = theme.colors[Math.floor(Math.random() * theme.colors.length)];
+    const color = themeColors[Math.floor(Math.random() * themeColors.length)];
     const sz = 4 + Math.random() * 6;
     el.style.width  = sz + 'px';
     el.style.height = sz + 'px';
@@ -2799,6 +2801,10 @@ document.getElementById('share-copy').addEventListener('click', () => {
     btn.innerHTML = '✅ Copied!';
     btn.style.color = '#6bcb77';
     setTimeout(() => { btn.innerHTML = orig; btn.style.color = ''; }, 2000);
+  }).catch(() => {
+    const btn = document.getElementById('share-copy');
+    btn.innerHTML = SHARE_URL;
+    setTimeout(() => { btn.innerHTML = '📋 Copy Link'; }, 3000);
   });
 });
 
