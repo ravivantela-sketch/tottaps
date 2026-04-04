@@ -292,6 +292,36 @@ body.phase-legend #vignette { background:radial-gradient(ellipse at center,trans
   text-align: center;
 }
 
+/* ─── LANDING NAV BAR ───────────────────── */
+#landing-nav {
+  position: absolute; top: 0; left: 0; right: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 28px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  background: rgba(11,14,26,.5);
+  backdrop-filter: blur(10px);
+}
+.lnav-logo {
+  display: flex; align-items: center; gap: 9px;
+  font-family: 'Baloo 2', cursive; font-size: 20px; font-weight: 900;
+  color: #fff; text-decoration: none;
+}
+.lnav-icon {
+  width: 32px; height: 32px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  display: flex; align-items: center; justify-content: center; font-size: 17px;
+}
+.lnav-links { display: flex; align-items: center; gap: 6px; }
+.lnav-link {
+  padding: 7px 16px; border-radius: 99px;
+  border: 1px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.75);
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px; font-weight: 700;
+  text-decoration: none; transition: .2s;
+}
+.lnav-link:hover { background: rgba(255,255,255,.08); color: #fff; }
+
 /* ─── LANDING OVERLAY ───────────────────── */
 #landing {
   position: fixed; inset: 0;
@@ -299,6 +329,7 @@ body.phase-legend #vignette { background:radial-gradient(ellipse at center,trans
   display: flex; align-items: center; justify-content: center;
   background: var(--bg-deep);
   transition: opacity .6s ease;
+  flex-direction: column;
 }
 #landing.fade-out { opacity: 0; pointer-events: none; }
 .landing-inner {
@@ -651,18 +682,29 @@ select {
 
 <!-- ── LANDING OVERLAY ────────────────────── -->
 <div id="landing">
+
+  <!-- Top nav bar — issue 3 -->
+  <nav id="landing-nav">
+    <div class="lnav-logo">
+      <div class="lnav-icon">🐾</div>
+      TotTaps
+    </div>
+    <div class="lnav-links">
+      <a href="tottaps-guides.html" class="lnav-link">📖 Guides</a>
+      <a href="tottaps-about.html"  class="lnav-link">ℹ️ About</a>
+      <a href="mailto:ravibvs91@gmail.com" class="lnav-link">✉️ Contact</a>
+    </div>
+  </nav>
+
+  <!-- Centered landing content -->
   <div class="landing-inner">
     <div class="landing-logo">
       <div class="logo-paw">🐾</div>
       <div class="logo-name">TotTaps</div>
     </div>
-    <div style="display:flex;gap:8px;justify-content:center;margin-bottom:20px;">
-      <a href="tottaps-guides.html" style="padding:6px 16px;border-radius:99px;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:13px;font-weight:700;text-decoration:none;transition:.2s;" onmouseover="this.style.background='rgba(255,255,255,.08)'" onmouseout="this.style.background='transparent'">Guides</a>
-      <a href="tottaps-about.html"  style="padding:6px 16px;border-radius:99px;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:13px;font-weight:700;text-decoration:none;transition:.2s;" onmouseover="this.style.background='rgba(255,255,255,.08)'" onmouseout="this.style.background='transparent'">About</a>
-    </div>
     <p class="landing-tagline">
       The <strong>keyboard toy for tiny tots!</strong><br>
-      Every tap bursts into colours, sounds & chaos! 🎉
+      Every tap bursts into colours, sounds &amp; chaos! 🎉
     </p>
     <div class="feature-pills">
       <div class="fpill">🔒 Fullscreen safe mode</div>
@@ -672,7 +714,7 @@ select {
       <div class="fpill">📱 Touch + keyboard + mouse</div>
     </div>
     <button class="start-btn" id="start-btn">🐾 Start Tapping — It's Free</button>
-    <span class="start-note">No account · No ads · Fullscreen kiosk mode</span>
+    <span class="start-note">No account · No ads · Fullscreen kiosk mode · <a href="tottaps.com" style="color:var(--muted)">tottaps.com</a></span>
   </div>
 </div>
 
@@ -796,8 +838,8 @@ select {
 
     <!-- Footer -->
     <div class="report-footer">
-      <a href="#" id="rpt-videos-link">See real parent videos →</a>
-      <div class="report-site">TOTTAPS.APP</div>
+      <a href="tottaps-guides.html" id="rpt-videos-link">Read parent guides →</a>
+      <div class="report-site">TOTTAPS.COM</div>
     </div>
 
   </div>
@@ -2555,7 +2597,7 @@ function animateConfetti() {
 function showEnd(reason = 'timer') {
   active = false;
   const elapsed = Date.now() - sessionStart;
-  const chaosInfo = getChaosInfo(smashCount); // [emoji, badgeText, description]
+  const chaosInfo = getChaosInfo(smashCount);
   const currentThemeName = Object.keys(THEMES).find(k => THEMES[k] === theme) || 'default';
 
   document.getElementById('rpt-score').textContent    = smashCount;
@@ -2565,6 +2607,21 @@ function showEnd(reason = 'timer') {
   document.getElementById('rpt-streak').textContent   = bestStreak;
   document.getElementById('rpt-theme').textContent    = THEME_ICONS[currentThemeName] || '🎉';
   document.getElementById('rpt-session-label').textContent = chaosInfo[2];
+
+  // Issue 1: Show the right primary button depending on how session ended
+  const playAgainBtn = document.getElementById('rpt-play-again');
+  const newGameBtn   = document.getElementById('rpt-new-game');
+  if (reason === 'escape' || reason === 'exit') {
+    // User pressed ESC / exited fullscreen — they clearly want to keep going
+    playAgainBtn.innerHTML = '🔄 Keep Tapping!';
+    playAgainBtn.style.display = 'flex';
+    newGameBtn.style.display   = 'none'; // hide new game — irrelevant on ESC
+  } else {
+    // Timer ended naturally — show both options
+    playAgainBtn.innerHTML = '🔄 Play Again';
+    playAgainBtn.style.display = 'flex';
+    newGameBtn.style.display   = 'flex';
+  }
 
   endCard.classList.add('show');
   launchConfetti();
@@ -2590,6 +2647,10 @@ document.getElementById('rpt-play-again').addEventListener('click', () => {
   resetSession();
   if (timerDuration > 0) startTimer();
   active = true;
+  // Re-enter fullscreen
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen?.().catch(()=>{});
+  }
 });
 
 document.getElementById('rpt-new-game').addEventListener('click', () => {
@@ -2601,11 +2662,15 @@ document.getElementById('rpt-new-game').addEventListener('click', () => {
   clearInterval(timerInterval);
   document.getElementById('timer-sel').value = '0';
   active = true;
+  // Re-enter fullscreen
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen?.().catch(()=>{});
+  }
 });
 
 document.getElementById('rpt-challenge').addEventListener('click', () => {
   const chaosInfo = getChaosInfo(smashCount);
-  const txt = `🔥 Can your toddler beat ${smashCount} taps?\nChaos level: ${chaosInfo[1]}\nChallenge them on TotTaps! 👉 tottaps.app`;
+  const txt = `🔥 Can your toddler beat ${smashCount} taps?\nChaos level: ${chaosInfo[1]}\nChallenge them on TotTaps! 👉 tottaps.com`;
   if (navigator.share) navigator.share({ title: 'TotTaps Challenge!', text: txt });
   else { navigator.clipboard?.writeText(txt); _showCopied('rpt-challenge', '✅ Challenge copied!'); }
 });
@@ -2613,14 +2678,14 @@ document.getElementById('rpt-challenge').addEventListener('click', () => {
 document.getElementById('rpt-copy').addEventListener('click', () => {
   const chaosInfo = getChaosInfo(smashCount);
   const elapsed = Date.now() - sessionStart;
-  const txt = `🐾 TotTaps Report\n\nScore: ${smashCount} keys tapped\nDuration: ${formatDuration(elapsed)}\nChaos level: ${chaosInfo[1]}\nBest streak: ${bestStreak}\n\n${chaosInfo[2]}\n\n👉 tottaps.app`;
+  const txt = `🐾 TotTaps Report\n\nScore: ${smashCount} keys tapped\nDuration: ${formatDuration(elapsed)}\nChaos level: ${chaosInfo[1]}\nBest streak: ${bestStreak}\n\n${chaosInfo[2]}\n\n👉 tottaps.com`;
   navigator.clipboard?.writeText(txt);
   _showCopied('rpt-copy', '✅ Copied to clipboard!');
 });
 
 document.getElementById('rpt-whatsapp').addEventListener('click', () => {
   const chaosInfo = getChaosInfo(smashCount);
-  const msg = encodeURIComponent(`🐾 My toddler just tapped ${smashCount} keys on TotTaps!\nChaos level: ${chaosInfo[1]} 😂\nBest streak: ${bestStreak} in a row!\nTry it free 👉 tottaps.app`);
+  const msg = encodeURIComponent(`🐾 My toddler just tapped ${smashCount} keys on TotTaps!\nChaos level: ${chaosInfo[1]} 😂\nBest streak: ${bestStreak} in a row!\nTry it free 👉 tottaps.com`);
   window.open(`https://wa.me/?text=${msg}`, '_blank');
 });
 
