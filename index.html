@@ -57,6 +57,12 @@ body {
   -webkit-user-select: none;
   touch-action: none;
 }
+a, button, select, input, [role="button"] { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible, [role="button"]:focus-visible {
+  outline: 3px solid var(--brand2);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(11,14,26,.9);
+}
 
 /* ─── CUSTOM CURSOR ─────────────────────── */
 #cursor {
@@ -496,7 +502,10 @@ body.phase-legend #vignette { background:radial-gradient(ellipse at center,trans
 .share-x:hover    { background: rgba(255,255,255,.1);  border-color: rgba(255,255,255,.3);color: #fff; }
 
 /* ─── PARENT PANEL ──────────────────────── */
-#ph { position: fixed; top: 0; left: 0; width: 60px; height: 60px; z-index: 100; cursor: pointer; }
+#ph {
+  position: fixed; top: 0; left: 0; width: 60px; height: 60px; z-index: 100; cursor: pointer;
+  border: 0; background: transparent; padding: 0;
+}
 #ph::after { content:'⚙️'; position:absolute; top:10px; left:10px; font-size:20px; opacity:.15; transition:.3s; }
 #ph:hover::after { opacity:.5; }
 
@@ -761,6 +770,60 @@ select {
   animation: twink var(--td) ease-in-out infinite var(--dl);
 }
 @keyframes twink { 0%,100%{opacity:var(--lo)} 50%{opacity:var(--hi)} }
+
+@media (max-width: 480px) {
+  #landing-nav {
+    padding: 10px 12px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .lnav-logo { font-size: 18px; }
+  .lnav-links {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .lnav-link {
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+  .landing-inner {
+    width: 100%;
+    max-width: 100%;
+    padding: 88px 14px 28px;
+  }
+  #smash-counter {
+    top: 10px;
+    right: 10px;
+    max-width: calc(100vw - 20px);
+  }
+  #counter-left {
+    padding: 8px 10px;
+    font-size: 11px;
+    gap: 6px;
+  }
+  #counter-num { font-size: 16px; }
+  #counter-badge {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+  .key-badge {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+  .start-btn, .share-btn, .lnav-link, .pbtn, .tbtn, .rpt-btn, select, #ph, #close-panel {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition-duration: 0.15s !important;
+    scroll-behavior: auto !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -781,7 +844,7 @@ select {
       TotTaps
     </div>
     <div class="lnav-links">
-      <a href="tottaps-guides.html" class="lnav-link" title="TotTaps parent guides">📖 Guides</a>
+      <a href="tottaps-guides.html" class="lnav-link" title="TotTaps parent guides" aria-label="Read parent guides">📖 Guides</a>
       <a href="tottaps-about.html"  class="lnav-link" title="About TotTaps">ℹ️ About</a>
       <a href="privacy.html"        class="lnav-link" title="TotTaps privacy policy">🔒 Privacy</a>
       <a href="mailto:ravibvs91@gmail.com" class="lnav-link" title="Contact TotTaps">✉️ Contact</a>
@@ -837,12 +900,12 @@ select {
 <div id="tbar-wrap"><div id="tbar"></div></div>
 
 <!-- Parent panel hotspot -->
-<div id="ph" title="Parent Panel (hold 2s)"></div>
+<button id="ph" type="button" title="Parent Panel (hold 2s)" aria-label="Open parent panel"></button>
 
 <!-- ── PARENT PANEL ───────────────────────── -->
-<div id="parent-panel">
+<div id="parent-panel" role="dialog" aria-modal="true" aria-labelledby="parent-panel-title">
   <div class="panel-box">
-    <h2>👪 Parent Panel</h2>
+    <h2 id="parent-panel-title">👪 Parent Panel</h2>
     <div class="prow"><label>🔊 Sound</label><label class="tog"><input type="checkbox" id="tog-sound" checked><span class="tslider"></span></label></div>
     <div class="prow"><label>🐢 Reduce motion</label><label class="tog"><input type="checkbox" id="tog-motion"><span class="tslider"></span></label></div>
     <div class="prow" style="flex-direction:column;align-items:flex-start;gap:10px">
@@ -1002,7 +1065,8 @@ const THEMES = {
 let theme = THEMES.default;
 let smashCount = 0;
 let soundOn = true;
-let reduceMotion = false;
+const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+let reduceMotion = reducedMotionQuery.matches;
 let timerDuration = 0, timerLeft = 0, timerInterval = null;
 let typedBuffer = '';
 let holdTimer = null;
@@ -2576,13 +2640,55 @@ document.getElementById('start-btn').addEventListener('click', () => {
 //  PARENT PANEL
 // ═══════════════════════════════════════════
 const panel = document.getElementById('parent-panel');
-function openPanel() { panel.classList.add('open'); active = false; }
-function closePanel() { panel.classList.remove('open'); active = true; }
+const panelFocusableSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+let lastFocusedBeforePanel = null;
+function openPanel() {
+  lastFocusedBeforePanel = document.activeElement;
+  panel.classList.add('open');
+  active = false;
+  const firstFocusable = panel.querySelector(panelFocusableSelector);
+  firstFocusable?.focus();
+}
+function closePanel() {
+  panel.classList.remove('open');
+  active = true;
+  if (lastFocusedBeforePanel && lastFocusedBeforePanel !== document.body) {
+    lastFocusedBeforePanel.focus();
+  }
+}
 
 document.getElementById('ph').addEventListener('pointerdown', ()=>{ holdTimer=setTimeout(()=>openPanel(),2000); });
 document.getElementById('ph').addEventListener('pointerup',   ()=>clearTimeout(holdTimer));
 document.getElementById('ph').addEventListener('pointerleave',()=>clearTimeout(holdTimer));
+document.getElementById('ph').addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    openPanel();
+  }
+});
 document.getElementById('close-panel').addEventListener('click', closePanel);
+panel.addEventListener('click', e => { if (e.target === panel) closePanel(); });
+panel.addEventListener('keydown', e => {
+  if (!panel.classList.contains('open')) return;
+  if (e.key === 'Escape') {
+    e.preventDefault();
+    e.stopPropagation();
+    closePanel();
+    return;
+  }
+  if (e.key !== 'Tab') return;
+  const focusables = Array.from(panel.querySelectorAll(panelFocusableSelector)).filter(el => !el.hasAttribute('disabled'));
+  if (!focusables.length) return;
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+});
 
 document.getElementById('btn-fs').addEventListener('click', ()=>{
   if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
@@ -2611,6 +2717,11 @@ document.getElementById('theme-btns').addEventListener('click', e=>{
 // Sound
 document.getElementById('tog-sound').addEventListener('change', e=>soundOn=e.target.checked);
 document.getElementById('tog-motion').addEventListener('change', e=>reduceMotion=e.target.checked);
+document.getElementById('tog-motion').checked = reduceMotion;
+reducedMotionQuery.addEventListener('change', e => {
+  reduceMotion = e.matches;
+  document.getElementById('tog-motion').checked = reduceMotion;
+});
 
 // ═══════════════════════════════════════════
 //  TIMER
