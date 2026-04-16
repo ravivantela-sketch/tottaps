@@ -181,8 +181,6 @@ See [LICENSE](LICENSE) file for details.
 
 ## 🙏 Credits
 
-Inspired by [TinyFingers.net](https://tinyfingers.net/) and countless toddlers who love keyboards.
-
 Built with ❤️ for parents everywhere.
 
 ---
