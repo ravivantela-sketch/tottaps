@@ -47,7 +47,7 @@
   --muted: rgba(240,240,248,0.55);
   --radius: 18px;
 }
-html, body { width: 100%; height: 100%; overflow: hidden; overflow-x: hidden; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
 body {
   font-family: 'Nunito', sans-serif;
   background: var(--bg-deep);
@@ -772,7 +772,6 @@ select {
 @keyframes twink { 0%,100%{opacity:var(--lo)} 50%{opacity:var(--hi)} }
 
 @media (max-width: 480px) {
-  html, body { overflow-x: hidden; }
   #landing-nav {
     padding: 10px 12px;
     gap: 8px;
@@ -813,16 +812,15 @@ select {
     font-size: 11px;
     padding: 4px 10px;
   }
-  .start-btn, .share-btn, .lnav-link, .pbtn, .tbtn, .rpt-btn, select, #ph {
+  .start-btn, .share-btn, .lnav-link, .pbtn, .tbtn, .rpt-btn, select, #ph, #close-panel {
     min-height: 44px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
+    animation: none !important;
+    transition-duration: 0.15s !important;
     scroll-behavior: auto !important;
   }
 }
@@ -2654,7 +2652,7 @@ function openPanel() {
 function closePanel() {
   panel.classList.remove('open');
   active = true;
-  if (lastFocusedBeforePanel && typeof lastFocusedBeforePanel.focus === 'function') {
+  if (lastFocusedBeforePanel && lastFocusedBeforePanel !== document.body) {
     lastFocusedBeforePanel.focus();
   }
 }
@@ -2662,7 +2660,12 @@ function closePanel() {
 document.getElementById('ph').addEventListener('pointerdown', ()=>{ holdTimer=setTimeout(()=>openPanel(),2000); });
 document.getElementById('ph').addEventListener('pointerup',   ()=>clearTimeout(holdTimer));
 document.getElementById('ph').addEventListener('pointerleave',()=>clearTimeout(holdTimer));
-document.getElementById('ph').addEventListener('click', openPanel);
+document.getElementById('ph').addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    openPanel();
+  }
+});
 document.getElementById('close-panel').addEventListener('click', closePanel);
 panel.addEventListener('click', e => { if (e.target === panel) closePanel(); });
 panel.addEventListener('keydown', e => {
