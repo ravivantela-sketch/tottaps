@@ -5,13 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TotTaps Parent Guides 🐾 – How to Set Up the Safe Keyboard Toy for Toddlers</title>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-13PPVT0CN7"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-13PPVT0CN7');
+  window.gtag = window.gtag || function gtag(){ dataLayer.push(arguments); };
+  const analyticsOn = localStorage.getItem('tottaps.analytics') === 'on';
+  if (analyticsOn) {
+    const tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-13PPVT0CN7';
+    document.head.appendChild(tag);
+    gtag('js', new Date());
+    gtag('config', 'G-13PPVT0CN7', {
+      anonymize_ip: true,
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false
+    });
+  }
 </script>
 
 <!-- SEO: Primary -->
@@ -279,7 +288,7 @@ footer { border-top:1px solid var(--border);padding:28px 24px;text-align:center;
       <ol class="steps">
         <li><strong>iPad — Guided Access:</strong> Go to Settings → Accessibility → Guided Access → turn it on. Open TotTaps, triple-click the side button, tap Start. Your child can't leave the app.</li>
         <li><strong>Android — Screen Pinning:</strong> Go to Settings → Security → Screen Pinning → turn it on. Open TotTaps, tap the recent apps button, then tap the pin icon.</li>
-        <li><strong>Laptop / Desktop:</strong> TotTaps uses the browser's native Fullscreen API. Press F11 or use the fullscreen button in the parent panel for a clean locked experience.</li>
+        <li><strong>Laptop / Desktop:</strong> TotTaps uses the browser's native Fullscreen API. Press F11 or use the fullscreen button in the parent panel for a focused play experience.</li>
         <li><strong>Chromebook:</strong> Press the fullscreen key (F4) or use the parent panel button. Works well for nursery and classroom use.</li>
       </ol>
       <div class="warn-box">
@@ -299,10 +308,9 @@ footer { border-top:1px solid var(--border);padding:28px 24px;text-align:center;
       </div>
     </div>
     <div class="guide-body">
-      <p>The parent panel is hidden so your toddler can't accidentally open it. There are two ways to open it:</p>
+      <p>The parent panel is hidden so your toddler can't accidentally open it. Open it by holding the top-left corner for 2 seconds:</p>
       <ol class="steps">
         <li><strong>Hold the top-left corner</strong> of the screen for 2 seconds. A settings icon appears — keep holding until the panel opens.</li>
-        <li><strong>Type the word "parent"</strong> on the keyboard. The panel opens as soon as the word is complete.</li>
       </ol>
       <p>Inside the parent panel you can:</p>
       <ol class="steps">

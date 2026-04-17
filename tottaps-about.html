@@ -5,13 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About TotTaps 🐾 – The Story Behind the Free Toddler Keyboard Toy</title>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-13PPVT0CN7"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-13PPVT0CN7');
+  window.gtag = window.gtag || function gtag(){ dataLayer.push(arguments); };
+  const analyticsOn = localStorage.getItem('tottaps.analytics') === 'on';
+  if (analyticsOn) {
+    const tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-13PPVT0CN7';
+    document.head.appendChild(tag);
+    gtag('js', new Date());
+    gtag('config', 'G-13PPVT0CN7', {
+      anonymize_ip: true,
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false
+    });
+  }
 </script>
 
 <!-- SEO: Primary -->
@@ -425,8 +434,8 @@ footer {
         <div class="privacy-item">
           <div class="privacy-icon">📊</div>
           <div class="privacy-text">
-            <h4>Anonymous analytics only</h4>
-            <p>Only aggregate counts (like total daily taps) are measured — never individual sessions.</p>
+            <h4>Optional anonymous analytics</h4>
+            <p>Analytics stay off unless a parent enables them. When enabled, TotTaps records only aggregate usage metrics.</p>
           </div>
         </div>
         <div class="privacy-item">

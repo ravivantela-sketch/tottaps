@@ -5,13 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy 🔒 – TotTaps</title>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-13PPVT0CN7"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-13PPVT0CN7');
+  window.gtag = window.gtag || function gtag(){ dataLayer.push(arguments); };
+  const analyticsOn = localStorage.getItem('tottaps.analytics') === 'on';
+  if (analyticsOn) {
+    const tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-13PPVT0CN7';
+    document.head.appendChild(tag);
+    gtag('js', new Date());
+    gtag('config', 'G-13PPVT0CN7', {
+      anonymize_ip: true,
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false
+    });
+  }
 </script>
 
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700;800;900&family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -245,8 +254,8 @@ footer {
         <div class="privacy-item">
           <div class="privacy-icon">📊</div>
           <div class="privacy-text">
-            <h4>Anonymous analytics only</h4>
-            <p>Only aggregate counts are measured — never individual sessions.</p>
+            <h4>Optional anonymous analytics</h4>
+            <p>Analytics are disabled by default and can be enabled by a parent in settings. Only aggregate usage metrics are measured.</p>
           </div>
         </div>
         <div class="privacy-item">
@@ -260,7 +269,7 @@ footer {
           <div class="privacy-icon">🔒</div>
           <div class="privacy-text">
             <h4>No advertising trackers</h4>
-            <p>No Facebook pixel, no Google Ads tags, and no retargeting scripts. TotTaps uses GA4 for site analytics and reviews reporting dashboards for usage trends.</p>
+            <p>No Facebook pixel, no Google Ads tags, and no retargeting scripts. We do not run ad personalization signals.</p>
           </div>
         </div>
         <div class="privacy-item">
