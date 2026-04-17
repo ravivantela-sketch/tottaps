@@ -5,13 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>TotTaps 🐾 – Free Keyboard Toy for Toddlers | Safe, Fun, No Ads</title>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-13PPVT0CN7"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-13PPVT0CN7');
+  window.gtag = window.gtag || function gtag(){ dataLayer.push(arguments); };
+  window.__ttAnalyticsLoaded = false;
+  window.__ttAnalyticsOptIn = localStorage.getItem('tottaps.analytics') === 'on';
+
+  function loadAnalytics() {
+    if (window.__ttAnalyticsLoaded) return;
+    const tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-13PPVT0CN7';
+    document.head.appendChild(tag);
+    gtag('js', new Date());
+    gtag('config', 'G-13PPVT0CN7', {
+      anonymize_ip: true,
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false
+    });
+    window.__ttAnalyticsLoaded = true;
+  }
+
+  window.setTotTapsAnalytics = function setTotTapsAnalytics(enabled) {
+    localStorage.setItem('tottaps.analytics', enabled ? 'on' : 'off');
+    window.__ttAnalyticsOptIn = enabled;
+    if (enabled) loadAnalytics();
+  };
+
+  if (window.__ttAnalyticsOptIn) loadAnalytics();
 </script>
 
 <!-- SEO: Primary -->
@@ -45,6 +66,7 @@
 <meta name="application-name" content="TotTaps">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
 <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+<link rel="manifest" href="manifest.webmanifest">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700;800;900&family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -251,6 +273,53 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   color:#fff; animation: badgePulse .3s ease-in-out infinite alternate;
 }
 @keyframes badgePulse { 0%{filter:brightness(1)} 100%{filter:brightness(1.4)} }
+
+#fs-status {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 51;
+  border-radius: 99px;
+  padding: 8px 13px;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(9,14,28,.82);
+  color: rgba(255,255,255,.85);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .03em;
+  backdrop-filter: blur(10px);
+}
+#fs-status.active {
+  border-color: rgba(82,220,138,.38);
+  color: #7de5a4;
+}
+#fs-status.limited {
+  border-color: rgba(255,181,79,.38);
+  color: #ffd27f;
+}
+
+#app-toast {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
+  z-index: 520;
+  background: rgba(10,12,26,.95);
+  border: 1px solid rgba(255,255,255,.18);
+  color: #fff;
+  border-radius: 14px;
+  padding: 11px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  pointer-events: none;
+  transition: .24s;
+  box-shadow: 0 12px 36px rgba(0,0,0,.38);
+}
+#app-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
 
 /* ─── SHAKE ANIMATIONS ───────────────────── */
 body.shake-light { animation: shakeLight .15s ease-in-out; }
@@ -576,6 +645,44 @@ select {
   font-family:'Nunito',sans-serif;
 }
 
+.insight-card {
+  margin-top: 8px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  border-radius: 14px;
+  padding: 12px;
+}
+.insight-title {
+  font-family: 'Baloo 2', cursive;
+  font-size: 16px;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.insight-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.insight-item {
+  padding: 8px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.05);
+}
+.insight-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 800;
+}
+.insight-val {
+  margin-top: 3px;
+  font-size: 14px;
+  font-weight: 900;
+  color: #fff;
+}
+
 /* ─── TIMER BAR ─────────────────────────── */
 #tbar-wrap { position:fixed; bottom:0; left:0; right:0; height:10px; background:rgba(255,255,255,.06); z-index:50; display:none; }
 #tbar { height:100%; background:linear-gradient(90deg,var(--brand),var(--brand2)); width:100%; transition:width 1s linear; border-radius:0 6px 6px 0; }
@@ -687,6 +794,13 @@ select {
   box-shadow: 0 4px 20px rgba(255,122,61,.4);
 }
 
+.report-reward {
+  margin-top: 10px;
+  color: rgba(255,255,255,.78);
+  font-size: 13px;
+  font-weight: 700;
+}
+
 /* Stats row */
 .report-stats {
   display: grid; grid-template-columns: 1fr 1fr 1fr;
@@ -780,6 +894,28 @@ select {
 }
 @keyframes twink { 0%,100%{opacity:var(--lo)} 50%{opacity:var(--hi)} }
 
+.combo-pop {
+  position: fixed;
+  left: 50%;
+  top: 28%;
+  z-index: 65;
+  pointer-events: none;
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(28px,8vw,74px);
+  font-weight: 900;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 0 24px rgba(255,255,255,.5), 0 0 40px rgba(255,122,61,.5);
+  transform: translate(-50%, -50%) scale(.2);
+  animation: comboPop .78s cubic-bezier(.2,.7,.2,1.28) forwards;
+}
+@keyframes comboPop {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(.2) rotate(-8deg); }
+  30% { opacity: 1; transform: translate(-50%, -50%) scale(1.18) rotate(2deg); }
+  75% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, calc(-50% - 80px)) scale(.9) rotate(0deg); }
+}
+
 @media (max-width: 480px) {
   #landing-nav {
     padding: 10px 12px;
@@ -807,6 +943,13 @@ select {
     right: 10px;
     max-width: calc(100vw - 20px);
   }
+  #fs-status {
+    top: 10px;
+    left: 10px;
+    font-size: 11px;
+    padding: 7px 10px;
+    max-width: calc(100vw - 20px);
+  }
   #counter-left {
     padding: 8px 10px;
     font-size: 11px;
@@ -824,6 +967,30 @@ select {
   .start-btn, .share-btn, .lnav-link, .pbtn, .tbtn, .rpt-btn, select, #ph, #close-panel {
     min-height: 44px;
   }
+  .panel-box {
+    padding: 22px 18px;
+    max-height: 88vh;
+    overflow-y: auto;
+  }
+  .insight-grid {
+    grid-template-columns: 1fr;
+  }
+  .report-card {
+    width: 96%;
+  }
+  .report-actions {
+    padding: 16px;
+    gap: 8px;
+  }
+  .rpt-btn {
+    font-size: 15px;
+    padding: 12px 14px;
+  }
+}
+
+@media (pointer: coarse) {
+  body { cursor: auto; }
+  #cursor { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -869,10 +1036,10 @@ select {
     <p class="landing-tagline">
       Hand your toddler the keyboard — <strong>safely.</strong><br>
       TotTaps turns every tap into colourful letters, fun sounds &amp; happy chaos,
-      so little ones stay entertained while <strong>your files stay safe.</strong> 🐾
+      so little ones stay entertained while <strong>you stay in control.</strong> 🐾
     </p>
     <div class="feature-pills">
-      <div class="fpill">🔒 Fullscreen kiosk — files stay safe</div>
+      <div class="fpill">🔒 Fullscreen focus mode with safeguards</div>
       <div class="fpill">🔤 Letters &amp; numbers spoken aloud</div>
       <div class="fpill">🎨 6 themes · Party, Space, Dino &amp; more</div>
       <div class="fpill">📱 Works on laptop, tablet &amp; phone</div>
@@ -902,11 +1069,13 @@ select {
 <div id="vignette"></div>
 <div id="chaos-flash"></div>
 <div id="phase-banner"></div>
+<div id="fs-status" class="limited" aria-live="polite">⚠ Limited mode</div>
 <div id="smash-counter" class="level-calm">
   <div id="counter-left">KEYS TAPPED: <span id="counter-num">0</span></div>
   <div id="counter-badge">CALM</div>
 </div>
 <div id="tbar-wrap"><div id="tbar"></div></div>
+<div id="app-toast" role="status" aria-live="polite"></div>
 
 <!-- Parent panel hotspot -->
 <button id="ph" type="button" title="Parent Panel (hold 2s)" aria-label="Open parent panel"></button>
@@ -917,6 +1086,24 @@ select {
     <h2 id="parent-panel-title">👪 Parent Panel</h2>
     <div class="prow"><label>🔊 Sound</label><label class="tog"><input type="checkbox" id="tog-sound" checked><span class="tslider"></span></label></div>
     <div class="prow"><label>🐢 Reduce motion</label><label class="tog"><input type="checkbox" id="tog-motion"><span class="tslider"></span></label></div>
+    <div class="prow"><label>📊 Anonymous analytics</label><label class="tog"><input type="checkbox" id="tog-analytics"><span class="tslider"></span></label></div>
+    <div class="prow">
+      <label>🎮 Play mode</label>
+      <select id="mode-sel" aria-label="Play mode">
+        <option value="fun">Fun Chaos</option>
+        <option value="letters">Learn Letters</option>
+        <option value="numbers">Learn Numbers</option>
+        <option value="colors">Learn Colors</option>
+      </select>
+    </div>
+    <div class="prow">
+      <label>🧒 Age preset</label>
+      <select id="age-sel" aria-label="Age preset">
+        <option value="6-18m">6-18 months</option>
+        <option value="18-36m" selected>18-36 months</option>
+        <option value="3-5y">3-5 years</option>
+      </select>
+    </div>
     <div class="prow" style="flex-direction:column;align-items:flex-start;gap:10px">
       <label>🎨 Theme</label>
       <div class="theme-btns" id="theme-btns">
@@ -938,12 +1125,33 @@ select {
         <option value="900">15 min</option>
       </select>
     </div>
+    <div class="insight-card" id="insight-card">
+      <div class="insight-title">📈 Parent Insights (local only)</div>
+      <div class="insight-grid">
+        <div class="insight-item">
+          <div class="insight-label">Sessions</div>
+          <div class="insight-val" id="ins-sessions">0</div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-label">Avg Duration</div>
+          <div class="insight-val" id="ins-duration">0s</div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-label">Top Mode</div>
+          <div class="insight-val" id="ins-mode">Fun Chaos</div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-label">Best Score</div>
+          <div class="insight-val" id="ins-score">0</div>
+        </div>
+      </div>
+    </div>
     <div style="display:flex;gap:10px;margin-top:24px">
       <button class="pbtn pbtn-primary" id="close-panel">✅ Resume</button>
       <button class="pbtn pbtn-secondary" id="btn-fs">⤢ Fullscreen</button>
       <button class="pbtn pbtn-secondary" id="btn-reset">↺ Reset</button>
     </div>
-    <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:16px">Hold top-left 2s or type "parent" to open</p>
+    <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:16px">Hold top-left corner for 2 seconds to open</p>
   </div>
 </div>
 
@@ -968,6 +1176,7 @@ select {
       <div class="report-score-num" id="rpt-score">0</div>
       <div class="report-score-label">keys tapped</div>
       <div class="report-chaos-badge" id="rpt-chaos">Tiny Chaos</div>
+      <div class="report-reward" id="rpt-reward">No stickers yet</div>
     </div>
 
     <!-- Stats row -->
@@ -1083,6 +1292,83 @@ let audioCtx;
 let active = false;
 let sessionStart = Date.now();
 let bestStreak = 0, streakCount = 0, lastSmashTime = 0;
+let playMode = localStorage.getItem('tottaps.playMode') || 'fun';
+let agePreset = localStorage.getItem('tottaps.agePreset') || '18-36m';
+let speechRate = 0.95, speechPitch = 1.35, smashVolume = 0.14, burstScale = 1;
+let toastTimer = null;
+let fullscreenWarningShown = false;
+let snowActive = false;
+let snowflakes = [];
+let unlockedStickers = [];
+
+const STICKER_MILESTONES = [
+  { count: 50, emoji: '✨', label: 'Spark Scout' },
+  { count: 120, emoji: '🚀', label: 'Rocket Tapper' },
+  { count: 220, emoji: '🌈', label: 'Rainbow Rhythm' },
+  { count: 350, emoji: '🏆', label: 'Chaos Champion' },
+];
+
+const AGE_PRESETS = {
+  '6-18m': { speechRate: 0.82, speechPitch: 1.22, smashVolume: 0.1, burstScale: 0.65, autoReduceMotion: true },
+  '18-36m': { speechRate: 0.92, speechPitch: 1.3, smashVolume: 0.14, burstScale: 1.0, autoReduceMotion: false },
+  '3-5y': { speechRate: 1.0, speechPitch: 1.16, smashVolume: 0.18, burstScale: 1.2, autoReduceMotion: false },
+};
+
+function applyAgePreset(preset, persist = true) {
+  const cfg = AGE_PRESETS[preset] || AGE_PRESETS['18-36m'];
+  agePreset = preset;
+  speechRate = cfg.speechRate;
+  speechPitch = cfg.speechPitch;
+  smashVolume = cfg.smashVolume;
+  burstScale = cfg.burstScale;
+  if (cfg.autoReduceMotion) {
+    reduceMotion = true;
+    document.getElementById('tog-motion').checked = true;
+  }
+  if (persist) localStorage.setItem('tottaps.agePreset', agePreset);
+}
+
+function applyPlayMode(mode, persist = true) {
+  playMode = mode;
+  if (persist) localStorage.setItem('tottaps.playMode', playMode);
+}
+
+function showToast(message, ms = 2200) {
+  const toast = document.getElementById('app-toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), ms);
+}
+
+function updateFullscreenStatus() {
+  const chip = document.getElementById('fs-status');
+  if (document.fullscreenElement) {
+    chip.className = 'active';
+    chip.textContent = '✅ Fullscreen active';
+  } else {
+    chip.className = 'limited';
+    chip.textContent = '⚠ Limited mode';
+  }
+}
+
+async function requestFullscreenSafe(source = 'unknown') {
+  try {
+    await document.documentElement.requestFullscreen?.();
+    updateFullscreenStatus();
+    return true;
+  } catch (_) {
+    updateFullscreenStatus();
+    if (!fullscreenWarningShown) {
+      showToast('Fullscreen is unavailable here. TotTaps will keep running in limited mode.');
+      fullscreenWarningShown = true;
+    }
+    if (source === 'start') {
+      showToast('Tip: Use a modern browser and tap Start again for fullscreen.');
+    }
+    return false;
+  }
+}
 
 // Mouse trail state
 let mx = -999, my = -999;
@@ -1094,6 +1380,81 @@ let trailTick = 0;
 const bgCanvas = document.getElementById('bg-canvas');
 const bgCtx    = bgCanvas.getContext('2d');
 let bgW, bgH, bgTime = 0;
+const LOW_POWER_DEVICE = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) || /Android\s[6-9]|iPhone OS 1[0-2]_/.test(navigator.userAgent);
+const COARSE_POINTER = window.matchMedia('(pointer: coarse)').matches;
+let maxParticles = LOW_POWER_DEVICE || COARSE_POINTER ? 260 : 420;
+let particleFrame = 0;
+
+let sessionInsights = [];
+try {
+  sessionInsights = JSON.parse(localStorage.getItem('tottaps.insights') || '[]');
+  if (!Array.isArray(sessionInsights)) sessionInsights = [];
+} catch (_) {
+  sessionInsights = [];
+}
+
+const MODE_LABELS = {
+  fun: 'Fun Chaos',
+  letters: 'Learn Letters',
+  numbers: 'Learn Numbers',
+  colors: 'Learn Colors'
+};
+
+function persistInsights() {
+  localStorage.setItem('tottaps.insights', JSON.stringify(sessionInsights.slice(-30)));
+}
+
+function formatSeconds(s) {
+  if (!s || s < 1) return '0s';
+  if (s < 60) return `${Math.round(s)}s`;
+  const m = Math.floor(s / 60);
+  const rem = Math.round(s % 60);
+  return `${m}m ${rem}s`;
+}
+
+function renderInsights() {
+  const sessionsEl = document.getElementById('ins-sessions');
+  const durationEl = document.getElementById('ins-duration');
+  const modeEl = document.getElementById('ins-mode');
+  const scoreEl = document.getElementById('ins-score');
+  if (!sessionsEl || !durationEl || !modeEl || !scoreEl) return;
+
+  const total = sessionInsights.length;
+  sessionsEl.textContent = String(total);
+  if (!total) {
+    durationEl.textContent = '0s';
+    modeEl.textContent = MODE_LABELS[playMode] || 'Fun Chaos';
+    scoreEl.textContent = '0';
+    return;
+  }
+
+  const avgSeconds = sessionInsights.reduce((a, b) => a + (b.durationSec || 0), 0) / total;
+  const bestScore = sessionInsights.reduce((a, b) => Math.max(a, b.score || 0), 0);
+  const modeCounts = sessionInsights.reduce((acc, item) => {
+    const k = item.mode || 'fun';
+    acc[k] = (acc[k] || 0) + 1;
+    return acc;
+  }, {});
+  const topMode = Object.keys(modeCounts).sort((a, b) => modeCounts[b] - modeCounts[a])[0] || 'fun';
+
+  durationEl.textContent = formatSeconds(avgSeconds);
+  modeEl.textContent = MODE_LABELS[topMode] || 'Fun Chaos';
+  scoreEl.textContent = String(bestScore);
+}
+
+function recordSessionInsight({ durationMs, score, mode, themeKey, reason }) {
+  sessionInsights.push({
+    ts: Date.now(),
+    durationSec: Math.round(durationMs / 1000),
+    score,
+    mode,
+    themeKey,
+    reason,
+  });
+  sessionInsights = sessionInsights.slice(-30);
+  persistInsights();
+  renderInsights();
+}
 
 // Background elements
 let bgOrbs    = [];   // large soft glowing orbs
@@ -1505,12 +1866,21 @@ function drawStar(c, cx, cy, spikes, outerR, innerR) {
 
 const TYPES = ['circle','circle','star','square','ring','triangle'];
 function spawnBurst(x, y, count=18) {
-  for (let i = 0; i < count; i++) {
+  const finalCount = Math.max(4, Math.min(Math.floor(count), 56));
+  for (let i = 0; i < finalCount; i++) {
     particles.push(new Particle(x, y, TYPES[Math.floor(Math.random()*TYPES.length)]));
+  }
+  if (particles.length > maxParticles) {
+    particles = particles.slice(particles.length - maxParticles);
   }
 }
 
 function animateCanvas() {
+  particleFrame++;
+  if ((LOW_POWER_DEVICE || COARSE_POINTER) && particleFrame % 2 === 0) {
+    requestAnimationFrame(animateCanvas);
+    return;
+  }
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   particles = particles.filter(p => p.life > 0);
   particles.forEach(p => { p.update(); p.draw(ctx); });
@@ -1675,8 +2045,8 @@ function speak(text) {
   ) || voices.find(v => v.lang.startsWith('en'))
     || voices[0];
   if (preferred) utt.voice = preferred;
-  utt.rate   = 0.95;
-  utt.pitch  = 1.35;  // slightly higher = kid-friendly
+  utt.rate   = speechRate;
+  utt.pitch  = speechPitch;
   utt.volume = 1;
   synth.speak(utt);
 }
@@ -1955,7 +2325,7 @@ function playSmash() {
   // Only the soft ping — speech is handled separately per key type
   initAudio();
   const freq = SCALE[smashCount % SCALE.length];
-  playNote(freq, 'triangle', .16, .14);
+  playNote(freq, 'triangle', .16, smashVolume);
 }
 
 // ═══════════════════════════════════════════
@@ -2008,6 +2378,19 @@ function showPhaseBanner(emoji, title, sub, color='#ff7a3d') {
   void bannerEl.offsetWidth; // reflow
   bannerEl.classList.add('show');
   bannerEl.addEventListener('animationend', () => bannerEl.classList.remove('show'), { once: true });
+}
+
+function showComboPop(text) {
+  if (reduceMotion) return;
+  const el = document.createElement('div');
+  el.className = 'combo-pop';
+  el.textContent = text;
+  const colors = theme.colors;
+  const c = colors[Math.floor(Math.random() * colors.length)];
+  el.style.color = c;
+  el.style.textShadow = `0 0 24px ${c}, 0 0 38px rgba(0,0,0,.5)`;
+  document.body.appendChild(el);
+  el.addEventListener('animationend', () => el.remove());
 }
 
 // Shake body
@@ -2108,8 +2491,22 @@ function doSmash(char, x, y, keyType='symbol') {
   }
   lastSmashTime = now;
 
-  // Play appropriate sound
-  if (keyType === 'letter') {
+  // Play mode-aware sound and speech behavior
+  if (playMode === 'letters') {
+    if (keyType === 'letter') playLetter(char);
+    else playSmash();
+  } else if (playMode === 'numbers') {
+    if (keyType === 'number') playNumber(char);
+    else playSmash();
+  } else if (playMode === 'colors') {
+    playSmash();
+    if (smashCount % 4 === 0) {
+      const chosen = theme.colors[smashCount % theme.colors.length];
+      const colorName = chosen === '#ff7a3d' ? 'orange' : chosen === '#ffcd3c' ? 'yellow' : chosen === '#4d96ff' ? 'blue' : 'color';
+      speak(colorName);
+    }
+    char = '⬤';
+  } else if (keyType === 'letter') {
     playLetter(char);
   } else if (keyType === 'number') {
     playNumber(char);
@@ -2120,11 +2517,24 @@ function doSmash(char, x, y, keyType='symbol') {
   spawnLetter(char, x, y);
   // Particle count and size scales with chaos phase
   const phase = getPhase(smashCount);
-  const pCount = Math.floor(phase[11] * (14 + Math.min(smashCount/8|0, 20)));
+  const pCount = Math.floor(phase[11] * burstScale * (14 + Math.min(smashCount/8|0, 20)));
   spawnBurst(x, y, pCount);
   spawnRipple(x, y);
   if (smashCount === 1) idlePrompt.classList.add('hide');
   if (smashCount % 15 === 0) idleMascot.textContent = theme.emoji[Math.floor(Math.random()*theme.emoji.length)];
+  if (streakCount > 0 && streakCount % 8 === 0) showComboPop(`x${streakCount} COMBO!`);
+  if (smashCount % 60 === 0) {
+    showComboPop('SUPER TAP!');
+    for (let i = 0; i < 3; i++) shootingStars.push(new ShootingStar());
+  }
+
+  const newSticker = STICKER_MILESTONES.find(s => s.count === smashCount);
+  if (newSticker) {
+    unlockedStickers.push(newSticker);
+    showComboPop(`${newSticker.emoji} ${newSticker.label}`);
+    showToast(`Sticker unlocked: ${newSticker.label}`);
+  }
+
   cursor.classList.add('big');
   setTimeout(()=>cursor.classList.remove('big'), 150);
 }
@@ -2575,13 +2985,9 @@ function spawnSpecialKey(keyName, x, y) {
 // ═══════════════════════════════════════════
 document.addEventListener('keydown', e => {
   if (e.repeat || !active) return;
+  e.preventDefault();
+  e.stopPropagation();
   initAudio();
-
-  // Parent panel detection
-  if (e.key.length === 1) {
-    typedBuffer = (typedBuffer + e.key.toLowerCase()).slice(-8);
-    if (typedBuffer.includes('parent')) { openPanel(); typedBuffer=''; return; }
-  }
   if (['F11','Escape'].includes(e.key)) return;
 
   const cx = window.innerWidth/2  + (Math.random()-.5)*window.innerWidth*.5;
@@ -2625,6 +3031,7 @@ document.addEventListener('touchstart', e => {
 document.addEventListener('mousedown', e => {
   if (!active) return;
   if (e.target.closest('#parent-panel,#ph,#end-card')) return;
+  e.preventDefault();
   initAudio();
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%';
   const c = chars[Math.floor(Math.random()*chars.length)];
@@ -2642,7 +3049,7 @@ document.getElementById('start-btn').addEventListener('click', () => {
   const landing = document.getElementById('landing');
   landing.classList.add('fade-out');
   setTimeout(() => { landing.style.display='none'; active = true; }, 600);
-  document.documentElement.requestFullscreen?.().catch(()=>{});
+  requestFullscreenSafe('start');
 });
 
 // ═══════════════════════════════════════════
@@ -2655,6 +3062,7 @@ function openPanel() {
   lastFocusedBeforePanel = document.activeElement;
   panel.classList.add('open');
   active = false;
+  renderInsights();
   const firstFocusable = panel.querySelector(panelFocusableSelector);
   firstFocusable?.focus();
 }
@@ -2700,8 +3108,9 @@ panel.addEventListener('keydown', e => {
 });
 
 document.getElementById('btn-fs').addEventListener('click', ()=>{
-  if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
-  else document.exitFullscreen?.();
+  if (!document.fullscreenElement) requestFullscreenSafe('panel');
+  else document.exitFullscreen?.().catch(()=>{});
+  updateFullscreenStatus();
   closePanel();
 });
 document.getElementById('btn-reset').addEventListener('click', ()=>{
@@ -2727,10 +3136,32 @@ document.getElementById('theme-btns').addEventListener('click', e=>{
 document.getElementById('tog-sound').addEventListener('change', e=>soundOn=e.target.checked);
 document.getElementById('tog-motion').addEventListener('change', e=>reduceMotion=e.target.checked);
 document.getElementById('tog-motion').checked = reduceMotion;
+document.getElementById('tog-analytics').checked = window.__ttAnalyticsOptIn;
+document.getElementById('tog-analytics').addEventListener('change', e => {
+  window.setTotTapsAnalytics(e.target.checked);
+  showToast(e.target.checked ? 'Anonymous analytics enabled' : 'Anonymous analytics disabled');
+});
+
+document.getElementById('mode-sel').value = playMode;
+document.getElementById('mode-sel').addEventListener('change', e => {
+  applyPlayMode(e.target.value);
+  showToast(`Play mode: ${e.target.options[e.target.selectedIndex].text}`);
+});
+
+document.getElementById('age-sel').value = agePreset;
+document.getElementById('age-sel').addEventListener('change', e => {
+  applyAgePreset(e.target.value);
+  showToast(`Age preset: ${e.target.options[e.target.selectedIndex].text}`);
+});
+
 reducedMotionQuery.addEventListener('change', e => {
   reduceMotion = e.matches;
   document.getElementById('tog-motion').checked = reduceMotion;
 });
+
+applyPlayMode(playMode, false);
+applyAgePreset(agePreset, false);
+renderInsights();
 
 // ═══════════════════════════════════════════
 //  TIMER
@@ -2829,6 +3260,14 @@ function showEnd(reason = 'timer') {
   const chaosInfo = getChaosInfo(smashCount);
   const currentThemeName = Object.keys(THEMES).find(k => THEMES[k] === theme) || 'default';
 
+  recordSessionInsight({
+    durationMs: elapsed,
+    score: smashCount,
+    mode: playMode,
+    themeKey: currentThemeName,
+    reason,
+  });
+
   document.getElementById('rpt-score').textContent    = smashCount;
   document.getElementById('rpt-chaos').textContent    = (chaosInfo[0]||'🎉') + ' ' + chaosInfo[1];
   document.getElementById('rpt-emoji').textContent    = chaosInfo[0] || theme.emoji[0];
@@ -2836,6 +3275,13 @@ function showEnd(reason = 'timer') {
   document.getElementById('rpt-streak').textContent   = bestStreak;
   document.getElementById('rpt-theme').textContent    = THEME_ICONS[currentThemeName] || '🎉';
   document.getElementById('rpt-session-label').textContent = chaosInfo[2];
+  const rewardEl = document.getElementById('rpt-reward');
+  if (unlockedStickers.length) {
+    const latest = unlockedStickers[unlockedStickers.length - 1];
+    rewardEl.textContent = `${latest.emoji} ${latest.label} · ${unlockedStickers.length} sticker${unlockedStickers.length > 1 ? 's' : ''} unlocked`;
+  } else {
+    rewardEl.textContent = 'No stickers yet. Keep tapping to unlock rewards!';
+  }
 
   // Issue 1: Show the right primary button depending on how session ended
   const playAgainBtn = document.getElementById('rpt-play-again');
@@ -2860,6 +3306,7 @@ function showEnd(reason = 'timer') {
 function resetSession() {
   smashCount = 0; bestStreak = 0; streakCount = 0;
   lastSmashTime = 0; sessionStart = Date.now();
+  unlockedStickers = [];
   currentPhaseIdx = 0;
   snowflakes = [];
   document.body.classList.remove('phase-calm','phase-warm','phase-hot','phase-wild','phase-chaos','phase-legend');
@@ -2878,7 +3325,7 @@ document.getElementById('rpt-play-again').addEventListener('click', () => {
   active = true;
   // Re-enter fullscreen
   if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen?.().catch(()=>{});
+    requestFullscreenSafe('play-again');
   }
 });
 
@@ -2893,7 +3340,7 @@ document.getElementById('rpt-new-game').addEventListener('click', () => {
   active = true;
   // Re-enter fullscreen
   if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen?.().catch(()=>{});
+    requestFullscreenSafe('new-game');
   }
 });
 
@@ -2934,8 +3381,23 @@ document.addEventListener('keydown', e => {
   }
 });
 document.addEventListener('fullscreenchange', () => {
+  updateFullscreenStatus();
   if (!document.fullscreenElement && active && !endCard.classList.contains('show')) {
     setTimeout(() => showEnd('exit'), 300);
+  }
+});
+
+['contextmenu', 'dragstart', 'drop', 'selectstart'].forEach(evt => {
+  document.addEventListener(evt, e => {
+    if (!active) return;
+    if (e.target.closest('#parent-panel,#ph,#end-card')) return;
+    e.preventDefault();
+  });
+});
+
+window.addEventListener('blur', () => {
+  if (active && !document.fullscreenElement) {
+    showToast('App moved to background. Return to continue tapping.');
   }
 });
 
@@ -2964,6 +3426,16 @@ document.getElementById('share-copy').addEventListener('click', () => {
 document.getElementById('share-x').addEventListener('click', () => {
   window.open('https://x.com/intent/tweet?text=' + encodeURIComponent(SHARE_TEXT) + '&url=' + encodeURIComponent(SHARE_URL), '_blank');
 });
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {
+      // Offline mode is optional and should never block play.
+    });
+  });
+}
+
+updateFullscreenStatus();
 </script>
 </body>
 </html>

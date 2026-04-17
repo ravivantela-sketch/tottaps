@@ -1,0 +1,16 @@
+{
+  "name": "TotTaps",
+  "short_name": "TotTaps",
+  "description": "Fun keyboard tapping app for toddlers with parent controls.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0e1a",
+  "theme_color": "#ff7a3d",
+  "icons": [
+    {
+      "src": "og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png"
+    }
+  ]
+}
