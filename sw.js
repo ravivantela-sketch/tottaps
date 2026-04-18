@@ -1,4 +1,4 @@
-const CACHE = 'tottaps-v1';
+const CACHE = 'tottaps-v2';
 const CORE_ASSETS = [
   '/',
   '/index.html',
@@ -27,6 +27,22 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
+
+  const isDocument = event.request.mode === 'navigate' ||
+    (event.request.headers.get('accept') || '').includes('text/html');
+
+  if (isDocument) {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          const copy = response.clone();
+          caches.open(CACHE).then(cache => cache.put(event.request, copy));
+          return response;
+        })
+        .catch(() => caches.match(event.request).then(cached => cached || caches.match('/index.html')))
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(event.request).then(cached => {
