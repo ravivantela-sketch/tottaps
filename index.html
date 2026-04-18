@@ -533,14 +533,30 @@ body.phase-legend #vignette { background:radial-gradient(ellipse at center,trans
   margin-top: 14px;
 }
 
+.more-btn {
+  margin-top: 10px;
+  background: transparent;
+  color: rgba(255,255,255,.8);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 99px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.more-btn:hover { background: rgba(255,255,255,.08); }
+
 /* ─── SHARE ROW (landing) ───────────────── */
 .share-row {
   margin-top: 24px;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   gap: 10px;
 }
+.share-row.open { display: flex; }
 .share-label {
   font-size: 12px;
   color: var(--muted);
@@ -693,9 +709,9 @@ select {
   background: rgba(5,7,18,.82);
   backdrop-filter: blur(18px);
   z-index: 400; display: none;
-  align-items: center; justify-content: center;
+  align-items: flex-start; justify-content: center;
   overflow-y: auto;
-  padding: 20px 0;
+  padding: 10px;
 }
 #end-card.show { display: flex; }
 
@@ -710,7 +726,8 @@ select {
   border: 1px solid rgba(255,255,255,.13);
   border-radius: 28px;
   width: 92%; max-width: 440px;
-  overflow: hidden;
+  max-height: calc(100vh - 20px);
+  overflow-y: auto;
   box-shadow: 0 32px 80px rgba(0,0,0,.6);
   animation: cardSlideIn .5s cubic-bezier(.22,.68,.35,1.2) forwards;
   position: relative; z-index: 402;
@@ -977,15 +994,29 @@ select {
   }
   .report-card {
     width: 96%;
+    max-height: calc(100vh - 12px);
+    border-radius: 20px;
+  }
+  .report-header { padding: 20px 14px 14px; }
+  .report-title { font-size: 22px; }
+  .report-score-block { padding: 14px 14px 0; }
+  .report-score-num { font-size: clamp(52px,12vw,72px); }
+  .report-stats {
+    grid-template-columns: 1fr;
+    margin-top: 14px;
+  }
+  .stat-cell {
+    padding: 11px 8px;
   }
   .report-actions {
-    padding: 16px;
+    padding: 12px;
     gap: 8px;
   }
   .rpt-btn {
     font-size: 15px;
-    padding: 12px 14px;
+    padding: 11px 12px;
   }
+  .report-footer { padding: 0 12px 12px; }
 }
 
 @media (pointer: coarse) {
@@ -1047,6 +1078,7 @@ select {
     </div>
     <button class="start-btn" id="start-btn">🐾 Start Tapping — It's Free</button>
     <span class="start-note">No account needed · No ads ever · Works on any device</span>
+    <button class="more-btn" id="start-more" type="button">More options</button>
     <!-- Share row -->
     <div class="share-row">
       <span class="share-label">Share with other parents:</span>
@@ -1204,10 +1236,6 @@ select {
 
       <button class="rpt-btn rpt-wa" id="rpt-whatsapp">
         💬 Share on WhatsApp
-      </button>
-
-      <button class="rpt-btn rpt-secondary" id="rpt-challenge">
-        🔥 Challenge Another Toddler
       </button>
 
       <button class="rpt-btn rpt-secondary" id="rpt-copy">
@@ -2393,6 +2421,18 @@ function showComboPop(text) {
   el.addEventListener('animationend', () => el.remove());
 }
 
+function getCheerMessage() {
+  const cheers = [
+    'You are doing great!',
+    'Woohoo! Keep tapping!',
+    'Amazing little superstar!',
+    'So much happy energy!',
+    'Wonderful tapping fun!',
+    'Yay! That was brilliant!',
+  ];
+  return cheers[Math.floor(Math.random() * cheers.length)];
+}
+
 // Shake body
 function doShake(cls) {
   if (!cls || reduceMotion) return;
@@ -2435,8 +2475,8 @@ function updateChaosPhase() {
     doFlash(phase[5], 250);
     setTimeout(() => doFlash(phase[5], 150), 300);
 
-    // Shake
-    doShake(phase[8]);
+    // Keep shake only before chaos mode.
+    if (n < 100) doShake(phase[8]);
 
     // Banner
     if (phase[6]) {
@@ -2455,9 +2495,8 @@ function updateChaosPhase() {
   }
 
   // Ongoing shake at high phases
-  if (n > 50 && n % 10 === 0) doShake(phase[8] || 'shake-light');
-  if (n > 75 && n % 5  === 0) doShake('shake-med');
-  if (n > 100&& n % 3  === 0) doShake('shake-hard');
+  if (n > 50 && n < 75 && n % 10 === 0) doShake(phase[8] || 'shake-light');
+  if (n >= 75 && n < 100 && n % 5 === 0) doShake('shake-med');
 }
 
 function bumpCounter() {
@@ -2515,15 +2554,18 @@ function doSmash(char, x, y, keyType='symbol') {
   }
 
   spawnLetter(char, x, y);
+  const calmIntro = smashCount <= 10;
   // Particle count and size scales with chaos phase
   const phase = getPhase(smashCount);
-  const pCount = Math.floor(phase[11] * burstScale * (14 + Math.min(smashCount/8|0, 20)));
+  const pCount = calmIntro
+    ? Math.floor(6 + smashCount * 0.8)
+    : Math.floor(phase[11] * burstScale * (14 + Math.min(smashCount/8|0, 20)));
   spawnBurst(x, y, pCount);
-  spawnRipple(x, y);
+  if (!calmIntro || smashCount % 2 === 0) spawnRipple(x, y);
   if (smashCount === 1) idlePrompt.classList.add('hide');
   if (smashCount % 15 === 0) idleMascot.textContent = theme.emoji[Math.floor(Math.random()*theme.emoji.length)];
-  if (streakCount > 0 && streakCount % 8 === 0) showComboPop(`x${streakCount} COMBO!`);
-  if (smashCount % 60 === 0) {
+  if (!calmIntro && streakCount > 0 && streakCount % 8 === 0) showComboPop(getCheerMessage());
+  if (!calmIntro && smashCount % 60 === 0) {
     showComboPop('SUPER TAP!');
     for (let i = 0; i < 3; i++) shootingStars.push(new ShootingStar());
   }
@@ -3041,12 +3083,20 @@ document.addEventListener('mousedown', e => {
 // ═══════════════════════════════════════════
 //  START BUTTON
 // ═══════════════════════════════════════════
+document.getElementById('start-more').addEventListener('click', () => {
+  const share = document.querySelector('.share-row');
+  const btn = document.getElementById('start-more');
+  const open = share.classList.toggle('open');
+  btn.textContent = open ? 'Hide options' : 'More options';
+});
+
 document.getElementById('start-btn').addEventListener('click', () => {
   initAudio();
   sessionStart = Date.now();
   bestStreak = 0; streakCount = 0; lastSmashTime = 0;
   snowActive = true;
   const landing = document.getElementById('landing');
+  document.querySelector('.share-row').classList.remove('open');
   landing.classList.add('fade-out');
   setTimeout(() => { landing.style.display='none'; active = true; }, 600);
   requestFullscreenSafe('start');
@@ -3342,13 +3392,6 @@ document.getElementById('rpt-new-game').addEventListener('click', () => {
   if (!document.fullscreenElement) {
     requestFullscreenSafe('new-game');
   }
-});
-
-document.getElementById('rpt-challenge').addEventListener('click', () => {
-  const chaosInfo = getChaosInfo(smashCount);
-  const txt = `🔥 Can your toddler beat ${smashCount} taps?\nChaos level: ${chaosInfo[1]}\nChallenge them on TotTaps! 👉 tottaps.com`;
-  if (navigator.share) navigator.share({ title: 'TotTaps Challenge!', text: txt });
-  else { navigator.clipboard?.writeText(txt); _showCopied('rpt-challenge', '✅ Challenge copied!'); }
 });
 
 document.getElementById('rpt-copy').addEventListener('click', () => {
