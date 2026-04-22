@@ -5,36 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>TotTaps 🐾 – Free Keyboard Toy for Toddlers | Safe, Fun, No Ads</title>
 
-<script>
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = window.gtag || function gtag(){ dataLayer.push(arguments); };
-  window.__ttAnalyticsLoaded = false;
-  window.__ttAnalyticsOptIn = localStorage.getItem('tottaps.analytics') === 'on';
-
-  function loadAnalytics() {
-    if (window.__ttAnalyticsLoaded) return;
-    const tag = document.createElement('script');
-    tag.async = true;
-    tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-13PPVT0CN7';
-    document.head.appendChild(tag);
-    gtag('js', new Date());
-    gtag('config', 'G-13PPVT0CN7', {
-      anonymize_ip: true,
-      allow_google_signals: false,
-      allow_ad_personalization_signals: false
-    });
-    window.__ttAnalyticsLoaded = true;
-  }
-
-  window.setTotTapsAnalytics = function setTotTapsAnalytics(enabled) {
-    localStorage.setItem('tottaps.analytics', enabled ? 'on' : 'off');
-    window.__ttAnalyticsOptIn = enabled;
-    if (enabled) loadAnalytics();
-  };
-
-  if (window.__ttAnalyticsOptIn) loadAnalytics();
-</script>
-
 <!-- SEO: Primary -->
 <meta name="description" content="TotTaps turns every keyboard tap into colourful explosions, sounds &amp; fun! Free, safe keyboard toy for toddlers — perfect when you're working from home. No ads, no account needed.">
 <meta name="keywords" content="toddler keyboard toy, baby keyboard, safe keyboard for toddlers, keyboard toy for babies, toddler typing, work from home toddler, free toddler app, TotTaps">
@@ -74,6 +44,9 @@
   --brand: #ff7a3d;
   --brand2: #ffcd3c;
   --bg-deep: #0b0e1a;
+  --bg-glow1: rgba(255,122,61,.22);
+  --bg-glow2: rgba(255,205,60,.16);
+  --bg-glow3: rgba(77,150,255,.16);
   --text: #f0f0f8;
   --muted: rgba(240,240,248,0.55);
   --radius: 18px;
@@ -81,12 +54,54 @@
 html, body { width: 100%; height: 100%; overflow: hidden; }
 body {
   font-family: 'Nunito', sans-serif;
-  background: var(--bg-deep);
+  background:
+    radial-gradient(circle at 18% 18%, var(--bg-glow1), transparent 32%),
+    radial-gradient(circle at 82% 20%, var(--bg-glow2), transparent 28%),
+    radial-gradient(circle at 50% 82%, var(--bg-glow3), transparent 30%),
+    linear-gradient(180deg, rgba(255,255,255,.02), transparent 28%),
+    var(--bg-deep);
   color: var(--text);
   cursor: none;
   user-select: none;
   -webkit-user-select: none;
   touch-action: none;
+  transition: background 1s ease;
+}
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: -12%;
+  pointer-events: none;
+}
+body::before {
+  z-index: 0;
+  opacity: .72;
+  background:
+    radial-gradient(circle at 20% 20%, var(--bg-glow1), transparent 26%),
+    radial-gradient(circle at 78% 26%, var(--bg-glow2), transparent 24%),
+    radial-gradient(circle at 52% 78%, var(--bg-glow3), transparent 28%);
+  filter: blur(28px) saturate(120%);
+  animation: bgFloat 20s ease-in-out infinite alternate;
+}
+body::after {
+  z-index: 1;
+  opacity: .12;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at center, rgba(0,0,0,.95), transparent 88%);
+  animation: bgDrift 22s linear infinite;
+}
+@keyframes bgFloat {
+  0% { transform: translate3d(-2%, 0, 0) scale(1); }
+  50% { transform: translate3d(2%, -1.5%, 0) scale(1.04); }
+  100% { transform: translate3d(-1%, 2%, 0) scale(1.02); }
+}
+@keyframes bgDrift {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-38px, 28px, 0); }
 }
 a, button, select, input, [role="button"] { -webkit-tap-highlight-color: transparent; }
 a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible, [role="button"]:focus-visible {
@@ -276,8 +291,8 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 
 #fs-status {
   position: fixed;
-  top: 16px;
   left: 16px;
+  bottom: 22px;
   z-index: 51;
   border-radius: 99px;
   padding: 8px 13px;
@@ -296,6 +311,22 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 #fs-status.limited {
   border-color: rgba(255,181,79,.38);
   color: #ffd27f;
+}
+
+#parent-hint {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 51;
+  border-radius: 99px;
+  padding: 8px 13px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(9,14,28,.76);
+  color: rgba(255,255,255,.86);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .03em;
+  backdrop-filter: blur(10px);
 }
 
 #app-toast {
@@ -322,22 +353,6 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 }
 
 /* ─── SHAKE ANIMATIONS ───────────────────── */
-body.shake-light { animation: shakeLight .15s ease-in-out; }
-body.shake-med   { animation: shakeMed   .18s ease-in-out; }
-body.shake-hard  { animation: shakeHard  .22s ease-in-out; }
-@keyframes shakeLight {
-  0%,100%{transform:translate(0)}
-  25%{transform:translate(-3px,2px)} 75%{transform:translate(3px,-2px)}
-}
-@keyframes shakeMed {
-  0%,100%{transform:translate(0)} 20%{transform:translate(-6px,4px)}
-  60%{transform:translate(6px,-4px)} 80%{transform:translate(-4px,3px)}
-}
-@keyframes shakeHard {
-  0%,100%{transform:translate(0)} 15%{transform:translate(-10px,6px)}
-  35%{transform:translate(10px,-6px)} 55%{transform:translate(-8px,4px)}
-  75%{transform:translate(8px,-5px)}
-}
 
 /* ─── FLASH OVERLAY ──────────────────────── */
 #chaos-flash {
@@ -348,30 +363,44 @@ body.shake-hard  { animation: shakeHard  .22s ease-in-out; }
 
 /* ─── PHASE BANNER ───────────────────────── */
 #phase-banner {
-  position:fixed; top:50%; left:50%;
-  transform:translate(-50%,-50%) scale(0);
-  z-index:60; pointer-events:none; text-align:center;
+  position: fixed;
+  top: 96px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-18px) scale(.92);
+  z-index: 60;
+  pointer-events: none;
+  text-align: center;
+  width: min(88vw, 360px);
+  opacity: 0;
+  padding: 14px 18px;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(7,10,24,.78);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 24px 60px rgba(0,0,0,.36);
 }
 #phase-banner.show {
-  animation: bannerPop .75s cubic-bezier(.22,.68,.35,1.3) forwards;
+  animation: bannerPop 8s cubic-bezier(.22,.68,.35,1.1) forwards;
 }
 @keyframes bannerPop {
-  0%  { transform:translate(-50%,-50%) scale(0) rotate(-6deg); opacity:1; }
-  40% { transform:translate(-50%,-50%) scale(1.18) rotate(2deg); opacity:1; }
-  70% { transform:translate(-50%,-50%) scale(1) rotate(0deg); opacity:1; }
-  88% { transform:translate(-50%,-50%) scale(1) rotate(0deg); opacity:1; }
-  100%{ transform:translate(-50%,-50%) scale(1.4); opacity:0; }
+  0% { transform: translateX(-50%) translateY(-18px) scale(.92); opacity: 0; }
+  8% { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
+  82% { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateX(-50%) translateY(-12px) scale(.98); opacity: 0; }
 }
-.phase-emoji { font-size:clamp(60px,14vw,120px); line-height:1; }
+.phase-emoji { font-size:clamp(32px,8vw,52px); line-height:1; }
 .phase-title {
   font-family:'Baloo 2',cursive;
-  font-size:clamp(28px,7vw,80px); font-weight:900; color:#fff;
-  text-shadow:0 0 40px currentColor, 0 4px 30px rgba(0,0,0,.7);
+  font-size:clamp(24px,6vw,38px); font-weight:900; color:#fff;
+  text-shadow:0 0 24px currentColor, 0 4px 20px rgba(0,0,0,.65);
   line-height:1.05;
 }
 .phase-sub {
-  font-size:clamp(14px,3vw,26px);
-  color:rgba(255,255,255,.8); margin-top:8px;
+  font-size:clamp(13px,3vw,18px);
+  color:rgba(255,255,255,.8); margin-top:6px;
+  font-weight:800;
+  letter-spacing:.04em;
+  text-transform:uppercase;
 }
 
 /* ─── VIGNETTE ───────────────────────────── */
@@ -551,12 +580,11 @@ body.phase-legend #vignette { background:radial-gradient(ellipse at center,trans
 /* ─── SHARE ROW (landing) ───────────────── */
 .share-row {
   margin-top: 24px;
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
 }
-.share-row.open { display: flex; }
 .share-label {
   font-size: 12px;
   color: var(--muted);
@@ -594,6 +622,7 @@ body.phase-legend #vignette { background:radial-gradient(ellipse at center,trans
 .share-wa:hover   { background: rgba(30,190,93,.18);  border-color: rgba(30,190,93,.4);  color: #1ebe5d; }
 .share-copy:hover { background: rgba(255,205,60,.12);  border-color: rgba(255,205,60,.3); color: var(--brand2); }
 .share-x:hover    { background: rgba(255,255,255,.1);  border-color: rgba(255,255,255,.3);color: #fff; }
+
 
 /* ─── PARENT PANEL ──────────────────────── */
 #ph {
@@ -709,9 +738,9 @@ select {
   background: rgba(5,7,18,.82);
   backdrop-filter: blur(18px);
   z-index: 400; display: none;
-  align-items: flex-start; justify-content: center;
-  overflow-y: auto;
-  padding: 10px;
+  align-items: center; justify-content: center;
+  overflow: hidden;
+  padding: 18px;
 }
 #end-card.show { display: flex; }
 
@@ -725,12 +754,14 @@ select {
   background: #10132a;
   border: 1px solid rgba(255,255,255,.13);
   border-radius: 28px;
-  width: 92%; max-width: 440px;
-  max-height: calc(100vh - 20px);
-  overflow-y: auto;
+  width: min(92vw, 760px);
+  max-height: min(92vh, 760px);
+  overflow: hidden;
   box-shadow: 0 32px 80px rgba(0,0,0,.6);
   animation: cardSlideIn .5s cubic-bezier(.22,.68,.35,1.2) forwards;
   position: relative; z-index: 402;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
 }
 @keyframes cardSlideIn {
   0%  { opacity:0; transform:translateY(40px) scale(.94); }
@@ -779,6 +810,9 @@ select {
 .report-score-block {
   padding: 24px 28px 0;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .report-score-emoji {
   font-size: 52px; line-height: 1;
@@ -844,7 +878,10 @@ select {
 /* Action buttons */
 .report-actions {
   padding: 20px 24px 24px;
-  display: flex; flex-direction: column; gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-content: start;
 }
 .rpt-btn {
   width: 100%; padding: 15px 20px;
@@ -861,6 +898,7 @@ select {
   background: linear-gradient(135deg, var(--brand), #ff5500);
   color: #fff;
   box-shadow: 0 6px 24px rgba(255,122,61,.35);
+  grid-column: 1 / -1;
 }
 .rpt-primary:hover { box-shadow: 0 8px 32px rgba(255,122,61,.55); }
 
@@ -885,6 +923,27 @@ select {
 .report-footer {
   padding: 0 24px 20px;
   text-align: center;
+  grid-column: 1 / -1;
+}
+.report-main {
+  min-width: 0;
+}
+.report-side {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid rgba(255,255,255,.08);
+  background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.05));
+}
+.panel-note {
+  margin: -4px 0 16px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.panel-note strong {
+  color: #fff;
 }
 .report-footer a {
   font-size: 12px; color: var(--muted);
@@ -901,7 +960,7 @@ select {
 /* ─── ANIMATED BACKGROUND ───────────────── */
 #bg-canvas {
   position: fixed; inset: 0;
-  pointer-events: none; z-index: 0;
+  pointer-events: none; z-index: 2;
   opacity: 1; transition: opacity 1s;
 }
 /* Old static stars still used as fallback dots */
@@ -932,6 +991,52 @@ select {
   75% { opacity: 1; }
   100% { opacity: 0; transform: translate(-50%, calc(-50% - 80px)) scale(.9) rotate(0deg); }
 }
+.achievement-pop {
+  position: fixed;
+  left: 50%;
+  bottom: 88px;
+  z-index: 66;
+  pointer-events: none;
+  min-width: min(82vw, 320px);
+  max-width: min(84vw, 360px);
+  padding: 14px 18px;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(8,12,28,.88);
+  backdrop-filter: blur(14px);
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0,0,0,.36);
+  transform: translateX(-50%) translateY(16px) scale(.92);
+  opacity: 0;
+  animation: achievementPop 5.5s cubic-bezier(.2,.7,.2,1.08) forwards;
+}
+.achievement-pop-title {
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.72);
+}
+.achievement-pop-label {
+  margin-top: 6px;
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(24px, 5vw, 34px);
+  font-weight: 900;
+  line-height: 1.05;
+  color: #fff;
+}
+.achievement-pop-icon {
+  display: block;
+  font-size: clamp(28px, 7vw, 42px);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+@keyframes achievementPop {
+  0% { opacity: 0; transform: translateX(-50%) translateY(16px) scale(.92); }
+  10% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+  82% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-8px) scale(.98); }
+}
 
 @media (max-width: 480px) {
   #landing-nav {
@@ -961,7 +1066,14 @@ select {
     max-width: calc(100vw - 20px);
   }
   #fs-status {
-    top: 10px;
+    left: 10px;
+    bottom: 18px;
+    font-size: 11px;
+    padding: 7px 10px;
+    max-width: calc(100vw - 24px);
+  }
+  #parent-hint {
+    top: 54px;
     left: 10px;
     font-size: 11px;
     padding: 7px 10px;
@@ -996,6 +1108,8 @@ select {
     width: 96%;
     max-height: calc(100vh - 12px);
     border-radius: 20px;
+    grid-template-columns: 1fr;
+    overflow-y: auto;
   }
   .report-header { padding: 20px 14px 14px; }
   .report-title { font-size: 22px; }
@@ -1011,12 +1125,22 @@ select {
   .report-actions {
     padding: 12px;
     gap: 8px;
+    grid-template-columns: 1fr;
   }
   .rpt-btn {
     font-size: 15px;
     padding: 11px 12px;
   }
   .report-footer { padding: 0 12px 12px; }
+  .report-side {
+    border-left: 0;
+    border-top: 1px solid rgba(255,255,255,.08);
+  }
+  .achievement-pop {
+    bottom: 74px;
+    min-width: min(88vw, 320px);
+    padding: 12px 14px;
+  }
 }
 
 @media (pointer: coarse) {
@@ -1078,7 +1202,6 @@ select {
     </div>
     <button class="start-btn" id="start-btn">🐾 Start Tapping — It's Free</button>
     <span class="start-note">No account needed · No ads ever · Works on any device</span>
-    <button class="more-btn" id="start-more" type="button">More options</button>
     <!-- Share row -->
     <div class="share-row">
       <span class="share-label">Share with other parents:</span>
@@ -1102,6 +1225,7 @@ select {
 <div id="chaos-flash"></div>
 <div id="phase-banner"></div>
 <div id="fs-status" class="limited" aria-live="polite">⚠ Limited mode</div>
+<div id="parent-hint" aria-live="polite">👪 Hold top-left 2s for Parent Panel</div>
 <div id="smash-counter" class="level-calm">
   <div id="counter-left">KEYS TAPPED: <span id="counter-num">0</span></div>
   <div id="counter-badge">CALM</div>
@@ -1118,7 +1242,7 @@ select {
     <h2 id="parent-panel-title">👪 Parent Panel</h2>
     <div class="prow"><label>🔊 Sound</label><label class="tog"><input type="checkbox" id="tog-sound" checked><span class="tslider"></span></label></div>
     <div class="prow"><label>🐢 Reduce motion</label><label class="tog"><input type="checkbox" id="tog-motion"><span class="tslider"></span></label></div>
-    <div class="prow"><label>📊 Anonymous analytics</label><label class="tog"><input type="checkbox" id="tog-analytics"><span class="tslider"></span></label></div>
+    <p class="panel-note"><strong>Privacy-safe setup:</strong> TotTaps does not send key taps or child profiles anywhere. Optional site traffic measurement can be configured separately without changing gameplay.</p>
     <div class="prow">
       <label>🎮 Play mode</label>
       <select id="mode-sel" aria-label="Play mode">
@@ -1191,68 +1315,70 @@ select {
 <canvas id="report-confetti"></canvas>
 <div id="end-card">
   <div class="report-card">
-
-    <!-- Header -->
-    <div class="report-header">
-      <div class="report-logo">
-        <div class="report-logo-icon">🐾</div>
-        <div class="report-logo-name">TotTaps</div>
+    <div class="report-main">
+      <!-- Header -->
+      <div class="report-header">
+        <div class="report-logo">
+          <div class="report-logo-icon">🐾</div>
+          <div class="report-logo-name">TotTaps</div>
+        </div>
+        <div class="report-title">🎉 TotTaps Report</div>
+        <div class="report-subtitle" id="rpt-session-label">Session complete!</div>
       </div>
-      <div class="report-title">🎉 TotTaps Report</div>
-      <div class="report-subtitle" id="rpt-session-label">Session complete!</div>
-    </div>
 
-    <!-- Big score -->
-    <div class="report-score-block">
-      <div class="report-score-emoji" id="rpt-emoji">🥳</div>
-      <div class="report-score-num" id="rpt-score">0</div>
-      <div class="report-score-label">keys tapped</div>
-      <div class="report-chaos-badge" id="rpt-chaos">Tiny Chaos</div>
-      <div class="report-reward" id="rpt-reward">No stickers yet</div>
-    </div>
+      <!-- Big score -->
+      <div class="report-score-block">
+        <div class="report-score-emoji" id="rpt-emoji">🥳</div>
+        <div class="report-score-num" id="rpt-score">0</div>
+        <div class="report-score-label">keys tapped</div>
+        <div class="report-chaos-badge" id="rpt-chaos">Tiny Chaos</div>
+        <div class="report-reward" id="rpt-reward">No stickers yet</div>
+      </div>
 
-    <!-- Stats row -->
-    <div class="report-stats">
-      <div class="stat-cell">
-        <div class="stat-cell-label">⏱ Duration</div>
-        <div class="stat-cell-val" id="rpt-duration">0s</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-cell-label">⚡ Best streak</div>
-        <div class="stat-cell-val highlight" id="rpt-streak">0</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-cell-label">🎨 Theme</div>
-        <div class="stat-cell-val" id="rpt-theme">🎉</div>
+      <!-- Stats row -->
+      <div class="report-stats">
+        <div class="stat-cell">
+          <div class="stat-cell-label">⏱ Duration</div>
+          <div class="stat-cell-val" id="rpt-duration">0s</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-cell-label">⚡ Best streak</div>
+          <div class="stat-cell-val highlight" id="rpt-streak">0</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-cell-label">🎨 Theme</div>
+          <div class="stat-cell-val" id="rpt-theme">🎉</div>
+        </div>
       </div>
     </div>
 
-    <!-- Actions -->
-    <div class="report-actions">
+    <div class="report-side">
+      <!-- Actions -->
+      <div class="report-actions">
 
-      <button class="rpt-btn rpt-primary" id="rpt-play-again">
-        🔄 Keep Smashing!
-      </button>
+        <button class="rpt-btn rpt-primary" id="rpt-play-again">
+          🔄 Keep Smashing!
+        </button>
 
-      <button class="rpt-btn rpt-wa" id="rpt-whatsapp">
-        💬 Share on WhatsApp
-      </button>
+        <button class="rpt-btn rpt-wa" id="rpt-whatsapp">
+          💬 Share on WhatsApp
+        </button>
 
-      <button class="rpt-btn rpt-secondary" id="rpt-copy">
-        📋 Copy This Chaos
-      </button>
+        <button class="rpt-btn rpt-secondary" id="rpt-copy">
+          📋 Copy This Chaos
+        </button>
 
-      <button class="rpt-btn rpt-ghost" id="rpt-new-game">
-        ↺ New Game
-      </button>
+        <button class="rpt-btn rpt-ghost" id="rpt-new-game">
+          ↺ New Game
+        </button>
+      </div>
+
+      <!-- Footer -->
+      <div class="report-footer">
+        <a href="tottaps-guides.html" id="rpt-videos-link">Read parent guides →</a>
+        <div class="report-site">TOTTAPS.COM</div>
+      </div>
     </div>
-
-    <!-- Footer -->
-    <div class="report-footer">
-      <a href="tottaps-guides.html" id="rpt-videos-link">Read parent guides →</a>
-      <div class="report-site">TOTTAPS.COM</div>
-    </div>
-
   </div>
 </div>
 
@@ -1329,12 +1455,52 @@ let snowActive = false;
 let snowflakes = [];
 let unlockedStickers = [];
 
+const THEME_VISUALS = {
+  default: { glow1: 'rgba(255,122,61,.22)', glow2: 'rgba(255,205,60,.16)', glow3: 'rgba(77,150,255,.16)' },
+  jungle:  { glow1: 'rgba(76,175,80,.22)',  glow2: 'rgba(139,195,74,.16)', glow3: 'rgba(255,235,59,.12)' },
+  ocean:   { glow1: 'rgba(0,188,212,.24)',  glow2: 'rgba(3,169,244,.16)',  glow3: 'rgba(128,222,234,.14)' },
+  space:   { glow1: 'rgba(167,139,250,.24)', glow2: 'rgba(192,132,252,.16)', glow3: 'rgba(248,113,113,.12)' },
+  dino:    { glow1: 'rgba(255,87,34,.22)',  glow2: 'rgba(255,152,0,.16)',  glow3: 'rgba(139,195,74,.12)' },
+  diwali:  { glow1: 'rgba(255,179,0,.26)',  glow2: 'rgba(255,111,0,.18)',  glow3: 'rgba(255,214,0,.15)' },
+};
+
+function applyThemeVisuals(themeKey, nextTheme) {
+  const visual = THEME_VISUALS[themeKey] || THEME_VISUALS.default;
+  theme = nextTheme;
+  document.body.style.background =
+    `radial-gradient(circle at 18% 18%, ${visual.glow1}, transparent 32%),
+     radial-gradient(circle at 82% 20%, ${visual.glow2}, transparent 28%),
+     radial-gradient(circle at 22% 78%, ${visual.glow2}, transparent 24%),
+     radial-gradient(circle at 50% 82%, ${visual.glow3}, transparent 30%),
+     linear-gradient(135deg, rgba(255,255,255,.03), transparent 36%),
+     linear-gradient(180deg, rgba(255,255,255,.02), transparent 28%),
+     ${theme.bg}`;
+  document.documentElement.style.setProperty('--bg-deep', theme.bg);
+  document.documentElement.style.setProperty('--bg-glow1', visual.glow1);
+  document.documentElement.style.setProperty('--bg-glow2', visual.glow2);
+  document.documentElement.style.setProperty('--bg-glow3', visual.glow3);
+  idleMascot.textContent = theme.mascot;
+  buildStars();
+}
+
 const STICKER_MILESTONES = [
-  { count: 50, emoji: '✨', label: 'Spark Scout' },
-  { count: 120, emoji: '🚀', label: 'Rocket Tapper' },
-  { count: 220, emoji: '🌈', label: 'Rainbow Rhythm' },
-  { count: 350, emoji: '🏆', label: 'Chaos Champion' },
+  { count: 50, emoji: '✨', label: 'Spark Master' },
+  { count: 120, emoji: '🚀', label: 'Rocket Master' },
+  { count: 220, emoji: '🌈', label: 'Rainbow Master' },
+  { count: 350, emoji: '🏆', label: 'Chaos Master' },
+  [220, 'level-legend', 'phase-legend', 'COSMIC MODE', 'legend','rgba(90,50,255,.34)', '🌠','COSMIC MODE','220 taps! Sky high chaos!','shake-hard',68, 3.8],
+  [320, 'level-legend', 'phase-legend', 'MEGA MODE',   'legend','rgba(170,60,255,.38)', '🪐','MEGA MODE','320 taps! Nothing can stop this!','shake-hard',82, 4.5],
+  [500, 'level-legend', 'phase-legend', 'INFINITE MODE','legend','rgba(255,80,200,.42)','♾️','INFINITE MODE','500 taps! Endless energy!','shake-hard',96, 5.2],
+  { count: 650, emoji: '☄️', label: 'Comet Master' },
+  { count: 800, emoji: '🌌', label: 'Galaxy Master' },
+  { count: 1000, emoji: '⭐', label: 'Nova Master' },
+  { count: 1250, emoji: '👑', label: 'Crown Master' },
 ];
+/* PHASES.push(
+  [220, 'level-legend', 'phase-legend', 'COSMIC MODE',  'legend','rgba(90,50,255,.34)',  '🌠','COSMIC MODE','220 taps! Sky high chaos!','shake-hard',68, 3.8],
+  [320, 'level-legend', 'phase-legend', 'MEGA MODE',    'legend','rgba(170,60,255,.38)', '🪐','MEGA MODE','320 taps! Nothing can stop this!','shake-hard',82, 4.5],
+  [500, 'level-legend', 'phase-legend', 'INFINITE MODE','legend','rgba(255,80,200,.42)','♾️','INFINITE MODE','500 taps! Endless energy!','shake-hard',96, 5.2],
+); */
 
 const AGE_PRESETS = {
   '6-18m': { speechRate: 0.82, speechPitch: 1.22, smashVolume: 0.1, burstScale: 0.65, autoReduceMotion: true },
@@ -1488,15 +1654,16 @@ function recordSessionInsight({ durationMs, score, mode, themeKey, reason }) {
 let bgOrbs    = [];   // large soft glowing orbs
 let bgBeams   = [];   // slow aurora light beams
 let bgBubbles = [];   // floating bubble rings
+let bgDust    = [];   // tiny drifting sparkles
 
 // Theme-aware BG palettes
 const BG_PALETTES = {
-  default: { orbs:['rgba(255,122,61,.18)','rgba(255,205,60,.14)','rgba(255,107,223,.12)','rgba(77,150,255,.14)'], beam:'rgba(255,122,61,.07)', star:'#fff' },
-  jungle:  { orbs:['rgba(76,175,80,.18)','rgba(139,195,74,.14)','rgba(255,235,59,.12)','rgba(255,152,0,.1)'],   beam:'rgba(76,175,80,.07)',  star:'#c8ffc8' },
-  ocean:   { orbs:['rgba(0,188,212,.2)','rgba(3,169,244,.15)','rgba(0,229,255,.12)','rgba(64,196,255,.14)'],   beam:'rgba(0,188,212,.08)',  star:'#b3f0ff' },
-  space:   { orbs:['rgba(167,139,250,.2)','rgba(129,140,248,.15)','rgba(192,132,252,.14)','rgba(248,113,113,.1)'], beam:'rgba(167,139,250,.09)', star:'#e0d0ff' },
-  dino:    { orbs:['rgba(255,87,34,.18)','rgba(255,152,0,.14)','rgba(255,193,7,.12)','rgba(139,195,74,.12)'],   beam:'rgba(255,87,34,.07)',  star:'#ffe0cc' },
-  diwali:  { orbs:['rgba(255,179,0,.22)','rgba(255,111,0,.16)','rgba(255,61,0,.14)','rgba(255,215,0,.18)'],    beam:'rgba(255,179,0,.1)',   star:'#fff9c4' },
+  default: { orbs:['rgba(255,122,61,.18)','rgba(255,205,60,.14)','rgba(255,107,223,.12)','rgba(77,150,255,.14)'], beam:'rgba(255,122,61,.07)', star:'#fff',      dust:'#fff7ea', thread:'rgba(255,244,220,.08)' },
+  jungle:  { orbs:['rgba(76,175,80,.18)','rgba(139,195,74,.14)','rgba(255,235,59,.12)','rgba(255,152,0,.1)'],   beam:'rgba(76,175,80,.07)',  star:'#c8ffc8', dust:'#f2ffd8', thread:'rgba(203,255,175,.08)' },
+  ocean:   { orbs:['rgba(0,188,212,.2)','rgba(3,169,244,.15)','rgba(0,229,255,.12)','rgba(64,196,255,.14)'],   beam:'rgba(0,188,212,.08)',  star:'#b3f0ff', dust:'#dffcff', thread:'rgba(189,245,255,.08)' },
+  space:   { orbs:['rgba(167,139,250,.2)','rgba(129,140,248,.15)','rgba(192,132,252,.14)','rgba(248,113,113,.1)'], beam:'rgba(167,139,250,.09)', star:'#e0d0ff', dust:'#efe7ff', thread:'rgba(224,208,255,.09)' },
+  dino:    { orbs:['rgba(255,87,34,.18)','rgba(255,152,0,.14)','rgba(255,193,7,.12)','rgba(139,195,74,.12)'],   beam:'rgba(255,87,34,.07)',  star:'#ffe0cc', dust:'#fff0d6', thread:'rgba(255,220,180,.08)' },
+  diwali:  { orbs:['rgba(255,179,0,.22)','rgba(255,111,0,.16)','rgba(255,61,0,.14)','rgba(255,215,0,.18)'],    beam:'rgba(255,179,0,.1)',   star:'#fff9c4', dust:'#fff5c0', thread:'rgba(255,235,165,.09)' },
 };
 
 function getBgPalette() {
@@ -1602,12 +1769,43 @@ class BgBubble {
   }
 }
 
+class BgDust {
+  constructor() { this.reset(true); }
+  reset(init=false) {
+    this.x = Math.random() * bgW;
+    this.y = init ? Math.random() * bgH : bgH + 20;
+    this.r = Math.random() * 2.2 + 0.6;
+    this.vx = (Math.random() - 0.5) * 0.18;
+    this.vy = -(Math.random() * 0.22 + 0.04);
+    this.phase = Math.random() * Math.PI * 2;
+    this.alpha = Math.random() * 0.2 + 0.05;
+  }
+  update() {
+    this.x += this.vx + Math.sin(bgTime * 0.01 + this.phase) * 0.12;
+    this.y += this.vy;
+    if (this.y < -20) this.reset();
+  }
+  draw(c) {
+    const pal = getBgPalette();
+    c.save();
+    c.globalAlpha = this.alpha * (0.55 + Math.sin(bgTime * 0.015 + this.phase) * 0.2);
+    c.fillStyle = pal.dust || '#ffffff';
+    c.shadowBlur = 10;
+    c.shadowColor = pal.dust || '#ffffff';
+    c.beginPath();
+    c.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    c.fill();
+    c.restore();
+  }
+}
+
 function initBg() {
   bgW = bgCanvas.width  = window.innerWidth;
   bgH = bgCanvas.height = window.innerHeight;
   bgOrbs    = Array.from({length: 6},  () => new BgOrb());
   bgBeams   = Array.from({length: 4},  () => new BgBeam());
   bgBubbles = Array.from({length: 18}, () => new BgBubble());
+  bgDust    = Array.from({length: 22}, () => new BgDust());
   rebuildStarDots();
 }
 
@@ -1624,7 +1822,10 @@ function animateBg() {
   // 3. Stars + shooting stars
   renderStars(bgCtx);
 
-  // 4. Floating bubbles (top layer)
+  // 4. Tiny drifting sparkles
+  bgDust.forEach(d => { d.update(); d.draw(bgCtx); });
+
+  // 5. Floating bubbles (top layer)
   bgBubbles.forEach(b => { b.update(); b.draw(bgCtx); });
 
   requestAnimationFrame(animateBg);
@@ -1789,6 +1990,30 @@ class ShootingStar {
 function renderStars(c) {
   // Static dots just draw (no update needed — they use bgTime)
   bgStarDots.forEach(s => s.draw(c));
+
+  const brightStars = bgStarDots.filter(s => s.bright);
+  c.save();
+  c.lineWidth = 0.7;
+  for (let i = 0; i < brightStars.length; i++) {
+    for (let j = i + 1; j < brightStars.length; j++) {
+      const a = brightStars[i];
+      const b = brightStars[j];
+      const dx = a.x - b.x;
+      const dy = a.y - b.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist > 90 && dist < 190) {
+        const alpha = (1 - ((dist - 90) / 100)) * 0.06;
+        const pal = getBgPalette();
+        const threadBase = pal.thread || 'rgba(255,255,255,.08)';
+        c.strokeStyle = threadBase.replace(/[\d.]+\)\s*$/, `${alpha.toFixed(3)})`);
+        c.beginPath();
+        c.moveTo(a.x, a.y);
+        c.lineTo(b.x, b.y);
+        c.stroke();
+      }
+    }
+  }
+  c.restore();
 
   // Shooting stars
   shootingStars = shootingStars.filter(s => !s.dead);
@@ -2380,6 +2605,15 @@ const PHASES = [
 
 let currentPhaseIdx = 0;
 let shakeTimeout = null;
+PHASES.push(
+  [220, 'level-legend', 'phase-legend', 'COSMIC MODE',  'legend','rgba(90,50,255,.34)',  '🌠','COSMIC MODE','220 taps! Sky high chaos!','shake-hard',68, 3.8],
+  [320, 'level-legend', 'phase-legend', 'MEGA MODE',    'legend','rgba(170,60,255,.38)', '🪐','MEGA MODE','320 taps! Nothing can stop this!','shake-hard',82, 4.5],
+  [500, 'level-legend', 'phase-legend', 'INFINITE MODE','legend','rgba(255,80,200,.42)','♾️','INFINITE MODE','500 taps! Endless energy!','shake-hard',96, 5.2],
+  [650, 'level-legend', 'phase-legend', 'COMET MODE',   'legend','rgba(110,180,255,.42)','☄️','COMET MODE','650 taps! Comet trail chaos!','shake-hard',112, 5.8],
+  [800, 'level-legend', 'phase-legend', 'GALAXY MODE',  'legend','rgba(90,120,255,.46)', '🌌','GALAXY MODE','800 taps! Galaxy power rising!','shake-hard',128, 6.4],
+  [1000, 'level-legend', 'phase-legend', 'NOVA MODE',   'legend','rgba(255,210,120,.5)', '⭐','NOVA MODE','1000 taps! Star power unleashed!','shake-hard',146, 7.0],
+  [1250, 'level-legend', 'phase-legend', 'CROWN MODE',  'legend','rgba(255,185,70,.54)', '👑','CROWN MODE','1250 taps! Crown-level tapping!','shake-hard',164, 7.8]
+);
 
 function getPhase(n) {
   let p = PHASES[0];
@@ -2395,17 +2629,46 @@ function doFlash(color, duration=180) {
   setTimeout(() => flashEl.classList.remove('flash'), duration);
 }
 
+function compactMilestoneText(title, sub) {
+  const safeTitle = String(title || '');
+  const safeSub = String(sub || '');
+  let compactTitle = safeTitle;
+  let compactSub = safeSub;
+  if (/Just Getting Started/i.test(safeTitle)) compactTitle = 'Tiny Start';
+  else if (/Getting Warm/i.test(safeTitle)) compactTitle = 'Warm Up';
+  else if (/GETTING WILD/i.test(safeTitle)) compactTitle = 'Wild Mode';
+  else if (/ABSOLUTE CHAOS/i.test(safeTitle)) compactTitle = 'On Fire';
+  else if (/CHAOS MODE/i.test(safeTitle)) compactTitle = 'Chaos Mode';
+  else if (/LEGENDARY/i.test(safeTitle)) compactTitle = 'Legend Mode';
+  else if (/COSMIC MODE/i.test(safeTitle)) compactTitle = 'Cosmic Mode';
+  else if (/MEGA MODE/i.test(safeTitle)) compactTitle = 'Mega Mode';
+  else if (/INFINITE MODE/i.test(safeTitle)) compactTitle = 'Infinite Mode';
+  else if (/COMET MODE/i.test(safeTitle)) compactTitle = 'Comet Mode';
+  else if (/GALAXY MODE/i.test(safeTitle)) compactTitle = 'Galaxy Mode';
+  else if (/NOVA MODE/i.test(safeTitle)) compactTitle = 'Nova Mode';
+  else if (/CROWN MODE/i.test(safeTitle)) compactTitle = 'Crown Mode';
+
+  if (/Tiny fingers exploring/i.test(safeSub)) compactSub = 'Keep going';
+  else if (/heating up/i.test(safeSub)) compactSub = 'Nice taps';
+  else if (/50 smashes/i.test(safeSub)) compactSub = 'Big energy';
+  else if (/75 keys/i.test(safeSub)) compactSub = 'Super taps';
+  else if (/100 SMASHES/i.test(safeSub)) compactSub = 'Tap storm';
+  else if (/150\+ smashes/i.test(safeSub)) compactSub = 'Top smash';
+  else if (/220 taps/i.test(safeSub)) compactSub = 'Sky rush';
+  else if (/320 taps/i.test(safeSub)) compactSub = 'Mega rush';
+  else if (/500 taps/i.test(safeSub)) compactSub = 'Never stop';
+  else if (/650 taps/i.test(safeSub)) compactSub = 'Comet dash';
+  else if (/800 taps/i.test(safeSub)) compactSub = 'Galaxy glow';
+  else if (/1000 taps/i.test(safeSub)) compactSub = 'Nova burst';
+  else if (/1250 taps/i.test(safeSub)) compactSub = 'Crown power';
+
+  return [compactTitle, compactSub];
+}
+
 // Show big phase banner
 function showPhaseBanner(emoji, title, sub, color='#ff7a3d') {
-  bannerEl.innerHTML = `
-    <div class="phase-emoji">${emoji}</div>
-    <div class="phase-title" style="color:${color};text-shadow:0 0 40px ${color}">${title}</div>
-    <div class="phase-sub">${sub}</div>
-  `;
   bannerEl.classList.remove('show');
-  void bannerEl.offsetWidth; // reflow
-  bannerEl.classList.add('show');
-  bannerEl.addEventListener('animationend', () => bannerEl.classList.remove('show'), { once: true });
+  clearTimeout(showPhaseBanner._timer);
 }
 
 function showComboPop(text) {
@@ -2421,26 +2684,22 @@ function showComboPop(text) {
   el.addEventListener('animationend', () => el.remove());
 }
 
-function getCheerMessage() {
-  const cheers = [
-    'You are doing great!',
-    'Woohoo! Keep tapping!',
-    'Amazing little superstar!',
-    'So much happy energy!',
-    'Wonderful tapping fun!',
-    'Yay! That was brilliant!',
-  ];
-  return cheers[Math.floor(Math.random() * cheers.length)];
+function showAchievementPop(emoji, label) {
+  if (reduceMotion) return;
+  const el = document.createElement('div');
+  el.className = 'achievement-pop';
+  el.innerHTML = `<span class="achievement-pop-icon">${emoji}</span><div class="achievement-pop-title">Achievement Unlocked</div><div class="achievement-pop-label">${label}</div>`;
+  const colors = theme.colors;
+  const c = colors[Math.floor(Math.random() * colors.length)];
+  el.querySelector('.achievement-pop-label').style.color = c;
+  el.querySelector('.achievement-pop-label').style.textShadow = `0 0 24px ${c}, 0 0 38px rgba(0,0,0,.5)`;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 5500);
 }
 
 // Shake body
 function doShake(cls) {
-  if (!cls || reduceMotion) return;
-  clearTimeout(shakeTimeout);
-  document.body.classList.remove('shake-light','shake-med','shake-hard');
-  void document.body.offsetWidth;
-  document.body.classList.add(cls);
-  shakeTimeout = setTimeout(() => document.body.classList.remove(cls), 300);
+  return;
 }
 
 // Phase transition colours
@@ -2476,14 +2735,7 @@ function updateChaosPhase() {
     setTimeout(() => doFlash(phase[5], 150), 300);
 
     // Keep shake only before chaos mode.
-    if (n < 100) doShake(phase[8]);
-
-    // Banner
-    if (phase[6]) {
-      setTimeout(() => {
-      showPhaseBanner(phase[6], phase[7], phase[9] || '', color);
-      }, 100);
-    }
+    if (n < 100) doShake(phase[9]);
 
     // Milestone sounds
     if (soundOn) {
@@ -2495,7 +2747,7 @@ function updateChaosPhase() {
   }
 
   // Ongoing shake at high phases
-  if (n > 50 && n < 75 && n % 10 === 0) doShake(phase[8] || 'shake-light');
+  if (n > 50 && n < 75 && n % 10 === 0) doShake(phase[9] || 'shake-light');
   if (n >= 75 && n < 100 && n % 5 === 0) doShake('shake-med');
 }
 
@@ -2564,17 +2816,15 @@ function doSmash(char, x, y, keyType='symbol') {
   if (!calmIntro || smashCount % 2 === 0) spawnRipple(x, y);
   if (smashCount === 1) idlePrompt.classList.add('hide');
   if (smashCount % 15 === 0) idleMascot.textContent = theme.emoji[Math.floor(Math.random()*theme.emoji.length)];
-  if (!calmIntro && streakCount > 0 && streakCount % 8 === 0) showComboPop(getCheerMessage());
   if (!calmIntro && smashCount % 60 === 0) {
-    showComboPop('SUPER TAP!');
     for (let i = 0; i < 3; i++) shootingStars.push(new ShootingStar());
   }
 
   const newSticker = STICKER_MILESTONES.find(s => s.count === smashCount);
   if (newSticker) {
     unlockedStickers.push(newSticker);
-    showComboPop(`${newSticker.emoji} ${newSticker.label}`);
-    showToast(`Sticker unlocked: ${newSticker.label}`);
+    showAchievementPop(newSticker.emoji, newSticker.label);
+    showToast(`Achievement unlocked: ${newSticker.label}`);
   }
 
   cursor.classList.add('big');
@@ -3083,20 +3333,12 @@ document.addEventListener('mousedown', e => {
 // ═══════════════════════════════════════════
 //  START BUTTON
 // ═══════════════════════════════════════════
-document.getElementById('start-more').addEventListener('click', () => {
-  const share = document.querySelector('.share-row');
-  const btn = document.getElementById('start-more');
-  const open = share.classList.toggle('open');
-  btn.textContent = open ? 'Hide options' : 'More options';
-});
-
 document.getElementById('start-btn').addEventListener('click', () => {
   initAudio();
   sessionStart = Date.now();
   bestStreak = 0; streakCount = 0; lastSmashTime = 0;
   snowActive = true;
   const landing = document.getElementById('landing');
-  document.querySelector('.share-row').classList.remove('open');
   landing.classList.add('fade-out');
   setTimeout(() => { landing.style.display='none'; active = true; }, 600);
   requestFullscreenSafe('start');
@@ -3174,23 +3416,15 @@ document.getElementById('theme-btns').addEventListener('click', e=>{
   const btn = e.target.closest('.tbtn');
   if (!btn) return;
   const t = btn.dataset.theme;
-  theme = THEMES[t];
   document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  document.body.style.background = theme.bg;
-  idleMascot.textContent = theme.mascot;
-  buildStars();
+  applyThemeVisuals(t, THEMES[t]);
 });
 
 // Sound
 document.getElementById('tog-sound').addEventListener('change', e=>soundOn=e.target.checked);
 document.getElementById('tog-motion').addEventListener('change', e=>reduceMotion=e.target.checked);
 document.getElementById('tog-motion').checked = reduceMotion;
-document.getElementById('tog-analytics').checked = window.__ttAnalyticsOptIn;
-document.getElementById('tog-analytics').addEventListener('change', e => {
-  window.setTotTapsAnalytics(e.target.checked);
-  showToast(e.target.checked ? 'Anonymous analytics enabled' : 'Anonymous analytics disabled');
-});
 
 document.getElementById('mode-sel').value = playMode;
 document.getElementById('mode-sel').addEventListener('change', e => {
@@ -3212,6 +3446,7 @@ reducedMotionQuery.addEventListener('change', e => {
 applyPlayMode(playMode, false);
 applyAgePreset(agePreset, false);
 renderInsights();
+applyThemeVisuals('default', THEMES.default);
 
 // ═══════════════════════════════════════════
 //  TIMER
@@ -3256,7 +3491,7 @@ const THEME_ICONS = {
 function getChaosInfo(n) {
   // Use PHASES for report card — map to readable info
   const phase = getPhase(n);
-  const labels = ['Just warming up!','Getting interesting!','Things are heating up!','Wild keyboard energy!','Absolute chaos!','LEGENDARY destruction!','UNMATCHABLE LEGEND!'];
+  const labels = ['Just warming up!','Getting interesting!','Things are heating up!','Wild keyboard energy!','Absolute chaos!','LEGENDARY destruction!','UNMATCHABLE LEGEND!','Cosmic keyboard storm!','Mega smashing power!','Infinite tapping energy!','Comet-speed tapping!','Galaxy-size smashing!','Nova-level burst!','Crown-worthy tapping!'];
   const idx = PHASES.indexOf(phase);
   return [phase[6] || '🎉', phase[3], labels[idx] || labels[0]];
 }
@@ -3328,9 +3563,9 @@ function showEnd(reason = 'timer') {
   const rewardEl = document.getElementById('rpt-reward');
   if (unlockedStickers.length) {
     const latest = unlockedStickers[unlockedStickers.length - 1];
-    rewardEl.textContent = `${latest.emoji} ${latest.label} · ${unlockedStickers.length} sticker${unlockedStickers.length > 1 ? 's' : ''} unlocked`;
+    rewardEl.textContent = `${latest.emoji} ${latest.label} · ${unlockedStickers.length} achievement${unlockedStickers.length > 1 ? 's' : ''} unlocked`;
   } else {
-    rewardEl.textContent = 'No stickers yet. Keep tapping to unlock rewards!';
+    rewardEl.textContent = 'No achievements yet. Keep tapping to unlock surprises!';
   }
 
   // Issue 1: Show the right primary button depending on how session ended

@@ -5,24 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy 🔒 – TotTaps</title>
 
-<script>
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = window.gtag || function gtag(){ dataLayer.push(arguments); };
-  const analyticsOn = localStorage.getItem('tottaps.analytics') === 'on';
-  if (analyticsOn) {
-    const tag = document.createElement('script');
-    tag.async = true;
-    tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-13PPVT0CN7';
-    document.head.appendChild(tag);
-    gtag('js', new Date());
-    gtag('config', 'G-13PPVT0CN7', {
-      anonymize_ip: true,
-      allow_google_signals: false,
-      allow_ad_personalization_signals: false
-    });
-  }
-</script>
-
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700;800;900&family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -254,8 +236,8 @@ footer {
         <div class="privacy-item">
           <div class="privacy-icon">📊</div>
           <div class="privacy-text">
-            <h4>Optional anonymous analytics</h4>
-            <p>Analytics are disabled by default and can be enabled by a parent in settings. Only aggregate usage metrics are measured.</p>
+            <h4>No in-app visitor tracker</h4>
+            <p>TotTaps itself does not load visitor-tracking code during play. The app stays focused on local gameplay only.</p>
           </div>
         </div>
         <div class="privacy-item">
@@ -320,16 +302,18 @@ footer {
     <div class="section-label">Measurement</div>
     <h2>Analytics</h2>
     <div class="info-card">
-      <p>TotTaps uses Google Analytics 4 (measurement ID: G-13PPVT0CN7) solely to understand aggregate website usage. This means:</p>
-      <p>Google Analytics collects and processes technical information such as approximate location (from IP), device/browser details, pages visited, session activity, referring source, and identifiers like cookies or client IDs.</p>
-      <p>TotTaps does not use this data to identify children or create user profiles. Google processes this information under its own privacy policy and retention settings.</p>
+      <p>TotTaps does not run Google Analytics or any visitor-tracking script inside the app experience.</p>
+      <p>TotTaps does not send key taps, gameplay logs, or child-specific activity to any analytics service.</p>
+      <p>If site traffic is reviewed, it is done outside the app through the site's hosting or infrastructure provider dashboards, not through embedded tracking inside TotTaps itself.</p>
       <p>
-        <strong style="color:#fff;">✓ Aggregate site metrics only</strong> — such as visitors, sessions, page views, traffic sources, and high-level geography reports.<br>
+        <strong style="color:#fff;">✓ No gameplay tracking</strong> — TotTaps does not send key taps or session content to analytics.<br>
+        <strong style="color:#fff;">✓ No embedded visitor analytics script</strong> — the current site code does not include an in-app analytics beacon.<br>
+        <strong style="color:#fff;">✓ No cookie banner flow in the app</strong> — the current setup avoids cookie-based analytics prompts inside TotTaps.<br>
         <strong style="color:#fff;">✗ No names, accounts, or child profiles</strong> — TotTaps does not ask for or store personal identity data.<br>
+        <strong style="color:#fff;">✗ No keystroke or typing logs</strong> — TotTaps does not send the child's taps or session content anywhere.<br>
         <strong style="color:#fff;">✗ No ad targeting or retargeting by TotTaps</strong> — we do not run ads, build remarketing audiences, or sell data.
       </p>
-      <p>TotTaps uses analytics data only to understand overall usage and improve the site. Google may also use Analytics data as described in Google's own terms and privacy policy (for example, to improve Google products and services).</p>
-      <p>You can opt out by using browser privacy controls or content blockers to disable analytics scripts, or by installing <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google's Analytics opt-out browser add-on</a>.</p>
+      <p>This keeps the live app simpler and reduces privacy risk while still allowing high-level site traffic to be checked from infrastructure dashboards when needed.</p>
     </div>
   </section>
 
