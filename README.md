@@ -26,7 +26,7 @@ A free, safe, and engaging web app for toddlers and babies who love to smash key
 ## 🚀 Quick Start
 
 ### Option 1: Open Locally
-1. Download `tottaps.html`
+1. Open `index.html`
 2. Open in any modern browser
 3. Click "Start Tapping"
 4. Let the chaos begin!
@@ -44,7 +44,7 @@ python -m http.server 8000
 npx serve .
 ```
 
-Visit `http://localhost:8000/tottaps.html`
+Visit `http://localhost:8000/`
 
 ---
 
@@ -84,7 +84,7 @@ git push -u origin main
    - Save
 
 3. **Access your site**
-   - `https://yourusername.github.io/tottaps/tottaps.html`
+   - `https://yourusername.github.io/tottaps/`
 
 ### Add Custom Domain
 

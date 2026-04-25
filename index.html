@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>TotTaps 🐾 – Free Keyboard Toy for Toddlers | Safe, Fun, No Ads</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TotTaps &mdash; Keyboard Toy for Babies &amp; Toddlers | Free, No Download</title>
 
 <!-- SEO: Primary -->
-<meta name="description" content="TotTaps turns every keyboard tap into colourful explosions, sounds &amp; fun! Free, safe keyboard toy for toddlers — perfect when you're working from home. No ads, no account needed.">
+  <meta name="description" content="TotTaps turns every key press into colour, sound and joy. A free browser toy for babies and toddlers &mdash; no download, no account, no ads.">
 <meta name="keywords" content="toddler keyboard toy, baby keyboard, safe keyboard for toddlers, keyboard toy for babies, toddler typing, work from home toddler, free toddler app, TotTaps">
 <meta name="author" content="TotTaps">
 <meta name="robots" content="index, follow">
@@ -15,43 +15,116 @@
 <!-- SEO: Open Graph (Facebook, WhatsApp, iMessage previews) -->
 <meta property="og:type"        content="website">
 <meta property="og:site_name"   content="TotTaps">
-<meta property="og:title"       content="TotTaps – Free Keyboard Toy for Toddlers">
-<meta property="og:description" content="TotTaps turns every keyboard tap into colourful explosions, sounds &amp; fun! Free, safe keyboard toy for toddlers — perfect when you're working from home. No ads, no account needed.">
+  <meta property="og:title"       content="TotTaps &mdash; Keyboard Toy for Babies &amp; Toddlers | Free, No Download">
+  <meta property="og:description" content="TotTaps turns every key press into colour, sound and joy. A free browser toy for babies and toddlers &mdash; no download, no account, no ads.">
 <meta property="og:url"         content="https://tottaps.com/">
 <meta property="og:image"       content="https://tottaps.com/og-image.png">
 <meta property="og:image:width"  content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt"   content="TotTaps — The keyboard toy for tiny tots">
+<meta property="og:image:alt"   content="TotTaps - The keyboard toy for tiny tots">
 <meta property="og:locale"      content="en_US">
 
 <!-- SEO: Twitter Card -->
 <meta name="twitter:card"        content="summary_large_image">
-<meta name="twitter:title"       content="TotTaps – Free Keyboard Toy for Toddlers">
-<meta name="twitter:description" content="TotTaps turns every keyboard tap into colourful explosions, sounds &amp; fun! Free, safe keyboard toy for toddlers — perfect when you're working from home. No ads, no account needed.">
+  <meta name="twitter:title"       content="TotTaps &mdash; Keyboard Toy for Babies &amp; Toddlers | Free, No Download">
+  <meta name="twitter:description" content="TotTaps turns every key press into colour, sound and joy. A free browser toy for babies and toddlers &mdash; no download, no account, no ads.">
 <meta name="twitter:image"       content="https://tottaps.com/og-image.png">
-<meta name="twitter:image:alt"   content="TotTaps — The keyboard toy for tiny tots">
+<meta name="twitter:image:alt"   content="TotTaps - The keyboard toy for tiny tots">
 
 <!-- SEO: Additional -->
-<meta name="theme-color" content="#ff7a3d">
+<meta name="theme-color" content="#ff7a1a">
 <meta name="application-name" content="TotTaps">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+<link rel="icon" type="image/png" href="tottaps-logo-icon.png">
+<link rel="apple-touch-icon" href="tottaps-logo-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: '#f97316',
+          'brand-soft': '#fb923c',
+          'shell-dark': '#0d0d12',
+          'surface-card': '#15171c',
+          'surface-panel': '#111318'
+        },
+        fontFamily: {
+          body: ['Nunito', 'sans-serif'],
+          display: ['"Baloo 2"', 'cursive']
+        }
+      }
+    }
+  };
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700;800;900&family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --brand: #ff7a3d;
-  --brand2: #ffcd3c;
-  --bg-deep: #0b0e1a;
+  --brand: #f97316;
+  --brand2: #fb923c;
+  --bg-deep: #0d0d12;
   --bg-glow1: rgba(255,122,61,.22);
   --bg-glow2: rgba(255,205,60,.16);
   --bg-glow3: rgba(77,150,255,.16);
+  --surface: rgba(15, 20, 37, .78);
+  --surface-strong: rgba(20, 26, 46, .92);
+  --border-soft: rgba(255,255,255,.10);
+  --border-strong: rgba(255,255,255,.16);
   --text: #f0f0f8;
-  --muted: rgba(240,240,248,0.55);
+  --muted: rgba(240,240,248,0.66);
+  --muted-strong: rgba(240,240,248,0.82);
+  --shadow-soft: 0 20px 60px rgba(0,0,0,.28);
+  --shadow-strong: 0 32px 90px rgba(0,0,0,.44);
+  --max-shell: 1220px;
   --radius: 18px;
 }
-html, body { width: 100%; height: 100%; overflow: hidden; }
+.brand-home-link:hover { text-decoration: none; }
+.brand-mark {
+  --mark-size: 66px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--mark-size);
+  height: var(--mark-size);
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 22px;
+}
+.brand-mark--report {
+  --mark-size: 54px;
+}
+.brand-mark__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.065);
+  transform-origin: center;
+}
+.report-score-emoji img,
+.lnav-icon img,
+.idle-mascot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.brand-wordmark {
+  color: #ffd2a6;
+  letter-spacing: 0.01em;
+  text-shadow:
+    0 2px 0 rgba(13,13,18,0.26),
+    0 10px 22px rgba(249,115,22,0.12);
+}
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color-scheme: dark;
+  cursor: default;
+}
+body { width: 100%; height: 100%; overflow: hidden; }
 body {
   font-family: 'Nunito', sans-serif;
   background:
@@ -61,11 +134,24 @@ body {
     linear-gradient(180deg, rgba(255,255,255,.02), transparent 28%),
     var(--bg-deep);
   color: var(--text);
-  cursor: none;
+  cursor: default;
   user-select: none;
   -webkit-user-select: none;
   touch-action: none;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
   transition: background 1s ease;
+}
+body.game-active {
+  cursor: none;
+}
+body.game-active a[href],
+body.game-active button,
+body.game-active [role="button"],
+body.game-active select,
+body.game-active input {
+  cursor: none !important;
 }
 body::before,
 body::after {
@@ -103,14 +189,17 @@ body::after {
   0% { transform: translate3d(0, 0, 0); }
   100% { transform: translate3d(-38px, 28px, 0); }
 }
-a, button, select, input, [role="button"] { -webkit-tap-highlight-color: transparent; }
+a[href], button, select, input, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
 a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible, [role="button"]:focus-visible {
   outline: 3px solid var(--brand2);
   outline-offset: 2px;
   box-shadow: 0 0 0 4px rgba(11,14,26,.9);
 }
 
-/* ─── CUSTOM CURSOR ─────────────────────── */
+/*  CUSTOM CURSOR  */
 #cursor {
   position: fixed;
   width: 22px; height: 22px;
@@ -119,19 +208,21 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%,-50%);
-  transition: width .1s, height .1s;
+  transition: width .1s, height .1s, opacity .15s ease;
   mix-blend-mode: screen;
+  opacity: 0;
 }
+body.game-active #cursor { opacity: 1; }
 #cursor.big { width: 48px; height: 48px; }
 
-/* ─── CANVAS (particles) ────────────────── */
+/*  CANVAS (particles)  */
 #particle-canvas {
   position: fixed; inset: 0;
   pointer-events: none;
   z-index: 5;
 }
 
-/* ─── THEME-AWARE TRAIL ─────────────────── */
+/*  THEME-AWARE TRAIL  */
 .trail-emoji {
   position: fixed;
   pointer-events: none;
@@ -158,7 +249,7 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   100% { opacity: 0;   transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, -12px))) scale(0.2); }
 }
 
-/* ─── SMASH LETTERS ─────────────────────── */
+/*  SMASH LETTERS  */
 .smash-letter {
   position: fixed;
   pointer-events: none;
@@ -178,7 +269,7 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   100% { opacity: 0;  transform: translate(calc(-50% + var(--dx2)), calc(-50% + var(--dy2))) scale(.2) rotate(var(--r3)); }
 }
 
-/* ─── SPECIAL KEY CARD ──────────────────── */
+/*  SPECIAL KEY CARD  */
 .special-card {
   position: fixed;
   pointer-events: none;
@@ -195,7 +286,7 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   100% { opacity:0; transform:translate(calc(-50% + var(--dx2)),calc(-50% + var(--dy2))) scale(.15) rotate(var(--r3)); }
 }
 
-/* ─── KEY LABEL BADGE ───────────────────── */
+/*  KEY LABEL BADGE  */
 .key-badge {
   position: fixed;
   pointer-events: none;
@@ -219,7 +310,7 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   100%{ opacity:0; transform:translate(-50%,-120%) scale(.8); }
 }
 
-/* ─── RIPPLE ────────────────────────────── */
+/*  RIPPLE  */
 .ripple-ring {
   position: fixed;
   border-radius: 50%;
@@ -234,7 +325,7 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   100% { transform: translate(-50%,-50%) scale(3.5); opacity: 0;  }
 }
 
-/* ─── COUNTER (top-right like TinyFingers) ── */
+/*  COUNTER (top-right like TinyFingers)  */
 #smash-counter {
   position: fixed; top: 16px; right: 16px;
   display: flex; align-items: center; gap: 0;
@@ -352,16 +443,16 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   transform: translateX(-50%) translateY(0);
 }
 
-/* ─── SHAKE ANIMATIONS ───────────────────── */
+/*  SHAKE ANIMATIONS  */
 
-/* ─── FLASH OVERLAY ──────────────────────── */
+/*  FLASH OVERLAY  */
 #chaos-flash {
   position:fixed; inset:0; pointer-events:none;
   z-index:30; opacity:0; transition:opacity .1s;
 }
 #chaos-flash.flash { opacity:1; }
 
-/* ─── PHASE BANNER ───────────────────────── */
+/*  PHASE BANNER  */
 #phase-banner {
   position: fixed;
   top: 96px;
@@ -403,7 +494,7 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   text-transform:uppercase;
 }
 
-/* ─── VIGNETTE ───────────────────────────── */
+/*  VIGNETTE  */
 #vignette {
   position:fixed; inset:0; pointer-events:none; z-index:2;
   background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,0) 100%);
@@ -415,7 +506,7 @@ body.phase-wild   #vignette { background:radial-gradient(ellipse at center,trans
 body.phase-chaos  #vignette { background:radial-gradient(ellipse at center,transparent 20%,rgba(220,0,50,.28) 100%); }
 body.phase-legend #vignette { background:radial-gradient(ellipse at center,transparent 15%,rgba(120,0,255,.35) 100%); }
 
-/* ─── IDLE PROMPT ───────────────────────── */
+/*  IDLE PROMPT  */
 #idle-prompt {
   position: fixed; inset: 0;
   display: flex; flex-direction: column;
@@ -445,123 +536,854 @@ body.phase-legend #vignette { background:radial-gradient(ellipse at center,trans
 }
 .idle-sub {
   font-size: clamp(14px,2.5vw,20px);
-  color: var(--muted);
+  color: rgba(255,255,255,.78);
   margin-top: 8px;
   text-align: center;
 }
 
-/* ─── LANDING NAV BAR ───────────────────── */
+/*  LANDING NAV BAR  */
 #landing-nav {
-  position: absolute; top: 0; left: 0; right: 0;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 16px 28px;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  background: rgba(11,14,26,.5);
-  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  align-self: center;
+  width: min(var(--max-shell), calc(100vw - 32px));
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 0 auto;
+  padding: 14px clamp(32px, 6vw, 80px);
+  border: 0;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  border-radius: 0;
+  background: linear-gradient(180deg, rgba(13,13,18,.96), rgba(13,13,18,.82));
+  box-shadow: none;
+  backdrop-filter: blur(12px);
+  z-index: 30;
+  transition: background-color .2s ease, border-color .2s ease;
+}
+#landing-nav.is-scrolled {
+  background: rgba(13,13,18,.94);
+  border-color: rgba(255,255,255,.08);
 }
 .lnav-logo {
-  display: flex; align-items: center; gap: 9px;
-  font-family: 'Baloo 2', cursive; font-size: 20px; font-weight: 900;
-  color: #fff; text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 4px 0;
+  font-family: 'Baloo 2', cursive;
+  font-size: 22px;
+  font-weight: 900;
+  color: #fff;
+  text-decoration: none;
+}
+.lnav-wordmark {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(249,115,22,.3);
 }
 .lnav-icon {
-  width: 32px; height: 32px; border-radius: 10px;
-  background: linear-gradient(135deg, var(--brand), var(--brand2));
-  display: flex; align-items: center; justify-content: center; font-size: 17px;
+  position: relative;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 24px rgba(244,120,42,.22);
 }
-.lnav-links { display: flex; align-items: center; gap: 6px; }
+.lnav-icon::before {
+  content: none;
+}
+.lnav-icon::after {
+  content: none;
+}
+.lnav-main {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-left: auto;
+}
+.lnav-links-wrap {
+  display: flex;
+  align-items: center;
+}
+.lnav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
 .lnav-link {
-  padding: 7px 16px; border-radius: 99px;
-  border: 1px solid rgba(255,255,255,.15);
-  color: rgba(255,255,255,.75);
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  padding: 6px 2px;
+  color: rgba(255,255,255,.9);
   font-family: 'Nunito', sans-serif;
-  font-size: 14px; font-weight: 700;
-  text-decoration: none; transition: .2s;
+  font-size: .95rem;
+  font-weight: 500;
+  letter-spacing: .3px;
+  line-height: 1;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color .2s ease, border-color .2s ease, opacity .2s ease;
 }
-.lnav-link:hover { background: rgba(255,255,255,.08); color: #fff; }
+.lnav-link::before,
+.lnav-link::after { content: none; }
+.lnav-link:hover {
+  color: #ffffff;
+  border-bottom-color: #f97316;
+}
+.lnav-link:focus-visible {
+  border-bottom-color: #f97316;
+}
+.lnav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: 1.5px solid #F4782A;
+  background: transparent;
+  color: #F4782A;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.lnav-cta:hover {
+  background: #F4782A;
+  color: #FFFFFF;
+  box-shadow: 0 14px 30px rgba(244,120,42,.18);
+}
+.lnav-cta:active {
+  transform: scale(.98);
+}
+.lnav-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 999px;
+  background: rgba(255,255,255,.04);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+.lnav-toggle:hover {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.2);
+}
+.lnav-toggle:active {
+  transform: scale(.97);
+}
+.lnav-toggle span {
+  position: absolute;
+  width: 16px;
+  height: 2px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  transition: transform .2s ease, opacity .2s ease;
+}
+.lnav-toggle span:nth-child(1) { transform: translateY(-5px); }
+.lnav-toggle span:nth-child(2) { transform: translateY(0); }
+.lnav-toggle span:nth-child(3) { transform: translateY(5px); }
+#landing-nav.menu-open .lnav-toggle span:nth-child(1) {
+  transform: translateY(0) rotate(45deg);
+}
+#landing-nav.menu-open .lnav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+#landing-nav.menu-open .lnav-toggle span:nth-child(3) {
+  transform: translateY(0) rotate(-45deg);
+}
 
-/* ─── LANDING OVERLAY ───────────────────── */
+/*  LANDING OVERLAY  */
 #landing {
   position: fixed; inset: 0;
   z-index: 200;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--bg-deep);
+  display: flex; align-items: flex-start; justify-content: flex-start;
+  background: #0d0d12;
   transition: opacity .6s ease;
   flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  touch-action: pan-y;
+  overscroll-behavior: contain;
 }
 #landing.fade-out { opacity: 0; pointer-events: none; }
+.landing-inner,
+.landing-inner p,
+.landing-inner span,
+.landing-inner strong,
+.landing-inner h1,
+.landing-inner h2 {
+  user-select: text;
+  -webkit-user-select: text;
+}
+#landing a,
+#landing button {
+  touch-action: manipulation;
+}
+.start-btn,
+.share-btn,
+.lnav-link,
+.lnav-cta,
+.lnav-toggle,
+.footer-start-btn {
+  user-select: none;
+  -webkit-user-select: none;
+}
 .landing-inner {
-  text-align: center;
-  padding: 40px 24px;
-  max-width: 640px;
+  position: relative;
+  width: min(var(--max-shell), calc(100vw - 32px));
+  display: grid;
+  grid-template-columns: minmax(0, 480px) minmax(0, 420px);
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(32px, 5vw, 72px);
+  min-height: calc(100vh - 112px);
+  padding: 56px clamp(32px, 6vw, 80px) 72px;
+  text-align: left;
+  z-index: 1;
+  margin: 0 auto;
 }
-.landing-logo {
-  display: flex; align-items: center; justify-content: center;
-  gap: 14px; margin-bottom: 28px;
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 480px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
 }
-.logo-paw {
-  width: 64px; height: 64px; border-radius: 20px;
+.hero-brand {
+  display: none;
+}
+.hero-brand-mark {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  flex: 0 0 auto;
+  border-radius: 20px;
   background: linear-gradient(135deg, var(--brand), var(--brand2));
-  display: flex; align-items: center; justify-content: center;
-  font-size: 34px;
-  box-shadow: 0 8px 32px rgba(255,122,61,.4);
-  animation: logoPulse 2s ease-in-out infinite;
+  box-shadow: 0 18px 36px rgba(255,122,61,.28);
 }
-@keyframes logoPulse {
-  0%,100%{ box-shadow: 0 8px 32px rgba(255,122,61,.4); }
-  50%    { box-shadow: 0 8px 56px rgba(255,122,61,.7); }
-}
-.logo-name {
+.hero-brand-mark::before {
+  content: none;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'Baloo 2', cursive;
-  font-size: clamp(36px,8vw,72px);
+  font-size: 30px;
   font-weight: 900;
+  color: #201a35;
+  letter-spacing: -.04em;
+}
+.hero-brand-mark::after {
+  content: '';
+  position: absolute;
+  top: 11px;
+  left: 14px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(43, 29, 72, .9);
+  box-shadow:
+    16px -2px 0 rgba(43, 29, 72, .9),
+    31px 1px 0 rgba(43, 29, 72, .9),
+    10px 18px 0 7px rgba(43, 29, 72, .9);
+}
+.hero-brand-name {
+  display: block;
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 900;
+  line-height: .95;
+  letter-spacing: -.04em;
   color: #fff;
-  letter-spacing: -.02em;
+}
+.hero-kicker {
+  display: none;
+}
+.hero-kicker::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--brand), var(--brand2));
+  box-shadow: 0 0 14px rgba(255,122,61,.35);
+}
+.hero-title {
+  max-width: 8ch;
+  margin: 0 0 18px;
+  padding-top: 0;
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(2.8rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: .95;
+  letter-spacing: -.04em;
+  color: #fff;
+  text-wrap: balance;
+}
+.hero-title span {
+  display: inline-block;
+  color: #f97316;
 }
 .landing-tagline {
-  font-size: clamp(15px,3vw,22px);
-  color: var(--muted);
-  margin-bottom: 36px;
-  line-height: 1.5;
+  max-width: 46ch;
+  font-size: 1rem;
+  color: #94a3b8;
+  margin-bottom: 24px;
+  line-height: 1.6;
+  text-wrap: pretty;
 }
 .landing-tagline strong { color: #fff; }
-.feature-pills {
-  display: flex; flex-wrap: wrap; justify-content: center;
-  gap: 10px; margin-bottom: 40px;
+.hero-microcopy {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  max-width: 480px;
+  margin-top: 0;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 2px;
 }
-.fpill {
-  display: flex; align-items: center; gap: 7px;
-  background: rgba(255,255,255,.07);
-  border: 1px solid rgba(255,255,255,.12);
-  color: var(--text);
-  font-size: 13px; font-weight: 700;
-  padding: 8px 16px; border-radius: 99px;
+.hero-microcopy::-webkit-scrollbar {
+  display: none;
+}
+.micro-pill {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  flex: 0 0 auto;
+  min-width: 0;
+  min-height: 42px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  position: relative;
+  background: #15171c;
+  border: 1px solid rgba(255,255,255,.08);
+  color: #e5e7eb;
+  font-size: .8rem;
+  font-weight: 600;
+  text-align: left;
+  line-height: 1.25;
+  white-space: nowrap;
+  box-shadow: none;
+}
+.micro-pill__icon {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  color: #f97316;
+}
+.micro-pill__icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.micro-pill__label {
+  display: block;
+  min-width: 0;
+  white-space: nowrap;
+}
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+.hero-feature-list {
+  display: none;
+}
+.hero-feature {
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: 6px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  text-align: left;
+}
+.hero-feature__icon {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 999px;
+  background: transparent;
+  color: #f97316;
+  box-shadow: none;
+}
+.hero-feature__icon svg {
+  width: 18px;
+  height: 18px;
+}
+.hero-feature__name {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.hero-feature__desc {
+  display: block;
+  color: rgba(240,240,248,.68);
+  font-size: 12px;
+  line-height: 1.4;
 }
 .start-btn {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: linear-gradient(135deg, var(--brand), #ff5500);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #f97316;
   color: #fff;
-  font-family: 'Baloo 2', cursive;
-  font-size: clamp(18px,4vw,26px);
-  font-weight: 900;
-  padding: 18px 52px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  min-height: 0;
+  padding: 14px 28px;
   border-radius: 99px;
   border: none; cursor: pointer;
-  box-shadow: 0 0 40px rgba(255,122,61,.45);
-  transition: transform .2s, box-shadow .2s;
-  animation: btnPulse 2.5s ease-in-out infinite;
+  box-shadow: 0 16px 32px rgba(249,115,22,.22);
+  transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease;
 }
-@keyframes btnPulse {
-  0%,100%{ box-shadow: 0 0 40px rgba(255,122,61,.45); transform: scale(1); }
-  50%    { box-shadow: 0 0 70px rgba(255,122,61,.7);  transform: scale(1.03); }
+.start-btn:hover {
+  background: #ea580c;
+  transform: scale(1.02);
+  box-shadow: 0 18px 36px rgba(234,88,12,.24);
 }
-.start-btn:hover { transform: scale(1.06) !important; box-shadow: 0 0 80px rgba(255,122,61,.8) !important; }
+.start-btn:active {
+  transform: scale(.98);
+}
 .start-note {
   display: block;
-  font-size: 13px; color: var(--muted);
+  font-size: 13px;
+  color: #AAAAAA;
+  margin-top: 0;
+}
+.hero-visual {
+  position: relative;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: 0;
+  align-self: center;
+}
+.hero-glow {
+  position: absolute;
+  inset: 12% 8% 18%;
+  border-radius: 36px;
+  background: radial-gradient(circle at 50% 50%, rgba(249,115,22,.12), transparent 56%);
+  filter: blur(24px);
+  opacity: .82;
+}
+.interaction-card {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  margin-inline: auto;
+  padding: 24px;
+  border-radius: 24px;
+  background: #15171c;
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 24px 48px rgba(0,0,0,.28);
+  overflow: hidden;
+}
+.interaction-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.03), transparent 28%),
+    radial-gradient(circle at 16% 14%, rgba(249,115,22,.08), transparent 28%);
+  pointer-events: none;
+}
+.visual-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  color: #cbd5e1;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.visual-title {
+  margin: 14px 0 10px;
+  font-family: 'Baloo 2', cursive;
+  max-width: 16ch;
+  font-size: 1.15rem;
+  line-height: 1.12;
+  letter-spacing: -.03em;
+  color: #cbd5e1;
+  text-wrap: balance;
+}
+.visual-copy {
+  color: #94a3b8;
+  max-width: none;
+  font-size: .875rem;
+  line-height: 1.6;
+}
+.visual-stage {
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+}
+.hero-demo-screen {
+  position: relative;
+  min-height: 220px;
+  border-radius: 16px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 24%, rgba(249,115,22,.24), transparent 20%),
+    radial-gradient(circle at 78% 24%, rgba(96,165,250,.18), transparent 22%),
+    radial-gradient(circle at 54% 76%, rgba(250,204,21,.14), transparent 24%),
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01)),
+    #1a1c22;
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 -28px 48px rgba(0,0,0,.18);
+  cursor: pointer;
+  outline: none;
+}
+.hero-demo-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 52%, rgba(255,255,255,.12), transparent 26%),
+    linear-gradient(140deg, rgba(255,255,255,.08), transparent 38%, transparent 62%, rgba(255,255,255,.04));
+  pointer-events: none;
+}
+.hero-demo-screen::after {
+  content: '';
+  position: absolute;
+  inset: auto 12% 14px 12%;
+  height: 34px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(255,255,255,.16), rgba(255,255,255,0) 70%);
+  opacity: .5;
+  filter: blur(12px);
+  pointer-events: none;
+}
+.hero-demo-screen:focus-visible {
+  border-color: rgba(244,120,42,.72);
+  box-shadow:
+    0 0 0 3px rgba(244,120,42,.18),
+    inset 0 1px 0 rgba(255,255,255,.08);
+}
+.hero-demo-idle {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-demo-ghost {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  height: 46px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.12);
+  color: #FFFFFF;
+  font-family: 'Baloo 2', cursive;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1;
+  text-shadow: 0 8px 18px rgba(0,0,0,.18);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 18px 30px rgba(0,0,0,.14);
+  opacity: .82;
+  animation: heroDemoGhostDrift 4.6s ease-in-out infinite;
+}
+.hero-demo-ghost--one {
+  top: 16%;
+  left: 14%;
+  color: #FFD166;
+}
+.hero-demo-ghost--two {
+  top: 28%;
+  right: 11%;
+  color: #FFFFFF;
+  animation-delay: -.9s;
+}
+.hero-demo-ghost--three {
+  bottom: 18%;
+  left: 43%;
+  color: #6FD3FF;
+  animation-delay: -1.8s;
+}
+.hero-demo-spark {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  opacity: .8;
+  filter: blur(.2px);
+  animation: heroDemoSpark 3.8s linear infinite;
+}
+.hero-demo-spark--one {
+  top: 22%;
+  left: 36%;
+  background: rgba(255,214,111,.85);
+}
+.hero-demo-spark--two {
+  top: 58%;
+  right: 24%;
+  background: rgba(111,211,255,.82);
+  animation-delay: -1.2s;
+}
+.hero-demo-spark--three {
+  bottom: 20%;
+  left: 24%;
+  background: rgba(244,120,42,.88);
+  animation-delay: -2.2s;
+}
+.hero-demo-spark--four {
+  top: 36%;
+  right: 40%;
+  background: rgba(255,255,255,.74);
+  animation-delay: -.6s;
+}
+.hero-demo-char {
+  z-index: 2;
+}
+.hero-demo-char {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, 18px) scale(.45);
+  opacity: 0;
+  font-family: 'Baloo 2', cursive;
+  font-weight: 800;
+  line-height: 1;
+  pointer-events: none;
+  text-shadow: 0 10px 28px rgba(0,0,0,.24);
+  animation: heroDemoFloat 2s ease-out forwards;
+}
+@keyframes heroDemoGhostDrift {
+  0%, 100% {
+    transform: translateY(8px) scale(.96);
+    opacity: .64;
+  }
+  50% {
+    transform: translateY(-8px) scale(1.04);
+    opacity: .96;
+  }
+}
+@keyframes heroDemoSpark {
+  0% {
+    transform: translateY(8px) scale(.7);
+    opacity: 0;
+  }
+  18% {
+    opacity: .9;
+  }
+  100% {
+    transform: translateY(-26px) scale(1.1);
+    opacity: 0;
+  }
+}
+@keyframes heroDemoFloat {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 18px) scale(.45);
+  }
+  18% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1.06);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, var(--demo-rise, -46px)) scale(.94);
+  }
+}
+.hero-demo-label {
+  margin-top: 12px;
+  font-size: .875rem;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+.stage-screen {
+  position: relative;
+  min-height: 128px;
+  border-radius: 18px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 25% 28%, rgba(255,205,60,.28), transparent 24%),
+    radial-gradient(circle at 78% 30%, rgba(255,122,61,.26), transparent 24%),
+    radial-gradient(circle at 50% 78%, rgba(114,155,255,.18), transparent 28%),
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border: 1px solid rgba(255,255,255,.08);
+}
+.stage-bubble {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  height: 46px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.12);
+  color: #fff;
+  font-family: 'Baloo 2', cursive;
+  font-size: 17px;
+  font-weight: 900;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.18);
+}
+.stage-bubble.one { top: 16px; left: 16px; }
+.stage-bubble.two { top: 34px; right: 16px; }
+.stage-bubble.three { bottom: 10px; left: 36%; }
+.stage-caption {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+.stage-caption span {
+  padding: 8px 8px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.08);
+  color: rgba(255,255,255,.86);
+  font-size: 11px;
+  font-weight: 800;
+  text-align: center;
+}
+.visual-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
   margin-top: 14px;
 }
-
+.visual-chip {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 10px;
+  align-items: start;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  min-height: 0;
+}
+.visual-chip::before {
+  content: attr(data-icon);
+  position: static;
+  min-width: 40px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(255,122,61,.92), rgba(255,205,60,.92));
+  box-shadow: 0 10px 24px rgba(255,122,61,.26);
+  color: #201a35;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .04em;
+  padding: 0 8px;
+  margin-bottom: 0;
+  grid-row: 1 / span 2;
+}
+.visual-chip strong {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.15;
+}
+.visual-chip span {
+  display: block;
+  margin-top: 0;
+  color: rgba(240,240,248,.78);
+  font-size: 12px;
+  line-height: 1.35;
+}
+.hero-floating-note {
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.2);
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff;
+}
+.hero-floating-note em {
+  color: #ffd66f;
+  font-style: normal;
+}
+.share-row {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.idle-mascot::before {
+  content: '';
+  display: block;
+  width: 118px;
+  height: 118px;
+  border-radius: 32px;
+  background-image: url('tottaps-logo-icon.png');
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 16px 36px rgba(255,122,61,.3);
+}
 .more-btn {
   margin-top: 10px;
   background: transparent;
@@ -577,59 +1399,317 @@ body.phase-legend #vignette { background:radial-gradient(ellipse at center,trans
 }
 .more-btn:hover { background: rgba(255,255,255,.08); }
 
-/* ─── SHARE ROW (landing) ───────────────── */
-.share-row {
-  margin-top: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
+/*  SHARE ROW (landing)  */
 .share-label {
-  font-size: 12px;
-  color: var(--muted);
-  font-weight: 700;
-  letter-spacing: .04em;
-  text-transform: uppercase;
+  font-size: 15px;
+  color: rgba(255,233,214,.86);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
 }
 .share-btns {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .share-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 9px 18px;
+  gap: 8px;
+  min-height: 46px;
+  padding: 10px 16px 10px 14px;
   border-radius: 99px;
-  border: 1px solid rgba(255,255,255,.15);
-  background: rgba(255,255,255,.07);
-  color: rgba(255,255,255,.8);
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.05);
+  color: rgba(255,255,255,.92);
   font-family: 'Nunito', sans-serif;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
-  transition: .2s;
+  box-shadow: 0 14px 28px rgba(0,0,0,.14);
+  transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.share-btn__icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.share-btn__icon svg {
+  width: 100%;
+  height: 100%;
+}
+.share-btn__label {
+  display: block;
 }
 .share-btn:hover {
-  background: rgba(255,255,255,.14);
+  background: rgba(255,255,255,.1);
   color: #fff;
   border-color: rgba(255,255,255,.3);
   transform: translateY(-1px);
+  box-shadow: 0 18px 32px rgba(0,0,0,.2);
 }
-.share-wa:hover   { background: rgba(30,190,93,.18);  border-color: rgba(30,190,93,.4);  color: #1ebe5d; }
-.share-copy:hover { background: rgba(255,205,60,.12);  border-color: rgba(255,205,60,.3); color: var(--brand2); }
-.share-x:hover    { background: rgba(255,255,255,.1);  border-color: rgba(255,255,255,.3);color: #fff; }
+.share-wa {
+  background: #25D366;
+  border-color: #25D366;
+  color: #ffffff;
+}
+.share-wa:hover {
+  background: #1fb85a;
+  border-color: #1fb85a;
+  color: #ffffff;
+}
+.share-copy {
+  background: rgba(249, 115, 22, 0.15);
+  border-color: #f97316;
+  color: #FBD0B5;
+}
+.share-copy:hover {
+  background: rgba(249, 115, 22, 0.22);
+  border-color: #f97316;
+  color: #FFE3CC;
+}
+.share-x {
+  background: rgba(255,255,255,.04);
+  border-color: rgba(255,255,255,.18);
+  color: #ffffff;
+}
+.share-x:hover {
+  background: rgba(255,255,255,.1);
+  border-color: rgba(255,255,255,.32);
+  color: #FFFFFF;
+}
+.landing-share {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  text-align: center;
+}
+.landing-share .share-label {
+  color: rgba(240,240,248,.86);
+}
+.landing-share .share-btns {
+  justify-content: center;
+}
+
+.landing-features {
+  width: 100%;
+  background: #111318;
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  padding: 48px 0;
+}
+.landing-features__inner {
+  width: min(var(--max-shell), calc(100vw - 32px));
+  margin: 0 auto;
+}
+.landing-features__heading {
+  margin: 0 0 32px;
+  text-align: center;
+  color: #ffffff;
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.landing-features__heading::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  margin: 0 auto 12px;
+  border-radius: 999px;
+  background: #f97316;
+}
+.landing-features__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  align-items: start;
+}
+.landing-features__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  max-width: 280px;
+  margin: 0 auto;
+  text-align: center;
+}
+.landing-features__icon {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #f97316;
+}
+.landing-features__icon svg {
+  width: 22px;
+  height: 22px;
+}
+.landing-features__title {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.landing-features__desc {
+  max-width: 28ch;
+  color: #94a3b8;
+  font-size: .9375rem;
+  line-height: 1.6;
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity .4s ease-out,
+    transform .4s ease-out;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*  LANDING FOOTER  */
+.landing-footer {
+  width: 100%;
+  background: #0d0d12;
+  border-top: 0;
+  padding: 60px 24px 32px;
+}
+.landing-footer__inner {
+  width: min(var(--max-shell), 100%);
+  margin: 0 auto;
+}
+.landing-footer__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.landing-footer__row + .landing-footer__row {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #FFFFFF;
+  font-family: 'Baloo 2', cursive;
+  font-size: 24px;
+  font-weight: 900;
+  text-decoration: none;
+}
+.footer-brand .lnav-icon {
+  width: 38px;
+  height: 38px;
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.footer-links a {
+  color: #CCCCCC;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.footer-links a:hover {
+  color: #FFFFFF;
+}
+.landing-footer__cta {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 0;
+  text-align: center;
+}
+.landing-footer__cta h2 {
+  margin: 0;
+  color: #FFFFFF;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.footer-start-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: 999px;
+  background: #f97316;
+  color: #FFFFFF;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease;
+  box-shadow: 0 16px 34px rgba(249,115,22,.2);
+}
+.footer-start-btn:hover {
+  background: #ea580c;
+  transform: translateY(-1px);
+  box-shadow: 0 18px 38px rgba(234,88,12,.24);
+}
+.footer-start-btn:active {
+  transform: scale(.98);
+}
+.landing-footer__bottom {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 13px;
+}
+.landing-footer__bottom.landing-footer__row {
+  margin-top: 18px;
+  padding-top: 18px;
+}
+.landing-footer__copyright {
+  color: #666666;
+}
+.landing-footer__email {
+  color: #64748b;
+  text-decoration: none;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color .2s ease, text-decoration-color .2s ease;
+}
+.landing-footer__email:hover {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
 
 
-/* ─── PARENT PANEL ──────────────────────── */
+/*  PARENT PANEL  */
 #ph {
   position: fixed; top: 0; left: 0; width: 60px; height: 60px; z-index: 100; cursor: pointer;
   border: 0; background: transparent; padding: 0;
 }
-#ph::after { content:'⚙️'; position:absolute; top:10px; left:10px; font-size:20px; opacity:.15; transition:.3s; }
+#ph::after { content:'P'; position:absolute; top:10px; left:10px; font-size:20px; opacity:.15; transition:.3s; }
 #ph:hover::after { opacity:.5; }
 
 #parent-panel {
@@ -641,21 +1721,61 @@ body.phase-legend #vignette { background:radial-gradient(ellipse at center,trans
 }
 #parent-panel.open { display: flex; }
 .panel-box {
-  background: #12152a;
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 28px; padding: 36px 40px;
-  max-width: 420px; width: 92%;
+  background:
+    linear-gradient(180deg, rgba(18, 24, 44, .96), rgba(10, 14, 28, .94)),
+    rgba(10, 14, 28, .94);
+  border: 1px solid var(--border-strong);
+  border-radius: 30px;
+  padding: 30px;
+  max-width: 520px;
+  width: min(92vw, 520px);
+  box-shadow: var(--shadow-strong);
+}
+.panel-header {
+  text-align: center;
+  margin-bottom: 20px;
 }
 .panel-box h2 {
   font-family: 'Baloo 2', cursive;
-  font-size: 26px; font-weight: 900;
-  color: var(--brand); margin-bottom: 24px; text-align: center;
+  font-size: 30px;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 6px;
+  text-align: center;
+}
+.panel-subtitle {
+  max-width: 34ch;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.panel-section {
+  display: grid;
+  gap: 12px;
 }
 .prow {
-  display: flex; align-items: center;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
-  font-size: 15px; font-weight: 700; color: var(--text);
+  gap: 14px;
+  margin-bottom: 0;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+.prow label:first-child {
+  color: #fff;
+}
+.prow.theme-row {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
 }
 .tog { position:relative; width:50px; height:26px; }
 .tog input { opacity:0; width:0; height:0; }
@@ -670,32 +1790,65 @@ body.phase-legend #vignette { background:radial-gradient(ellipse at center,trans
 }
 input:checked+.tslider { background: var(--brand); }
 input:checked+.tslider::before { background:#fff; transform:translateX(24px); }
-.theme-btns { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+.theme-btns { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:0; }
 .tbtn {
-  padding:10px 16px; border-radius:12px; border:2px solid transparent;
-  background:rgba(255,255,255,.07); color:#fff;
-  font-size:13px; font-weight:800; cursor:pointer; transition:.2s;
+  min-height: 42px;
+  padding:10px 16px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.07);
+  color:#fff;
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer;
+  transition:.2s ease;
 }
-.tbtn:hover, .tbtn.active { border-color:var(--brand); background:rgba(255,122,61,.15); }
+.tbtn:hover, .tbtn.active {
+  border-color: rgba(255,122,61,.34);
+  background: rgba(255,122,61,.16);
+  box-shadow: 0 10px 24px rgba(255,122,61,.18);
+}
 .pbtn {
-  flex:1; padding:13px; border:none; border-radius:14px;
-  font-family:'Baloo 2',cursive; font-size:16px; font-weight:900; cursor:pointer; transition:.2s;
+  flex:1;
+  min-height: 52px;
+  padding:13px 16px;
+  border:1px solid transparent;
+  border-radius:16px;
+  font-family:'Nunito',sans-serif;
+  font-size:15px;
+  font-weight:900;
+  cursor:pointer;
+  transition:.2s ease;
 }
-.pbtn:hover { transform:scale(1.04); }
-.pbtn-primary { background:var(--brand); color:#fff; }
-.pbtn-secondary { background:rgba(255,255,255,.08); color:var(--text); }
+.pbtn:hover { transform:translateY(-1px); }
+.pbtn-primary {
+  background: linear-gradient(135deg, var(--brand), #ff5600);
+  color:#fff;
+  box-shadow: 0 12px 26px rgba(255,122,61,.22);
+}
+.pbtn-secondary {
+  background:rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.10);
+  color:var(--text);
+}
 select {
-  background:#1e2235; color:#fff; border:1px solid rgba(255,255,255,.15);
-  border-radius:10px; padding:8px 12px; font-size:14px; font-weight:700;
+  min-height: 44px;
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:12px;
+  padding:10px 12px;
+  font-size:14px;
+  font-weight:700;
   font-family:'Nunito',sans-serif;
 }
 
 .insight-card {
-  margin-top: 8px;
-  border: 1px solid rgba(255,255,255,.12);
+  margin-top: 4px;
+  border: 1px solid rgba(255,255,255,.10);
   background: rgba(255,255,255,.04);
-  border-radius: 14px;
-  padding: 12px;
+  border-radius: 18px;
+  padding: 14px;
 }
 .insight-title {
   font-family: 'Baloo 2', cursive;
@@ -710,9 +1863,10 @@ select {
   gap: 8px;
 }
 .insight-item {
-  padding: 8px;
-  border-radius: 10px;
+  padding: 10px;
+  border-radius: 12px;
   background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.06);
 }
 .insight-label {
   font-size: 11px;
@@ -727,12 +1881,24 @@ select {
   font-weight: 900;
   color: #fff;
 }
+.panel-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 24px;
+}
+.panel-footnote {
+  text-align:center;
+  font-size:12px;
+  color:var(--muted);
+  margin-top:16px;
+}
 
-/* ─── TIMER BAR ─────────────────────────── */
+/*  TIMER BAR  */
 #tbar-wrap { position:fixed; bottom:0; left:0; right:0; height:10px; background:rgba(255,255,255,.06); z-index:50; display:none; }
 #tbar { height:100%; background:linear-gradient(90deg,var(--brand),var(--brand2)); width:100%; transition:width 1s linear; border-radius:0 6px 6px 0; }
 
-/* ─── SMASH REPORT ──────────────────────── */
+/*  SMASH REPORT  */
 #end-card {
   position: fixed; inset: 0;
   background: rgba(5,7,18,.82);
@@ -751,13 +1917,15 @@ select {
 }
 
 .report-card {
-  background: #10132a;
-  border: 1px solid rgba(255,255,255,.13);
-  border-radius: 28px;
-  width: min(92vw, 760px);
+  background:
+    linear-gradient(180deg, rgba(16,19,42,.98), rgba(10,13,28,.96)),
+    #10132a;
+  border: 1px solid var(--border-strong);
+  border-radius: 30px;
+  width: min(94vw, 860px);
   max-height: min(92vh, 760px);
   overflow: hidden;
-  box-shadow: 0 32px 80px rgba(0,0,0,.6);
+  box-shadow: 0 32px 90px rgba(0,0,0,.56);
   animation: cardSlideIn .5s cubic-bezier(.22,.68,.35,1.2) forwards;
   position: relative; z-index: 402;
   display: grid;
@@ -770,9 +1938,9 @@ select {
 
 /* Header gradient banner */
 .report-header {
-  background: linear-gradient(135deg, #1a1040 0%, #0d1a35 50%, #0b1a10 100%);
-  padding: 28px 28px 22px;
-  text-align: center;
+  background: linear-gradient(135deg, rgba(38,18,72,.92) 0%, rgba(13,24,53,.92) 52%, rgba(12,28,28,.9) 100%);
+  padding: 28px 30px 24px;
+  text-align: left;
   border-bottom: 1px solid rgba(255,255,255,.08);
   position: relative; overflow: hidden;
 }
@@ -783,7 +1951,7 @@ select {
   pointer-events: none;
 }
 .report-logo {
-  display: flex; align-items: center; justify-content: center;
+  display: flex; align-items: center; justify-content: flex-start;
   gap: 10px; margin-bottom: 16px;
 }
 .report-logo-icon {
@@ -791,6 +1959,13 @@ select {
   background: linear-gradient(135deg, var(--brand), var(--brand2));
   display: flex; align-items: center; justify-content: center;
   font-size: 20px;
+}
+.report-logo-icon::before {
+  content: none;
+  font-family: 'Baloo 2', cursive;
+  font-size: 15px;
+  font-weight: 900;
+  color: #201a35;
 }
 .report-logo-name {
   font-family: 'Baloo 2', cursive;
@@ -803,20 +1978,34 @@ select {
   color: #fff; margin-bottom: 6px;
 }
 .report-subtitle {
-  font-size: 14px; color: var(--muted);
+  font-size: 14px;
+  color: rgba(240,240,248,.8);
+  max-width: 34ch;
 }
 
 /* Big score display */
 .report-score-block {
-  padding: 24px 28px 0;
-  text-align: center;
+  padding: 28px 30px 6px;
+  text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
 }
 .report-score-emoji {
-  font-size: 52px; line-height: 1;
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(255,122,61,.22), rgba(255,205,60,.18));
+  border: 1px solid rgba(255,255,255,.10);
+  font-family: 'Baloo 2', cursive;
+  font-size: 22px;
+  line-height: 1;
   animation: emojiBounce .6s .3s cubic-bezier(.22,.68,.35,1.5) both;
+  overflow: hidden;
 }
 @keyframes emojiBounce {
   0%  { transform: scale(0) rotate(-20deg); }
@@ -831,12 +2020,15 @@ select {
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 .report-score-label {
-  font-size: 14px; color: var(--muted); font-weight: 700;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 800;
   text-transform: uppercase; letter-spacing: .1em;
 }
 .report-chaos-badge {
-  display: inline-block;
-  margin: 12px auto 0;
+  display: inline-flex;
+  align-items: center;
+  margin: 14px 0 0;
   font-family: 'Baloo 2', cursive;
   font-size: 18px; font-weight: 900;
   padding: 6px 24px; border-radius: 99px;
@@ -850,19 +2042,26 @@ select {
   color: rgba(255,255,255,.78);
   font-size: 13px;
   font-weight: 700;
+  line-height: 1.5;
+  max-width: 36ch;
 }
 
 /* Stats row */
 .report-stats {
-  display: grid; grid-template-columns: 1fr 1fr 1fr;
-  gap: 1px; margin: 20px 0 0;
-  background: rgba(255,255,255,.08);
-  border-top: 1px solid rgba(255,255,255,.08);
-  border-bottom: 1px solid rgba(255,255,255,.08);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 22px 0 0;
+  padding: 0 30px 28px;
+  background: transparent;
+  border: 0;
 }
 .stat-cell {
-  background: #10132a;
-  padding: 16px 10px; text-align: center;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  padding: 15px 12px;
+  text-align: left;
 }
 .stat-cell-label {
   font-size: 11px; font-weight: 800;
@@ -874,38 +2073,47 @@ select {
   font-size: 20px; font-weight: 900; color: #fff;
 }
 .stat-cell-val.highlight { color: var(--brand); }
+#rpt-theme {
+  color: #ffd2a6;
+  letter-spacing: .01em;
+}
 
 /* Action buttons */
 .report-actions {
-  padding: 20px 24px 24px;
+  padding: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   align-content: start;
 }
 .rpt-btn {
-  width: 100%; padding: 15px 20px;
-  border: none; border-radius: 14px;
-  font-family: 'Baloo 2', cursive;
-  font-size: 17px; font-weight: 900;
+  width: 100%;
+  min-height: 54px;
+  padding: 15px 18px;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 900;
   cursor: pointer; transition: transform .18s, box-shadow .18s;
   display: flex; align-items: center; justify-content: center; gap: 9px;
+  text-align: center;
 }
-.rpt-btn:hover { transform: scale(1.03); }
+.rpt-btn:hover { transform: translateY(-1px); }
 .rpt-btn:active { transform: scale(.98); }
 
 .rpt-primary {
   background: linear-gradient(135deg, var(--brand), #ff5500);
   color: #fff;
-  box-shadow: 0 6px 24px rgba(255,122,61,.35);
+  box-shadow: 0 12px 28px rgba(255,122,61,.26);
   grid-column: 1 / -1;
 }
-.rpt-primary:hover { box-shadow: 0 8px 32px rgba(255,122,61,.55); }
+.rpt-primary:hover { box-shadow: 0 18px 36px rgba(255,122,61,.34); }
 
 .rpt-wa {
-  background: #1ebe5d;
+  background: linear-gradient(135deg, #1ebe5d, #22d46d);
   color: #fff;
-  box-shadow: 0 4px 16px rgba(30,190,93,.3);
+  box-shadow: 0 10px 22px rgba(30,190,93,.22);
 }
 .rpt-secondary {
   background: rgba(255,255,255,.07);
@@ -921,9 +2129,10 @@ select {
 
 /* Footer */
 .report-footer {
-  padding: 0 24px 20px;
-  text-align: center;
-  grid-column: 1 / -1;
+  padding: 18px 0 0;
+  text-align: left;
+  margin-top: auto;
+  border-top: 1px solid rgba(255,255,255,.08);
 }
 .report-main {
   min-width: 0;
@@ -932,9 +2141,23 @@ select {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   border-left: 1px solid rgba(255,255,255,.08);
   background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.05));
+  padding: 28px 24px 24px;
+}
+.report-side-kicker {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted-strong);
+}
+.report-side-copy {
+  margin: 8px 0 18px;
+  color: rgba(240,240,248,.72);
+  font-size: 14px;
+  line-height: 1.6;
 }
 .panel-note {
   margin: -4px 0 16px;
@@ -954,10 +2177,10 @@ select {
 .report-site {
   font-size: 11px; color: rgba(255,255,255,.2);
   letter-spacing: .12em; text-transform: uppercase;
-  margin-top: 10px;
+  margin-top: 2px;
 }
 
-/* ─── ANIMATED BACKGROUND ───────────────── */
+/*  ANIMATED BACKGROUND  */
 #bg-canvas {
   position: fixed; inset: 0;
   pointer-events: none; z-index: 2;
@@ -981,7 +2204,13 @@ select {
   font-weight: 900;
   line-height: 1;
   color: #fff;
-  text-shadow: 0 0 24px rgba(255,255,255,.5), 0 0 40px rgba(255,122,61,.5);
+  text-shadow: none;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: rgba(17, 24, 39, .82);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 12px 28px rgba(0,0,0,.18);
+  backdrop-filter: blur(6px);
   transform: translate(-50%, -50%) scale(.2);
   animation: comboPop .78s cubic-bezier(.2,.7,.2,1.28) forwards;
 }
@@ -1038,27 +2267,260 @@ select {
   100% { opacity: 0; transform: translateX(-50%) translateY(-8px) scale(.98); }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 900px) {
   #landing-nav {
-    padding: 10px 12px;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .lnav-logo { font-size: 18px; }
-  .lnav-links {
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .lnav-link {
-    font-size: 12px;
-    padding: 10px 12px;
+    width: min(var(--max-shell), calc(100vw - 24px));
+    padding: 14px 24px;
   }
   .landing-inner {
-    width: 100%;
+    grid-template-columns: 1fr;
+    justify-content: start;
+    gap: 32px;
+    min-height: auto;
+    padding: 40px 24px 56px;
+  }
+  .hero-copy {
+    max-width: min(480px, 100%);
+    min-height: auto;
+  }
+  .hero-title,
+  .landing-tagline {
+    max-width: none;
+  }
+  .hero-visual {
+    justify-content: center;
+    padding-top: 0;
+  }
+  .interaction-card {
+    max-width: 420px;
+  }
+  .landing-features__inner {
+    width: min(var(--max-shell), calc(100vw - 24px));
+  }
+  .landing-features__grid {
+    gap: 22px;
+  }
+}
+
+@media (max-width: 767px) {
+  #landing-nav {
+    top: 10px;
+    width: calc(100vw - 20px);
+    margin-top: 10px;
+    min-height: 64px;
+    padding: 12px 16px;
+    gap: 10px;
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 18px;
+    overflow: visible;
+    background: rgba(13,13,18,.92);
+  }
+  .lnav-logo { font-size: 20px; }
+  .lnav-main {
+    gap: 10px;
+  }
+  .lnav-links-wrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 10px);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity .2s ease, transform .2s ease;
+  }
+  #landing-nav.menu-open .lnav-links-wrap {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .lnav-links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding: 10px;
+    border-radius: 20px;
+    background: rgba(17,17,17,.96);
+    border: 1px solid rgba(255,255,255,.08);
+    box-shadow: 0 22px 40px rgba(0,0,0,.32);
+  }
+  .lnav-link {
+    padding: 14px 16px;
+    border-radius: 12px;
+  }
+  .lnav-link:hover {
+    background: rgba(255,255,255,.04);
+  }
+  .lnav-cta {
+    min-height: 40px;
+    padding: 8px 16px;
+  }
+  .lnav-toggle {
+    position: relative;
+    display: inline-flex;
+    flex: 0 0 auto;
+  }
+  .landing-inner {
+    width: calc(100vw - 20px);
+    max-width: none;
+    gap: 28px;
+    padding: 32px 20px 48px;
+    text-align: left;
+  }
+  .hero-kicker {
+    display: none;
+  }
+  .hero-title {
+    max-width: none;
+    font-size: clamp(2.8rem, 9vw, 3.5rem);
+  }
+  .landing-tagline {
+    font-size: 1rem;
+  }
+  .hero-actions {
+    align-items: stretch;
+  }
+  .hero-microcopy {
+    gap: 8px;
+  }
+  .micro-pill {
+    min-height: 38px;
+    font-size: .72rem;
+    padding: 7px 10px;
+  }
+  .start-btn {
+    width: fit-content;
     max-width: 100%;
-    padding: 88px 14px 28px;
+  }
+  .share-row {
+    display: none;
+  }
+  .hero-visual {
+    min-height: auto;
+  }
+  .interaction-card {
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+  }
+  .panel-actions {
+    grid-template-columns: 1fr;
+  }
+  .visual-title {
+    font-size: 1.15rem;
+  }
+  .visual-copy,
+  .hero-demo-label {
+    font-size: 14px;
+  }
+  .hero-demo-screen {
+    min-height: 200px;
+  }
+  .landing-footer {
+    padding: 48px 20px 32px;
+  }
+  .landing-footer__row,
+  .landing-footer__bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-links {
+    justify-content: center;
+  }
+  .share-btns {
+    justify-content: center;
+  }
+  .landing-features {
+    padding: 48px 0;
+  }
+  .landing-features__inner {
+    width: calc(100vw - 20px);
+  }
+  .landing-features__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  #landing-nav {
+    min-height: 64px;
+    padding: 11px 14px;
+  }
+  .lnav-logo { font-size: 18px; }
+  .lnav-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+  }
+  .lnav-cta {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+  .landing-inner {
+    width: calc(100vw - 16px);
+    gap: 20px;
+    padding: 28px 16px 40px;
+  }
+  .hero-kicker {
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+  .hero-brand-mark {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+  }
+  .hero-brand-mark::before {
+    font-size: 23px;
+  }
+  .hero-brand-mark::after {
+    top: 9px;
+    left: 11px;
+    width: 8px;
+    height: 8px;
+    box-shadow:
+      13px -2px 0 rgba(43, 29, 72, .9),
+      26px 0 0 rgba(43, 29, 72, .9),
+      8px 14px 0 6px rgba(43, 29, 72, .9);
+  }
+  .hero-brand-name {
+    font-size: 28px;
+  }
+  .hero-title {
+    font-size: clamp(2.8rem, 11vw, 3.4rem);
+    max-width: none;
+    padding-top: 0;
+  }
+  .landing-tagline {
+    font-size: .975rem;
+  }
+  .micro-pill {
+    min-height: 36px;
+    padding: 6px 8px;
+    font-size: .66rem;
+  }
+  .visual-title {
+    font-size: 1.15rem;
+  }
+  .hero-demo-screen {
+    min-height: 180px;
+  }
+  .landing-footer {
+    padding: 44px 16px 32px;
+  }
+  .footer-links {
+    gap: 12px;
+  }
+  .landing-footer__cta h2 {
+    font-size: 22px;
+  }
+  .landing-features__heading {
+    margin-bottom: 28px;
+  }
+  .landing-features__desc {
+    font-size: .875rem;
   }
   #smash-counter {
     top: 10px;
@@ -1093,13 +2555,16 @@ select {
     font-size: 11px;
     padding: 4px 10px;
   }
-  .start-btn, .share-btn, .lnav-link, .pbtn, .tbtn, .rpt-btn, select, #ph, #close-panel {
+  .start-btn, .share-btn, .lnav-link, .lnav-cta, .lnav-toggle, .footer-start-btn, .pbtn, .tbtn, .rpt-btn, select, #ph, #close-panel {
     min-height: 44px;
   }
   .panel-box {
     padding: 22px 18px;
     max-height: 88vh;
     overflow-y: auto;
+  }
+  .report-side {
+    padding: 20px 18px 18px;
   }
   .insight-grid {
     grid-template-columns: 1fr;
@@ -1131,7 +2596,7 @@ select {
     font-size: 15px;
     padding: 11px 12px;
   }
-  .report-footer { padding: 0 12px 12px; }
+  .report-footer { padding: 16px 0 0; }
   .report-side {
     border-left: 0;
     border-top: 1px solid rgba(255,255,255,.08);
@@ -1140,6 +2605,175 @@ select {
     bottom: 74px;
     min-width: min(88vw, 320px);
     padding: 12px 14px;
+  }
+}
+
+@media (min-width: 1025px) and (max-height: 940px) {
+  #landing-nav {
+    top: 10px;
+    padding: 14px 0 12px;
+    gap: 12px;
+  }
+  .lnav-logo {
+    font-size: 20px;
+  }
+  .lnav-icon {
+    width: 28px;
+    height: 28px;
+  }
+  .lnav-main {
+    gap: 14px;
+  }
+  .lnav-link {
+    font-size: 12px;
+  }
+  .lnav-links {
+    gap: 18px;
+  }
+  .lnav-cta {
+    min-height: 36px;
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+  .landing-inner {
+    gap: 28px;
+    min-height: auto;
+    padding: 36px 0 48px;
+  }
+  .hero-kicker {
+    display: none;
+  }
+  .hero-title {
+    max-width: 8.4ch;
+    margin-bottom: 14px;
+    font-size: clamp(2.5rem, 4.2vw, 3.5rem);
+  }
+  .landing-tagline {
+    font-size: .95rem;
+    margin-bottom: 14px;
+    line-height: 1.55;
+  }
+  .hero-actions {
+    gap: 10px;
+  }
+  .start-btn {
+    padding: 13px 24px;
+    font-size: .95rem;
+  }
+  .hero-microcopy {
+    gap: 8px;
+  }
+  .micro-pill {
+    min-height: 38px;
+    padding: 8px 10px;
+    font-size: .74rem;
+  }
+  .share-row {
+    margin-top: 18px;
+    gap: 8px;
+    padding-top: 12px;
+  }
+  .share-label {
+    font-size: 11px;
+  }
+  .share-btn {
+    min-height: 40px;
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+  .share-btn__icon {
+    width: 14px;
+    height: 14px;
+  }
+  .hero-visual {
+    padding-top: 2px;
+  }
+  .interaction-card {
+    width: min(420px, 100%);
+    padding: 20px;
+    border-radius: 24px;
+  }
+  .visual-badge {
+    padding: 7px 11px;
+    font-size: 10px;
+  }
+  .visual-title {
+    max-width: 14ch;
+    margin: 10px 0 6px;
+    font-size: 1.15rem;
+  }
+  .visual-copy {
+    max-width: 31ch;
+    font-size: .8125rem;
+    line-height: 1.5;
+  }
+  .visual-stage {
+    margin-top: 12px;
+  }
+  .hero-demo-screen {
+    min-height: 190px;
+  }
+  .hero-demo-label {
+    font-size: 12px;
+  }
+  .landing-features {
+    padding: 48px 0;
+  }
+  .landing-footer {
+    padding-top: 48px;
+    padding-bottom: 32px;
+  }
+  .landing-footer__row + .landing-footer__row {
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+  .stage-bubble {
+    min-width: 42px;
+    height: 42px;
+    padding: 0 10px;
+    font-size: 15px;
+  }
+  .stage-bubble.one {
+    top: 14px;
+    left: 14px;
+  }
+  .stage-bubble.two {
+    top: 30px;
+    right: 14px;
+  }
+  .stage-bubble.three {
+    bottom: 8px;
+  }
+  .stage-caption {
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .stage-caption span {
+    padding: 7px 6px;
+    font-size: 10px;
+  }
+  .visual-grid {
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .visual-chip {
+    padding: 10px 12px;
+    gap: 2px 8px;
+  }
+  .visual-chip::before {
+    min-width: 36px;
+    height: 28px;
+    font-size: 10px;
+  }
+  .visual-chip strong {
+    font-size: 13px;
+  }
+  .visual-chip span {
+    font-size: 11px;
+    line-height: 1.28;
+  }
+  .hero-floating-note {
+    display: none;
   }
 }
 
@@ -1165,67 +2799,259 @@ select {
 
 <!-- BG stars injected by JS -->
 
-<!-- ── LANDING OVERLAY ────────────────────── -->
-<div id="landing">
+<!--  LANDING OVERLAY  -->
+<div id="landing" class="fixed inset-0 z-[200] flex flex-col overflow-x-hidden overflow-y-auto bg-[#0d0d12] font-body text-[#f0f0f8]">
 
-  <!-- Top nav bar — issue 3 -->
-  <nav id="landing-nav">
-    <div class="lnav-logo">
-      <div class="lnav-icon">🐾</div>
-      TotTaps
-    </div>
-    <div class="lnav-links">
-      <a href="tottaps-guides.html" class="lnav-link" title="TotTaps parent guides" aria-label="Read parent guides">📖 Guides</a>
-      <a href="tottaps-about.html"  class="lnav-link" title="About TotTaps">ℹ️ About</a>
-      <a href="privacy.html"        class="lnav-link" title="TotTaps privacy policy">🔒 Privacy</a>
-      <a href="mailto:ravibvs91@gmail.com" class="lnav-link" title="Contact TotTaps">✉️ Contact</a>
+  <!-- Top nav bar  issue 3 -->
+  <nav id="landing-nav-shell" aria-label="Primary" class="relative sticky top-0 z-30 mx-auto flex min-h-16 w-full max-w-[1220px] items-center justify-between gap-4 border-b border-white/10 bg-[rgba(13,13,18,0.82)] px-5 py-4 backdrop-blur-xl transition-colors duration-200 sm:px-6 md:px-10 lg:px-20">
+    <a href="index.html" aria-label="TotTaps home" class="brand-home-link flex min-w-0 items-center gap-3.5 py-1 text-white no-underline">
+      <span aria-hidden="true" class="brand-mark"><img src="tottaps-logo-icon.png" alt="" class="brand-mark__img"></span>
+      <span class="brand-wordmark font-display text-[1.72rem] font-bold leading-none">TotTaps</span>
+    </a>
+    <div class="ml-auto flex items-center gap-3 md:gap-4">
+      <div id="lnav-links-wrap" class="hidden absolute left-0 right-0 top-[calc(100%+10px)] px-5 sm:px-6 md:static md:flex md:px-0">
+        <div class="flex flex-col gap-0.5 rounded-[20px] border border-white/10 bg-[rgba(17,17,17,0.96)] p-2.5 shadow-[0_22px_40px_rgba(0,0,0,0.32)] md:flex-row md:items-center md:gap-8 md:rounded-none md:border-0 md:bg-transparent md:p-0 md:shadow-none">
+          <a href="tottaps-guides.html" title="TotTaps parent guides" aria-label="Read parent guides" data-nav-link="true" class="inline-flex items-center rounded-xl border-b-2 border-transparent px-4 py-3 text-[0.95rem] font-medium tracking-[0.3px] text-white/90 transition duration-200 hover:border-[#f97316] hover:bg-white/5 hover:text-white md:rounded-none md:px-0.5 md:py-1.5 md:hover:bg-transparent">Guides</a>
+          <a href="tottaps-about.html" title="About TotTaps" data-nav-link="true" class="inline-flex items-center rounded-xl border-b-2 border-transparent px-4 py-3 text-[0.95rem] font-medium tracking-[0.3px] text-white/90 transition duration-200 hover:border-[#f97316] hover:bg-white/5 hover:text-white md:rounded-none md:px-0.5 md:py-1.5 md:hover:bg-transparent">About</a>
+          <a href="mailto:ravibvs91@gmail.com" title="Contact TotTaps" data-nav-link="true" class="inline-flex items-center rounded-xl border-b-2 border-transparent px-4 py-3 text-[0.95rem] font-medium tracking-[0.3px] text-white/90 transition duration-200 hover:border-[#f97316] hover:bg-white/5 hover:text-white md:rounded-none md:px-0.5 md:py-1.5 md:hover:bg-transparent">Contact</a>
+        </div>
+      </div>
+      <button id="lnav-toggle" type="button" aria-expanded="false" aria-controls="lnav-links-wrap" aria-label="Toggle navigation menu" class="relative inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white transition duration-200 hover:bg-white/10 hover:text-white md:hidden">
+        <span aria-hidden="true" class="absolute h-0.5 w-4 rounded-full bg-current transition duration-200" style="transform: translateY(-5px);"></span>
+        <span aria-hidden="true" class="absolute h-0.5 w-4 rounded-full bg-current transition duration-200" style="transform: translateY(0);"></span>
+        <span aria-hidden="true" class="absolute h-0.5 w-4 rounded-full bg-current transition duration-200" style="transform: translateY(5px);"></span>
+      </button>
     </div>
   </nav>
 
   <!-- Centered landing content -->
-  <div class="landing-inner">
-    <div class="landing-logo">
-      <div class="logo-paw">🐾</div>
-      <div class="logo-name">TotTaps</div>
-    </div>
-    <p class="landing-tagline">
-      Hand your toddler the keyboard — <strong>safely.</strong><br>
-      TotTaps turns every tap into colourful letters, fun sounds &amp; happy chaos,
-      so little ones stay entertained while <strong>you stay in control.</strong> 🐾
-    </p>
-    <div class="feature-pills">
-      <div class="fpill">🔒 Fullscreen focus mode with safeguards</div>
-      <div class="fpill">🔤 Letters &amp; numbers spoken aloud</div>
-      <div class="fpill">🎨 6 themes · Party, Space, Dino &amp; more</div>
-      <div class="fpill">📱 Works on laptop, tablet &amp; phone</div>
-      <div class="fpill">🚫 Zero ads · No account · 100% free</div>
-    </div>
-    <button class="start-btn" id="start-btn">🐾 Start Tapping — It's Free</button>
-    <span class="start-note">No account needed · No ads ever · Works on any device</span>
-    <!-- Share row -->
-    <div class="share-row">
-      <span class="share-label">Share with other parents:</span>
-      <div class="share-btns">
-        <button class="share-btn share-wa"   id="share-wa">💬 WhatsApp</button>
-        <button class="share-btn share-copy" id="share-copy">📋 Copy Link</button>
-        <button class="share-btn share-x"    id="share-x">𝕏 Post</button>
+  <main id="landing-main" class="relative z-10 mx-auto grid w-full max-w-[1280px] grid-cols-1 items-center gap-8 px-5 pb-10 pt-14 text-left sm:px-6 md:px-10 lg:min-h-[620px] lg:grid-cols-[minmax(0,520px)_minmax(0,460px)] lg:gap-12 lg:px-20 lg:pb-12 lg:pt-12">
+    <section aria-labelledby="hero-title" class="relative z-10 flex max-w-[520px] flex-col justify-center self-center">
+      <h1 id="hero-title" class="mb-5 max-w-[8ch] font-display text-[clamp(3rem,6vw,4.85rem)] font-bold leading-[0.92] tracking-[-0.05em] text-white">TotTaps for <span class="inline-block text-[#f97316]">tiny taps.</span></h1>
+      <p class="mb-7 max-w-[44ch] text-[1.08rem] leading-[1.7] text-slate-300/80">TotTaps turns keyboard presses, mouse clicks and screen taps into colour, sound and instant joy while keeping tabs, files and settings safely out of reach.</p>
+      <div class="flex flex-col items-start gap-5">
+        <button id="start-btn" data-launch-play="true" type="button" aria-describedby="trust-note" class="inline-flex select-none items-center justify-center rounded-full bg-[#f97316] px-8 py-4 text-[1.05rem] font-semibold text-white shadow-[0_18px_42px_rgba(249,115,22,0.28)] transition duration-200 hover:scale-[1.02] hover:bg-[#ea580c] hover:shadow-[0_20px_48px_rgba(234,88,12,0.3)] active:scale-[0.98]">Play Free &mdash; No Download</button>
+        <div id="trust-note" aria-label="TotTaps trust signals" class="grid w-full max-w-[520px] grid-cols-1 gap-2.5 sm:grid-cols-3">
+          <span class="flex min-h-[52px] items-center gap-2.5 rounded-2xl border border-white/10 bg-white/[0.04] px-3.5 py-3 text-[0.8rem] font-semibold leading-tight text-slate-200 backdrop-blur-sm">
+            <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-orange-400/15 text-[#f97316]">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="8.5" cy="8" r="3"></circle>
+                <path d="M3.5 19c.8-3 3-4.5 5-4.5s4.2 1.5 5 4.5"></path>
+                <path d="m16.5 10.5 2 2 4-4"></path>
+              </svg>
+            </span>
+            <span>No sign-up</span>
+          </span>
+          <span class="flex min-h-[52px] items-center gap-2.5 rounded-2xl border border-white/10 bg-white/[0.04] px-3.5 py-3 text-[0.8rem] font-semibold leading-tight text-slate-200 backdrop-blur-sm">
+            <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-orange-400/15 text-[#f97316]">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3 18 5.6V11c0 4.1-2.3 7.4-6 9-3.7-1.6-6-4.9-6-9V5.6L12 3z"></path>
+                <path d="m9.2 9.2 5.6 5.6"></path>
+                <path d="m14.8 9.2-5.6 5.6"></path>
+              </svg>
+            </span>
+            <span>No ads ever</span>
+          </span>
+          <span class="flex min-h-[52px] items-center gap-2.5 rounded-2xl border border-white/10 bg-white/[0.04] px-3.5 py-3 text-[0.8rem] font-semibold leading-tight text-slate-200 backdrop-blur-sm">
+            <span aria-hidden="true" class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-orange-400/15 text-[#f97316]">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2.5" y="5" width="13.5" height="9" rx="1.8"></rect>
+                <path d="M7.5 19h3.5"></path>
+                <path d="M9.25 14v5"></path>
+                <rect x="17.5" y="7.5" width="4" height="8.5" rx="1.2"></rect>
+              </svg>
+            </span>
+            <span>Any device</span>
+          </span>
+        </div>
+      </div>
+    </section>
+    <aside aria-labelledby="preview-title" class="relative flex items-center justify-end self-center">
+      <div class="pointer-events-none absolute inset-[10%_6%_14%] rounded-[42px] bg-[radial-gradient(circle_at_50%_50%,rgba(249,115,22,.16),transparent_58%)] blur-3xl opacity-90"></div>
+      <div id="hero-preview-card" class="relative mx-auto w-full max-w-[460px] overflow-hidden rounded-[26px] border border-white/10 bg-[linear-gradient(180deg,rgba(26,28,34,0.98),rgba(21,23,28,0.98))] p-5 shadow-[0_24px_60px_rgba(0,0,0,0.34)] lg:p-6">
+        <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,.04),transparent_28%),radial-gradient(circle_at_18%_12%,rgba(249,115,22,.1),transparent_28%),radial-gradient(circle_at_82%_18%,rgba(96,165,250,.08),transparent_24%)]"></div>
+        <div class="relative inline-flex items-center rounded-full border border-orange-300/15 bg-orange-400/10 px-3 py-1.5 text-[9px] font-extrabold uppercase tracking-[0.12em] text-orange-100/90">How it works</div>
+        <div id="preview-title" class="relative mt-3.5 max-w-[15ch] font-display text-[1.14rem] leading-[1.1] tracking-[-0.02em] text-white/92">Keyboard, mouse and touch all work.</div>
+        <p class="relative mt-2.5 text-[0.9rem] leading-[1.65] text-slate-300/80">Any key press, mouse click or screen tap gets an instant response, so parents can understand the experience at a glance.</p>
+        <div class="relative mt-4 rounded-[20px] border border-white/10 bg-white/[0.03] p-3.5">
+          <div class="hero-demo-screen relative min-h-[210px] overflow-hidden rounded-[20px] border border-white/10 md:min-h-[220px] lg:min-h-[238px]" id="hero-demo-screen" tabindex="0" role="button" aria-label="Interactive TotTaps demo. Press any key or click here to spawn playful letters and numbers.">
+            <div class="hero-demo-idle" aria-hidden="true">
+              <span class="hero-demo-ghost hero-demo-ghost--one">A</span>
+              <span class="hero-demo-ghost hero-demo-ghost--two">7</span>
+              <span class="hero-demo-ghost hero-demo-ghost--three">Z</span>
+              <span class="hero-demo-spark hero-demo-spark--one"></span>
+              <span class="hero-demo-spark hero-demo-spark--two"></span>
+              <span class="hero-demo-spark hero-demo-spark--three"></span>
+              <span class="hero-demo-spark hero-demo-spark--four"></span>
+            </div>
+          </div>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <span class="inline-flex items-center rounded-full border border-white/10 bg-white/[0.05] px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-slate-300/90">Keys</span>
+            <span class="inline-flex items-center rounded-full border border-white/10 bg-white/[0.05] px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-slate-300/90">Clicks</span>
+            <span class="inline-flex items-center rounded-full border border-white/10 bg-white/[0.05] px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-slate-300/90">Touches</span>
+          </div>
+          <div class="mt-3 text-[0.86rem] leading-[1.4] text-slate-400">Try pressing any key ↑</div>
+        </div>
+      </div>
+    </aside>
+  </main>
+  <section id="features-section" aria-labelledby="features-title" class="w-full border-y border-white/10 bg-[#111318] py-10">
+    <div class="mx-auto w-full max-w-[1220px] px-5 sm:px-6 md:px-10 lg:px-20">
+      <h2 id="features-title" class="relative mb-3 text-center font-display text-[1.65rem] font-bold leading-tight text-white before:mb-3 before:mx-auto before:block before:h-0.5 before:w-10 before:rounded-full before:bg-[#f97316] before:content-['']">What makes it magical</h2>
+      <p class="mx-auto mb-7 max-w-2xl text-center text-[0.98rem] leading-7 text-slate-300/70">A safe, browser-based play space that feels immediate for little hands and predictable for parents.</p>
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
+        <div data-gsap-feature="true" class="group relative mx-auto flex h-full max-w-[320px] flex-col items-start gap-3 rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015))] p-5 text-left shadow-[0_18px_36px_rgba(0,0,0,0.12)] transition duration-300 hover:-translate-y-1 hover:border-white/15 hover:bg-[linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018))]">
+          <span aria-hidden="true" class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-400/15 text-[#f97316]">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3.5 13.7 8l4.5 1.7-4.5 1.7L12 16l-1.7-4.6L5.8 9.7 10.3 8 12 3.5z"></path>
+              <circle cx="18.2" cy="16.5" r="2"></circle>
+              <circle cx="6.2" cy="17.5" r="1.4"></circle>
+            </svg>
+          </span>
+          <div class="text-[1.05rem] font-bold leading-tight text-white">Letters &amp; Numbers</div>
+          <div class="max-w-[28ch] text-[0.95rem] leading-[1.7] text-slate-300/75">Every key spawns a glowing letter or number, then lets it drift, bloom, and fade across the screen.</div>
+          <div class="mt-auto flex flex-wrap gap-2 pt-2">
+            <span class="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-slate-300/80">Glow</span>
+            <span class="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-slate-300/80">Float</span>
+            <span class="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-slate-300/80">Fade</span>
+          </div>
+        </div>
+        <div data-gsap-feature="true" class="group relative mx-auto flex h-full max-w-[320px] flex-col items-start gap-3 rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015))] p-5 text-left shadow-[0_18px_36px_rgba(0,0,0,0.12)] transition duration-300 hover:-translate-y-1 hover:border-white/15 hover:bg-[linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018))]">
+          <span aria-hidden="true" class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-400/15 text-[#f97316]">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 10h3l4-3v10l-4-3H5z"></path>
+              <path d="M16 9.5a4 4 0 0 1 0 5"></path>
+              <path d="M18.5 7a7.5 7.5 0 0 1 0 10"></path>
+            </svg>
+          </span>
+          <div class="text-[1.05rem] font-bold leading-tight text-white">Tap Sounds</div>
+          <div class="max-w-[28ch] text-[0.95rem] leading-[1.7] text-slate-300/75">Each tap responds with bright sound cues, so babies quickly learn that their actions make things happen.</div>
+          <div class="mt-auto flex flex-wrap gap-2 pt-2">
+            <span class="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-slate-300/80">Beep</span>
+            <span class="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-slate-300/80">Pop</span>
+            <span class="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-slate-300/80">Repeat</span>
+          </div>
+        </div>
+        <div data-gsap-feature="true" class="group relative mx-auto flex h-full max-w-[320px] flex-col items-start gap-3 rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015))] p-5 text-left shadow-[0_18px_36px_rgba(0,0,0,0.12)] transition duration-300 hover:-translate-y-1 hover:border-white/15 hover:bg-[linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018))]">
+          <span aria-hidden="true" class="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-400/15 text-[#f97316]">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="8"></circle>
+              <path d="M4 12h16"></path>
+              <path d="M12 4a12.5 12.5 0 0 1 0 16"></path>
+              <path d="M12 4a12.5 12.5 0 0 0 0 16"></path>
+            </svg>
+          </span>
+          <div class="text-[1.05rem] font-bold leading-tight text-white">Themed Worlds</div>
+          <div class="max-w-[28ch] text-[0.95rem] leading-[1.7] text-slate-300/75">Switch between space, jungle, and ocean moods to keep repeat play fresh without changing the simple core interaction.</div>
+          <div class="mt-auto flex flex-wrap gap-2 pt-2">
+            <span class="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-slate-300/80">Space</span>
+            <span class="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-slate-300/80">Jungle</span>
+            <span class="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-slate-300/80">Ocean</span>
+          </div>
+        </div>
+      </div>
+      <div class="mt-5 grid gap-4 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]">
+        <div data-gsap-detail="true" class="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015))] p-6 shadow-[0_20px_40px_rgba(0,0,0,0.12)]">
+          <div class="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-orange-100/80">For Parents</div>
+          <h3 class="mt-3 font-display text-[1.55rem] font-bold leading-[1.08] text-white">Built to feel safe the moment you hand it over.</h3>
+          <p class="mt-3 max-w-[56ch] text-[0.98rem] leading-[1.7] text-slate-300/75">TotTaps is designed for quick, calm hand-offs. It opens fast, reacts instantly, and stays focused on one job: giving little hands a joyful place to tap without wandering into the rest of your computer.</p>
+          <div class="mt-5 grid gap-3 sm:grid-cols-3">
+            <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+              <div class="text-[0.74rem] font-semibold uppercase tracking-[0.1em] text-slate-400">No wandering</div>
+              <p class="mt-2 text-sm leading-6 text-slate-200/90">No menus, purchases, or pop-ups pulling attention away.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+              <div class="text-[0.74rem] font-semibold uppercase tracking-[0.1em] text-slate-400">Instant start</div>
+              <p class="mt-2 text-sm leading-6 text-slate-200/90">Open it in the browser and let them play in seconds.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+              <div class="text-[0.74rem] font-semibold uppercase tracking-[0.1em] text-slate-400">Cause &amp; effect</div>
+              <p class="mt-2 text-sm leading-6 text-slate-200/90">Every tap gets a clear response that little ones can understand.</p>
+            </div>
+          </div>
+        </div>
+        <div class="grid gap-4">
+          <div data-gsap-detail="true" class="rounded-[26px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015))] p-5 shadow-[0_18px_36px_rgba(0,0,0,0.12)]">
+            <div class="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-orange-100/80">3 Ways To Play</div>
+            <p class="mt-3 text-[0.95rem] leading-[1.7] text-slate-200/85">Keyboard, mouse, and touch all work the same way, so the experience stays consistent across laptop, tablet, and phone.</p>
+          </div>
+          <div data-gsap-detail="true" class="rounded-[26px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015))] p-5 shadow-[0_18px_36px_rgba(0,0,0,0.12)]">
+            <div class="text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-orange-100/80">Short Session Friendly</div>
+            <p class="mt-3 text-[0.95rem] leading-[1.7] text-slate-200/85">Perfect for those quick two-minute resets when you need a safe, responsive distraction without a long setup.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
+  <footer role="contentinfo" class="w-full bg-[#0d0d12] px-5 pb-8 pt-[52px] sm:px-6 md:px-10 lg:px-20">
+    <div class="mx-auto w-full max-w-[1220px]">
+      <div class="flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
+        <a href="index.html" aria-label="TotTaps home" class="brand-home-link inline-flex items-center gap-3.5 text-white no-underline">
+          <span aria-hidden="true" class="brand-mark"><img src="tottaps-logo-icon.png" alt="" class="brand-mark__img"></span>
+          <span class="brand-wordmark font-display text-[1.56rem] font-bold leading-none">TotTaps</span>
+        </a>
+        <nav aria-label="Footer" class="flex flex-wrap items-center justify-center gap-[18px] md:justify-end">
+          <a href="tottaps-guides.html" class="text-sm text-slate-300 transition duration-200 hover:text-white">Guides</a>
+          <a href="tottaps-about.html" class="text-sm text-slate-300 transition duration-200 hover:text-white">About</a>
+          <a href="privacy.html" class="text-sm text-slate-300 transition duration-200 hover:text-white">Privacy</a>
+          <a href="mailto:ravibvs91@gmail.com" class="text-sm text-slate-300 transition duration-200 hover:text-white">Contact support</a>
+        </nav>
+      </div>
+      <div id="landing-footer-cta" class="mt-6 flex flex-col items-center gap-4 border-t border-white/10 pt-6 text-center">
+        <h2 class="font-display text-3xl font-bold leading-none text-white">Ready to play?</h2>
+        <button id="footer-start-btn" data-launch-play="true" type="button" class="inline-flex select-none items-center justify-center gap-2 rounded-full bg-[#f97316] px-7 py-3.5 text-base font-semibold text-white shadow-[0_16px_32px_rgba(249,115,22,0.22)] transition duration-200 hover:scale-[1.02] hover:bg-[#ea580c] hover:shadow-[0_18px_36px_rgba(234,88,12,0.24)] active:scale-[0.98]">Start Free <span aria-hidden="true">&rarr;</span></button>
+        <div class="mt-4 flex w-full flex-col items-center gap-3 text-center">
+          <span class="text-[15px] font-semibold text-[rgba(240,240,248,0.86)]">Share TotTaps with another parent 💛</span>
+          <div class="flex flex-wrap items-center justify-center gap-2.5">
+            <button id="share-wa" type="button" class="inline-flex min-h-[46px] items-center gap-2 rounded-full border border-[#25D366] bg-[#25D366] px-[14px] py-[10px] text-[13px] font-extrabold text-white shadow-[0_14px_28px_rgba(0,0,0,0.14)] transition duration-200 hover:-translate-y-px hover:bg-[#1fb85a] hover:shadow-[0_18px_32px_rgba(0,0,0,0.2)]">
+              <span aria-hidden="true" class="inline-flex h-4 w-4 items-center justify-center">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path d="M9.98 1.85a8.11 8.11 0 0 0-6.95 12.32L1.9 18.1l4.03-1.09a8.12 8.12 0 1 0 4.05-15.16Zm0 1.76a6.36 6.36 0 0 1 5.45 9.63l-.25.4.64 2.37-2.43-.66-.39.23A6.36 6.36 0 1 1 9.98 3.61Zm-2.6 3.16c-.19 0-.5.07-.77.36-.26.29-1.01.99-1.01 2.42s1.04 2.8 1.19 2.99c.14.19 2.03 3.25 5.02 4.42 2.47.97 2.98.78 3.52.73.54-.05 1.74-.71 1.99-1.4.24-.69.24-1.28.17-1.4-.07-.12-.26-.19-.55-.33-.29-.14-1.74-.86-2.01-.96-.26-.1-.45-.14-.64.14-.19.29-.73.96-.9 1.16-.17.19-.33.22-.62.07-.29-.14-1.21-.45-2.3-1.45-.85-.76-1.42-1.7-1.58-1.98-.17-.29-.02-.45.12-.59.13-.13.29-.33.43-.5.14-.17.19-.29.29-.48.09-.19.05-.36-.03-.5-.07-.14-.64-1.66-.88-2.27-.23-.55-.47-.48-.64-.49h-.55Z"></path>
+                </svg>
+              </span>
+              <span>WhatsApp</span>
+            </button>
+            <button id="share-copy" type="button" class="inline-flex min-h-[46px] items-center gap-2 rounded-full border border-[#f97316] bg-[rgba(249,115,22,0.15)] px-[14px] py-[10px] text-[13px] font-extrabold text-[#FBD0B5] shadow-[0_14px_28px_rgba(0,0,0,0.14)] transition duration-200 hover:-translate-y-px hover:bg-[rgba(249,115,22,0.22)] hover:text-[#FFE3CC] hover:shadow-[0_18px_32px_rgba(0,0,0,0.2)]">
+              <span aria-hidden="true" class="inline-flex h-4 w-4 items-center justify-center">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M8.2 11.8 6.4 13.6a2.4 2.4 0 1 1-3.4-3.4l2.7-2.7a2.4 2.4 0 0 1 3.4 0"></path>
+                  <path d="m11.8 8.2 1.8-1.8a2.4 2.4 0 1 1 3.4 3.4l-2.7 2.7a2.4 2.4 0 0 1-3.4 0"></path>
+                  <path d="m7.4 12.6 5.2-5.2"></path>
+                </svg>
+              </span>
+              <span>Copy Link</span>
+            </button>
+            <button id="share-x" type="button" class="inline-flex min-h-[46px] items-center gap-2 rounded-full border border-white/20 bg-white/[0.04] px-[14px] py-[10px] text-[13px] font-extrabold text-white shadow-[0_14px_28px_rgba(0,0,0,0.14)] transition duration-200 hover:-translate-y-px hover:bg-white/10 hover:shadow-[0_18px_32px_rgba(0,0,0,0.2)]">
+              <span aria-hidden="true" class="inline-flex h-4 w-4 items-center justify-center">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path d="M11.59 8.47 16.62 2.6h-1.2l-4.36 5.08L7.58 2.6H3.52l5.28 7.68L3.52 16.4h1.2l4.61-5.37 3.69 5.37h4.06l-5.49-7.93Zm-1.64 1.91-.54-.77-4.32-6.18H6.9l3.48 4.97.54.77 4.53 6.47h-1.82l-3.69-5.27Z"></path>
+                </svg>
+              </span>
+              <span>Post on X</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="mt-6 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-center md:flex-row md:text-left">
+        <div class="text-[13px] text-[#666666]">&copy; 2025 TotTaps. Built for tiny hands.</div>
+        <a href="mailto:ravibvs91@gmail.com" class="text-[13px] text-[#64748b] transition duration-200 hover:underline">Contact support: ravibvs91@gmail.com</a>
+      </div>
+    </div>
+  </footer>
 </div>
 
-<!-- ── SMASH TOY (behind landing) ────────── -->
+<!--  SMASH TOY (behind landing)  -->
 <div id="idle-prompt">
-  <div class="idle-mascot" id="idle-mascot">🐾</div>
-  <div class="idle-text">Tap anything! 🐾</div>
-  <div class="idle-sub">Keys · Screen · Mouse — go wild!</div>
+  <div class="idle-mascot" id="idle-mascot"></div>
+  <div class="idle-text">Tap anything!</div>
+  <div class="idle-sub">Keys. Mouse. Screen. Instant happy chaos.</div>
 </div>
 
 <div id="vignette"></div>
 <div id="chaos-flash"></div>
 <div id="phase-banner"></div>
-<div id="fs-status" class="limited" aria-live="polite">⚠ Limited mode</div>
-<div id="parent-hint" aria-live="polite">👪 Hold top-left 2s for Parent Panel</div>
+<div id="fs-status" class="limited" aria-live="polite"> Limited mode</div>
+<div id="parent-hint" aria-live="polite"> Hold top-left 2s for Parent Panel</div>
 <div id="smash-counter" class="level-calm">
   <div id="counter-left">KEYS TAPPED: <span id="counter-num">0</span></div>
   <div id="counter-badge">CALM</div>
@@ -1236,43 +3062,47 @@ select {
 <!-- Parent panel hotspot -->
 <button id="ph" type="button" title="Parent Panel (hold 2s)" aria-label="Open parent panel"></button>
 
-<!-- ── PARENT PANEL ───────────────────────── -->
+<!--  PARENT PANEL  -->
 <div id="parent-panel" role="dialog" aria-modal="true" aria-labelledby="parent-panel-title">
   <div class="panel-box">
-    <h2 id="parent-panel-title">👪 Parent Panel</h2>
-    <div class="prow"><label>🔊 Sound</label><label class="tog"><input type="checkbox" id="tog-sound" checked><span class="tslider"></span></label></div>
-    <div class="prow"><label>🐢 Reduce motion</label><label class="tog"><input type="checkbox" id="tog-motion"><span class="tslider"></span></label></div>
-    <p class="panel-note"><strong>Privacy-safe setup:</strong> TotTaps does not send key taps or child profiles anywhere. Optional site traffic measurement can be configured separately without changing gameplay.</p>
-    <div class="prow">
-      <label>🎮 Play mode</label>
+    <div class="panel-header">
+      <h2 id="parent-panel-title">Parent Panel</h2>
+      <p class="panel-subtitle">Control sound, motion, themes and session limits without interrupting the toddler-safe experience.</p>
+    </div>
+    <div class="panel-section">
+      <div class="prow"><label>Sound</label><label class="tog"><input type="checkbox" id="tog-sound" checked><span class="tslider"></span></label></div>
+      <div class="prow"><label>Reduce motion</label><label class="tog"><input type="checkbox" id="tog-motion"><span class="tslider"></span></label></div>
+      <p class="panel-note"><strong>Privacy-safe setup:</strong> TotTaps does not send key taps or child profiles anywhere. Optional site traffic measurement can be configured separately without changing gameplay.</p>
+      <div class="prow">
+      <label for="mode-sel">Play mode</label>
       <select id="mode-sel" aria-label="Play mode">
         <option value="fun">Fun Chaos</option>
         <option value="letters">Learn Letters</option>
         <option value="numbers">Learn Numbers</option>
         <option value="colors">Learn Colors</option>
       </select>
-    </div>
-    <div class="prow">
-      <label>🧒 Age preset</label>
+      </div>
+      <div class="prow">
+      <label for="age-sel">Age preset</label>
       <select id="age-sel" aria-label="Age preset">
         <option value="6-18m">6-18 months</option>
         <option value="18-36m" selected>18-36 months</option>
         <option value="3-5y">3-5 years</option>
       </select>
-    </div>
-    <div class="prow" style="flex-direction:column;align-items:flex-start;gap:10px">
-      <label>🎨 Theme</label>
-      <div class="theme-btns" id="theme-btns">
-        <button class="tbtn active" data-theme="default">🎉 Party</button>
-        <button class="tbtn" data-theme="jungle">🌿 Jungle</button>
-        <button class="tbtn" data-theme="ocean">🌊 Ocean</button>
-        <button class="tbtn" data-theme="space">🚀 Space</button>
-        <button class="tbtn" data-theme="dino">🦕 Dino</button>
-        <button class="tbtn" data-theme="diwali">🪔 Diwali</button>
       </div>
-    </div>
-    <div class="prow">
-      <label>⏱️ Timer</label>
+      <div class="prow theme-row">
+      <label>Theme</label>
+      <div class="theme-btns" id="theme-btns">
+        <button class="tbtn active" data-theme="default" type="button">Party</button>
+        <button class="tbtn" data-theme="jungle" type="button">Jungle</button>
+        <button class="tbtn" data-theme="ocean" type="button">Ocean</button>
+        <button class="tbtn" data-theme="space" type="button">Space</button>
+        <button class="tbtn" data-theme="dino" type="button">Dino</button>
+        <button class="tbtn" data-theme="diwali" type="button">Diwali</button>
+      </div>
+      </div>
+      <div class="prow">
+      <label for="timer-sel">Timer</label>
       <select id="timer-sel" aria-label="Session timer duration">
         <option value="0">No limit</option>
         <option value="120">2 min</option>
@@ -1280,9 +3110,10 @@ select {
         <option value="600">10 min</option>
         <option value="900">15 min</option>
       </select>
+      </div>
     </div>
     <div class="insight-card" id="insight-card">
-      <div class="insight-title">📈 Parent Insights (local only)</div>
+      <div class="insight-title"> Parent Insights (local only)</div>
       <div class="insight-grid">
         <div class="insight-item">
           <div class="insight-label">Sessions</div>
@@ -1302,16 +3133,16 @@ select {
         </div>
       </div>
     </div>
-    <div style="display:flex;gap:10px;margin-top:24px">
-      <button class="pbtn pbtn-primary" id="close-panel">✅ Resume</button>
-      <button class="pbtn pbtn-secondary" id="btn-fs">⤢ Fullscreen</button>
-      <button class="pbtn pbtn-secondary" id="btn-reset">↺ Reset</button>
+    <div class="panel-actions">
+      <button class="pbtn pbtn-primary" id="close-panel" type="button">Resume</button>
+      <button class="pbtn pbtn-secondary" id="btn-fs" type="button">Fullscreen</button>
+      <button class="pbtn pbtn-secondary" id="btn-reset" type="button">Reset</button>
     </div>
-    <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:16px">Hold top-left corner for 2 seconds to open</p>
+    <p class="panel-footnote">Hold the top-left corner for 2 seconds to open this panel again.</p>
   </div>
 </div>
 
-<!-- ── SMASH REPORT CARD ──────────────────── -->
+<!--  SMASH REPORT CARD  -->
 <canvas id="report-confetti"></canvas>
 <div id="end-card">
   <div class="report-card">
@@ -1319,16 +3150,16 @@ select {
       <!-- Header -->
       <div class="report-header">
         <div class="report-logo">
-          <div class="report-logo-icon">🐾</div>
-          <div class="report-logo-name">TotTaps</div>
+          <span aria-hidden="true" class="brand-mark brand-mark--report"><img src="tottaps-logo-icon.png" alt="" class="brand-mark__img"></span>
+          <div class="report-logo-name brand-wordmark">TotTaps</div>
         </div>
-        <div class="report-title">🎉 TotTaps Report</div>
+        <div class="report-title">TotTaps Report</div>
         <div class="report-subtitle" id="rpt-session-label">Session complete!</div>
       </div>
 
       <!-- Big score -->
       <div class="report-score-block">
-        <div class="report-score-emoji" id="rpt-emoji">🥳</div>
+        <div class="report-score-emoji" id="rpt-emoji"></div>
         <div class="report-score-num" id="rpt-score">0</div>
         <div class="report-score-label">keys tapped</div>
         <div class="report-chaos-badge" id="rpt-chaos">Tiny Chaos</div>
@@ -1338,102 +3169,106 @@ select {
       <!-- Stats row -->
       <div class="report-stats">
         <div class="stat-cell">
-          <div class="stat-cell-label">⏱ Duration</div>
+          <div class="stat-cell-label">Duration</div>
           <div class="stat-cell-val" id="rpt-duration">0s</div>
         </div>
         <div class="stat-cell">
-          <div class="stat-cell-label">⚡ Best streak</div>
+          <div class="stat-cell-label">Best streak</div>
           <div class="stat-cell-val highlight" id="rpt-streak">0</div>
         </div>
         <div class="stat-cell">
-          <div class="stat-cell-label">🎨 Theme</div>
-          <div class="stat-cell-val" id="rpt-theme">🎉</div>
+          <div class="stat-cell-label">Theme</div>
+          <div class="stat-cell-val" id="rpt-theme"></div>
         </div>
       </div>
     </div>
 
     <div class="report-side">
+      <div class="report-side-kicker">Next step</div>
+      <p class="report-side-copy">Keep the fun going, start a fresh round, or share the session summary with another parent.</p>
       <!-- Actions -->
       <div class="report-actions">
 
-        <button class="rpt-btn rpt-primary" id="rpt-play-again">
-          🔄 Keep Smashing!
+        <button class="rpt-btn rpt-primary" id="rpt-play-again" type="button">
+           Keep Smashing!
         </button>
 
-        <button class="rpt-btn rpt-wa" id="rpt-whatsapp">
-          💬 Share on WhatsApp
+        <button class="rpt-btn rpt-wa" id="rpt-whatsapp" type="button">
+           Share on WhatsApp
         </button>
 
-        <button class="rpt-btn rpt-secondary" id="rpt-copy">
-          📋 Copy This Chaos
+        <button class="rpt-btn rpt-secondary" id="rpt-copy" type="button">
+           Copy This Chaos
         </button>
 
-        <button class="rpt-btn rpt-ghost" id="rpt-new-game">
-          ↺ New Game
+        <button class="rpt-btn rpt-ghost" id="rpt-new-game" type="button">
+           New Game
         </button>
       </div>
 
       <!-- Footer -->
       <div class="report-footer">
-        <a href="tottaps-guides.html" id="rpt-videos-link">Read parent guides →</a>
+        <a href="tottaps-guides.html" id="rpt-videos-link">Read parent guides </a>
         <div class="report-site">TOTTAPS.COM</div>
       </div>
     </div>
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
-// ═══════════════════════════════════════════
+// 
 //  THEMES
-// ═══════════════════════════════════════════
+// 
 const THEMES = {
   default: {
     bg: '#0b0e1a',
     colors: ['#ff7a3d','#ffcd3c','#ff6bdf','#6bcb77','#4d96ff','#ff4560','#fff'],
-    emoji:  ['🎉','⭐','✨','💥','🌈','❤️','🎊','🌟','💫','🎈'],
-    mascot: '🐾',
+    emoji:  ['\u{1F436}','\u{1F9F8}','\u{2B50}','\u{1F388}','\u{1F697}','\u{1F308}','\u{1F98B}','\u{1F3B5}','\u{1FAE7}','\u{1F389}'],
+    mascot: '\u{1F9F8}',
     trailMode: 'rainbow'
   },
   jungle: {
     bg: '#0a1f0a',
     colors: ['#4caf50','#8bc34a','#ffeb3b','#ff9800','#cddc39','#a5d6a7'],
-    emoji:  ['🌿','🦁','🐒','🌺','🦜','🌴','🐆','🍌','🦋','🌸'],
-    mascot: '🦁',
+    emoji:  ['\u{1F435}','\u{1F981}','\u{1F99C}','\u{1F438}','\u{1F33F}','\u{1F34C}','\u{1F98B}','\u{1F42F}','\u{1F338}','\u{1F33A}'],
+    mascot: '\u{1F435}',
     trailMode: 'leaves'
   },
   ocean: {
     bg: '#011829',
     colors: ['#00bcd4','#03a9f4','#00e5ff','#40c4ff','#80deea','#b2ebf2'],
-    emoji:  ['🐠','🌊','🐙','🦈','🐟','💧','🦀','⚓','🐡','🦑'],
-    mascot: '🐙',
+    emoji:  ['\u{1F420}','\u{1F433}','\u{1F419}','\u{1FAB8}','\u{1FAE7}','\u{2B50}','\u{1F422}','\u{1F980}','\u{1F30A}','\u{1F42C}'],
+    mascot: '\u{1F433}',
     trailMode: 'bubbles'
   },
   space: {
     bg: '#03001a',
     colors: ['#a78bfa','#818cf8','#c084fc','#e879f9','#f0abfc','#fff'],
-    emoji:  ['🚀','⭐','🪐','👾','🌙','☄️','🛸','💫','🌌','🔭'],
-    mascot: '🚀',
+    emoji:  ['\u{1F680}','\u{1FA90}','\u{2B50}','\u{1F319}','\u{2604}','\u{1F47D}','\u{1F6F8}','\u{2728}','\u{1F31F}','\u{1F6F0}'],
+    mascot: '\u{1F680}',
     trailMode: 'stars'
   },
   dino: {
     bg: '#1a0a00',
     colors: ['#ff5722','#ff9800','#ffc107','#8bc34a','#795548','#ffccbc'],
-    emoji:  ['🦕','🦖','🥚','🌋','🍃','🦎','💎','🌿','🔥','🪨'],
-    mascot: '🦕',
+    emoji:  ['\u{1F996}','\u{1F995}','\u{1F95A}','\u{1F30B}','\u{2B50}','\u{1FAA8}','\u{1F33F}','\u{1F9B4}','\u{1F525}','\u{2604}'],
+    mascot: '\u{1F996}',
     trailMode: 'fire'
   },
   diwali: {
     bg: '#0d0000',
     colors: ['#ffb300','#ff6f00','#ff3d00','#ffd600','#fff9c4','#ff6e40'],
-    emoji:  ['🪔','🎆','✨','🌟','🎇','💛','🔥','🎊','🏮','💥'],
-    mascot: '🪔',
+    emoji:  ['\u{1FA94}','\u{2728}','\u{1F386}','\u{1F33C}','\u{1F387}','\u{2B50}','\u{1F389}','\u{1F56F}','\u{1F4AB}','\u{1F31F}'],
+    mascot: '\u{1FA94}',
     trailMode: 'sparkles'
   }
 };
 
-// ═══════════════════════════════════════════
+// 
 //  STATE
-// ═══════════════════════════════════════════
+// 
 let theme = THEMES.default;
 let smashCount = 0;
 let soundOn = true;
@@ -1484,14 +3319,14 @@ function applyThemeVisuals(themeKey, nextTheme) {
 }
 
 const STICKER_MILESTONES = [
-  { count: 50, emoji: '✨', label: 'Spark Master' },
-  { count: 120, emoji: '🚀', label: 'Rocket Master' },
-  { count: 220, emoji: '🌈', label: 'Rainbow Master' },
-  { count: 350, emoji: '🏆', label: 'Chaos Master' },
-  { count: 650, emoji: '☄️', label: 'Comet Master' },
-  { count: 800, emoji: '🌌', label: 'Galaxy Master' },
-  { count: 1000, emoji: '⭐', label: 'Nova Master' },
-  { count: 1250, emoji: '👑', label: 'Crown Master' },
+  { count: 50, emoji: '\u{2B50}', label: 'Spark Master' },
+  { count: 120, emoji: '\u{1F680}', label: 'Rocket Master' },
+  { count: 220, emoji: '\u{1F308}', label: 'Rainbow Master' },
+  { count: 350, emoji: '\u{1F389}', label: 'Chaos Master' },
+  { count: 650, emoji: '\u{2604}', label: 'Comet Master' },
+  { count: 800, emoji: '\u{1FA90}', label: 'Galaxy Master' },
+  { count: 1000, emoji: '\u{2728}', label: 'Nova Master' },
+  { count: 1250, emoji: '\u{1F451}', label: 'Crown Master' },
 ];
 
 const AGE_PRESETS = {
@@ -1531,10 +3366,10 @@ function updateFullscreenStatus() {
   const chip = document.getElementById('fs-status');
   if (document.fullscreenElement) {
     chip.className = 'active';
-    chip.textContent = '✅ Fullscreen active';
+    chip.textContent = ' Fullscreen active';
   } else {
     chip.className = 'limited';
-    chip.textContent = '⚠ Limited mode';
+    chip.textContent = ' Limited mode';
   }
 }
 
@@ -1560,9 +3395,9 @@ async function requestFullscreenSafe(source = 'unknown') {
 let mx = -999, my = -999;
 let trailTick = 0;
 
-// ═══════════════════════════════════════════
+// 
 //  ANIMATED BACKGROUND ENGINE
-// ═══════════════════════════════════════════
+// 
 const bgCanvas = document.getElementById('bg-canvas');
 const bgCtx    = bgCanvas.getContext('2d');
 let bgW, bgH, bgTime = 0;
@@ -1663,7 +3498,7 @@ function getBgPalette() {
   return BG_PALETTES[name] || BG_PALETTES.default;
 }
 
-// Orb class — large soft glowing blobs drifting slowly
+// Orb class  large soft glowing blobs drifting slowly
 class BgOrb {
   constructor() { this.reset(true); }
   reset(init=false) {
@@ -1695,7 +3530,7 @@ class BgOrb {
   }
 }
 
-// Aurora beam — slow horizontal sweep of soft light
+// Aurora beam  slow horizontal sweep of soft light
 class BgBeam {
   constructor() { this.reset(true); }
   reset(init=false) {
@@ -1829,14 +3664,14 @@ function buildStars() {
   shootingStars = []; // reset so new ones use updated theme colour
 }
 
-// ── Star system state ──
+//  Star system state 
 let bgStarDots    = [];
 let shootingStars = [];
 let starTick      = 0;
 
-// ═══════════════════════════════════════════
+// 
 //  STARS + SHOOTING STARS SYSTEM
-// ═══════════════════════════════════════════
+// 
 
 // Theme star colours
 const STAR_COLORS = {
@@ -1853,7 +3688,7 @@ function getStarColor() {
   return arr[Math.floor(Math.random()*arr.length)];
 }
 
-// ── Static star dot ──────────────────────
+//  Static star dot 
 class StarDot {
   constructor() {
     this.x      = Math.random() * (bgW || window.innerWidth);
@@ -1901,7 +3736,7 @@ class StarDot {
   }
 }
 
-// ── Shooting star ────────────────────────
+//  Shooting star 
 class ShootingStar {
   constructor() { this.reset(); }
   reset() {
@@ -1978,9 +3813,9 @@ class ShootingStar {
   }
 }
 
-// ── Render all star elements ─────────────
+//  Render all star elements 
 function renderStars(c) {
-  // Static dots just draw (no update needed — they use bgTime)
+  // Static dots just draw (no update needed  they use bgTime)
   bgStarDots.forEach(s => s.draw(c));
 
   const brightStars = bgStarDots.filter(s => s.bright);
@@ -2034,14 +3869,14 @@ function rebuildStarDots() {
   });
 }
 
-// ── All classes defined — safe to initialise and start ──
+//  All classes defined  safe to initialise and start 
 initBg();
 animateBg();
 window.addEventListener('resize', initBg);
 
-// ═══════════════════════════════════════════
+// 
 //  CANVAS PARTICLE SYSTEM
-// ═══════════════════════════════════════════
+// 
 const canvas = document.getElementById('particle-canvas');
 const ctx = canvas.getContext('2d');
 let particles = [];
@@ -2133,10 +3968,17 @@ function animateCanvas() {
 }
 animateCanvas();
 
-// ═══════════════════════════════════════════
+// 
 //  MOUSE TRAIL
-// ═══════════════════════════════════════════
+// 
 const cursor = document.getElementById('cursor');
+
+function syncGameCursorState() {
+  document.body.classList.toggle('game-active', active);
+  if (!active) cursor.classList.remove('big');
+}
+
+syncGameCursorState();
 
 document.addEventListener('mousemove', e => {
   mx = e.clientX; my = e.clientY;
@@ -2150,11 +3992,11 @@ function spawnTrailParticle(x, y) {
   trailTick++;
 
   const el = document.createElement('div');
-  const themeEmoji  = (theme.emoji  && theme.emoji.length)  ? theme.emoji  : ['✨'];
+  const themeEmoji  = (theme.emoji  && theme.emoji.length)  ? theme.emoji  : [''];
   const themeColors = (theme.colors && theme.colors.length) ? theme.colors : ['#ff7a3d'];
 
   if (trailTick % 3 === 0) {
-    // Emoji particle — pick random emoji from theme.emoji
+    // Emoji particle  pick random emoji from theme.emoji
     el.className = 'trail-emoji';
     el.textContent = themeEmoji[Math.floor(Math.random() * themeEmoji.length)];
     const sz = 12 + Math.random() * 8;
@@ -2164,7 +4006,7 @@ function spawnTrailParticle(x, y) {
     el.style.setProperty('--rot', (Math.random()*60-30) + 'deg');
     el.style.setProperty('--dy', -(10 + Math.random()*20) + 'px');
   } else {
-    // Spark dot — use theme color
+    // Spark dot  use theme color
     el.className = 'trail-spark';
     const color = themeColors[Math.floor(Math.random() * themeColors.length)];
     const sz = 4 + Math.random() * 6;
@@ -2192,9 +4034,9 @@ document.addEventListener('touchmove', e => {
   Array.from(e.touches).forEach(t => spawnTrail(t.clientX, t.clientY));
 }, { passive: true });
 
-// ═══════════════════════════════════════════
+// 
 //  SMASH LETTER SPAWNER
-// ═══════════════════════════════════════════
+// 
 const LETTER_STYLES = [
   // style: { size, color_fn, effect }
   'bounce', 'spin', 'explode', 'float', 'wobble', 'zoom'
@@ -2207,7 +4049,7 @@ function spawnLetter(char, x, y) {
   el.textContent = char;
 
   const color = theme.colors[Math.floor(Math.random()*theme.colors.length)];
-  const size = Math.floor(Math.random()*80 + 60); // 60–140px
+  const size = Math.floor(Math.random()*80 + 60); // 60140px
   const style = LETTER_STYLES[smashCount % LETTER_STYLES.length];
   const dur = (.8 + Math.random()*.5).toFixed(2);
 
@@ -2252,9 +4094,9 @@ function spawnRipple(x, y) {
   el.addEventListener('animationend', ()=>el.remove());
 }
 
-// ═══════════════════════════════════════════
+// 
 //  AUDIO ENGINE
-// ═══════════════════════════════════════════
+// 
 function initAudio() { if (!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)(); }
 
 // Low-level tone
@@ -2270,7 +4112,7 @@ function playNote(freq, type='triangle', dur=.22, vol=.22) {
   osc.start(); osc.stop(audioCtx.currentTime + dur);
 }
 
-// ── SPEECH SYNTHESIS (letters & numbers) ──
+//  SPEECH SYNTHESIS (letters & numbers) 
 const synth = window.speechSynthesis;
 let voices = [];
 function loadVoices() {
@@ -2296,7 +4138,7 @@ function speak(text) {
   synth.speak(utt);
 }
 
-// ── LETTER SOUNDS: speak the letter + a soft musical ping ──
+//  LETTER SOUNDS: speak the letter + a soft musical ping 
 const LETTER_FREQS = {
   A:440,B:494,C:523,D:587,E:659,F:698,G:784,
   H:880,I:988,J:523,K:587,L:659,M:698,
@@ -2311,7 +4153,7 @@ function playLetter(char) {
   setTimeout(() => playNote(freq, 'sine', .18, .15), 180);
 }
 
-// ── NUMBER SOUNDS: speak the number name ──
+//  NUMBER SOUNDS: speak the number name 
 const NUM_WORDS = ['zero','one','two','three','four','five','six','seven','eight','nine'];
 function playNumber(char) {
   const n = parseInt(char);
@@ -2322,11 +4164,11 @@ function playNumber(char) {
   setTimeout(() => playNote((baseFreqs[n]||400)*1.5, 'sine', .15, .12), 120);
 }
 
-// ── SOUND PACKS for special keys ──
+//  SOUND PACKS for special keys 
 // Each pack is a function that synthesises a unique sound with Web Audio
 const SOUND_PACKS = {
 
-  // 🐱 Cat meow
+  //  Cat meow
   cat: () => {
     initAudio();
     const t = audioCtx.currentTime;
@@ -2343,7 +4185,7 @@ const SOUND_PACKS = {
     osc.start(t); osc.stop(t+.5);
   },
 
-  // 🐶 Dog bark
+  //  Dog bark
   dog: () => {
     initAudio();
     const t = audioCtx.currentTime;
@@ -2358,7 +4200,7 @@ const SOUND_PACKS = {
     });
   },
 
-  // 🐸 Frog boing
+  //  Frog boing
   frog: () => {
     initAudio();
     const t = audioCtx.currentTime;
@@ -2374,7 +4216,7 @@ const SOUND_PACKS = {
     o.start(t); o.stop(t+.3);
   },
 
-  // 🚗 Car horn beep
+  //  Car horn beep
   car: () => {
     initAudio();
     const t = audioCtx.currentTime;
@@ -2389,7 +4231,7 @@ const SOUND_PACKS = {
     });
   },
 
-  // 🚂 Train whistle
+  //  Train whistle
   train: () => {
     initAudio();
     const t = audioCtx.currentTime;
@@ -2405,7 +4247,7 @@ const SOUND_PACKS = {
     });
   },
 
-  // ✨ Magic sparkle
+  //  Magic sparkle
   magic: () => {
     initAudio();
     const t = audioCtx.currentTime;
@@ -2420,7 +4262,7 @@ const SOUND_PACKS = {
     });
   },
 
-  // 💥 Explosion boom
+  //  Explosion boom
   boom: () => {
     initAudio();
     const t = audioCtx.currentTime;
@@ -2443,7 +4285,7 @@ const SOUND_PACKS = {
     o.start(t);o.stop(t+.4);
   },
 
-  // 🌊 Ocean wave
+  //  Ocean wave
   ocean: () => {
     initAudio();
     const t = audioCtx.currentTime;
@@ -2460,7 +4302,7 @@ const SOUND_PACKS = {
     src.start(t);
   },
 
-  // ⚡ Electric zap
+  //  Electric zap
   zap: () => {
     initAudio();
     const t = audioCtx.currentTime;
@@ -2474,7 +4316,7 @@ const SOUND_PACKS = {
     o.start(t);o.stop(t+.2);
   },
 
-  // 🎺 Fanfare
+  //  Fanfare
   fanfare: () => {
     initAudio();
     const t = audioCtx.currentTime;
@@ -2489,7 +4331,7 @@ const SOUND_PACKS = {
     });
   },
 
-  // 🌙 Dreamy shimmer
+  //  Dreamy shimmer
   shimmer: () => {
     initAudio();
     const t = audioCtx.currentTime;
@@ -2504,7 +4346,7 @@ const SOUND_PACKS = {
     });
   },
 
-  // 🏎️ Race engine rev
+  // Race engine rev
   rev: () => {
     initAudio();
     const t = audioCtx.currentTime;
@@ -2519,7 +4361,7 @@ const SOUND_PACKS = {
     o.start(t);o.stop(t+.6);
   },
 
-  // 🍦 Sweet chime
+  //  Sweet chime
   chime: () => {
     initAudio();
     const t=audioCtx.currentTime;
@@ -2533,9 +4375,156 @@ const SOUND_PACKS = {
       o.start(t+i*.1);o.stop(t+i*.1+.28);
     });
   },
+
+  roar: () => {
+    initAudio();
+    const t = audioCtx.currentTime;
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.connect(g); g.connect(audioCtx.destination);
+    o.type = 'sawtooth';
+    o.frequency.setValueAtTime(180, t);
+    o.frequency.exponentialRampToValueAtTime(120, t + .12);
+    o.frequency.exponentialRampToValueAtTime(76, t + .38);
+    g.gain.setValueAtTime(.18, t);
+    g.gain.exponentialRampToValueAtTime(.001, t + .4);
+    o.start(t); o.stop(t + .42);
+  },
+
+  trumpet: () => {
+    initAudio();
+    const t = audioCtx.currentTime;
+    [392, 523, 659].forEach((f, i) => {
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.connect(g); g.connect(audioCtx.destination);
+      o.type = 'square';
+      o.frequency.setValueAtTime(f, t + i * .06);
+      g.gain.setValueAtTime(.12, t + i * .06);
+      g.gain.exponentialRampToValueAtTime(.001, t + i * .06 + .16);
+      o.start(t + i * .06); o.stop(t + i * .06 + .18);
+    });
+  },
+
+  chirp: () => {
+    initAudio();
+    const t = audioCtx.currentTime;
+    [1180, 1420, 1260].forEach((f, i) => {
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.connect(g); g.connect(audioCtx.destination);
+      o.type = 'sine';
+      o.frequency.setValueAtTime(f, t + i * .05);
+      g.gain.setValueAtTime(.08, t + i * .05);
+      g.gain.exponentialRampToValueAtTime(.001, t + i * .05 + .1);
+      o.start(t + i * .05); o.stop(t + i * .05 + .12);
+    });
+  },
+
+  bubble: () => {
+    initAudio();
+    const t = audioCtx.currentTime;
+    [280, 360, 470].forEach((f, i) => {
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.connect(g); g.connect(audioCtx.destination);
+      o.type = 'sine';
+      o.frequency.setValueAtTime(f, t + i * .07);
+      o.frequency.linearRampToValueAtTime(f + 110, t + i * .07 + .08);
+      g.gain.setValueAtTime(.09, t + i * .07);
+      g.gain.exponentialRampToValueAtTime(.001, t + i * .07 + .14);
+      o.start(t + i * .07); o.stop(t + i * .07 + .16);
+    });
+  },
+
+  flutter: () => {
+    initAudio();
+    const t = audioCtx.currentTime;
+    [880, 988, 1175, 988].forEach((f, i) => {
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.connect(g); g.connect(audioCtx.destination);
+      o.type = 'triangle';
+      o.frequency.setValueAtTime(f, t + i * .045);
+      g.gain.setValueAtTime(.08, t + i * .045);
+      g.gain.exponentialRampToValueAtTime(.001, t + i * .045 + .12);
+      o.start(t + i * .045); o.stop(t + i * .045 + .14);
+    });
+  },
+
+  whoosh: () => {
+    initAudio();
+    const t = audioCtx.currentTime;
+    const buf = audioCtx.createBuffer(1, audioCtx.sampleRate * .32, audioCtx.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < data.length; i++) {
+      const fall = 1 - i / data.length;
+      data[i] = (Math.random() * 2 - 1) * fall * .28;
+    }
+    const src = audioCtx.createBufferSource();
+    const g = audioCtx.createGain();
+    src.buffer = buf;
+    src.connect(g); g.connect(audioCtx.destination);
+    g.gain.setValueAtTime(.18, t);
+    g.gain.exponentialRampToValueAtTime(.001, t + .32);
+    src.start(t);
+  },
+
+  helicopter: () => {
+    initAudio();
+    const t = audioCtx.currentTime;
+    for (let i = 0; i < 4; i++) {
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.connect(g); g.connect(audioCtx.destination);
+      o.type = 'square';
+      o.frequency.setValueAtTime(150 + i * 12, t + i * .06);
+      g.gain.setValueAtTime(.08, t + i * .06);
+      g.gain.exponentialRampToValueAtTime(.001, t + i * .06 + .08);
+      o.start(t + i * .06); o.stop(t + i * .06 + .09);
+    }
+  },
+
+  learn: () => {
+    initAudio();
+    const t = audioCtx.currentTime;
+    [523, 659, 784].forEach((f, i) => {
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.connect(g); g.connect(audioCtx.destination);
+      o.type = 'sine';
+      o.frequency.setValueAtTime(f, t + i * .09);
+      g.gain.setValueAtTime(.1, t + i * .09);
+      g.gain.exponentialRampToValueAtTime(.001, t + i * .09 + .18);
+      o.start(t + i * .09); o.stop(t + i * .09 + .2);
+    });
+  },
+
+  splash: () => {
+    initAudio();
+    const t = audioCtx.currentTime;
+    const buf = audioCtx.createBuffer(1, audioCtx.sampleRate * .18, audioCtx.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < data.length; i++) {
+      data[i] = (Math.random() * 2 - 1) * Math.sin(Math.PI * i / data.length) * .35;
+    }
+    const src = audioCtx.createBufferSource();
+    const g = audioCtx.createGain();
+    src.buffer = buf;
+    src.connect(g); g.connect(audioCtx.destination);
+    g.gain.setValueAtTime(.16, t);
+    g.gain.exponentialRampToValueAtTime(.001, t + .18);
+    src.start(t);
+  },
+
+  celebrate: () => {
+    initAudio();
+    SOUND_PACKS.fanfare?.();
+    setTimeout(() => SOUND_PACKS.magic?.(), 120);
+  },
 };
 
-// Map special keys → sound pack
+// Map special keys  sound pack
 const KEY_SOUNDS = {
   'Shift':      'magic',
   'CapsLock':   'shimmer',
@@ -2564,18 +4553,18 @@ function playSpecialKeySound(keyName) {
   SOUND_PACKS[packName]?.();
 }
 
-// ── Normal smash: play a soft ping in addition to speech ──
+//  Normal smash: play a soft ping in addition to speech 
 const SCALE = [261.6,293.7,329.6,349.2,392,440,493.9,523.3,587.3,659.3];
 function playSmash() {
-  // Only the soft ping — speech is handled separately per key type
+  // Only the soft ping  speech is handled separately per key type
   initAudio();
   const freq = SCALE[smashCount % SCALE.length];
   playNote(freq, 'triangle', .16, smashVolume);
 }
 
-// ═══════════════════════════════════════════
+// 
 //  CHAOS PROGRESSION ENGINE
-// ═══════════════════════════════════════════
+// 
 const counterEl  = document.getElementById('smash-counter');
 const counterNum = document.getElementById('counter-num');
 const counterBadge = document.getElementById('counter-badge');
@@ -2586,25 +4575,25 @@ const vignetteEl = document.getElementById('vignette');
 // Phase definitions
 // [minSmash, levelClass, phaseClass, badgeText, bgHue, flashColor, bannerEmoji, bannerTitle, bannerSub, shakeClass, particleCount, burstScale]
 const PHASES = [
-  [0,   'level-calm',   'phase-calm',   'CALM',        null,   null,                   '🐣','Just Getting Started','Tiny fingers exploring…',   null,         14, 1.0],
+  [0,   'level-calm',   'phase-calm',   'CALM',        null,   null,                   '','Just Getting Started','Tiny fingers exploring',   null,         14, 1.0],
   [10,  'level-calm',   'phase-calm',   'WARMING UP',  null,   null,                   null, null, null, null, 16, 1.1],
-  [25,  'level-warm',   'phase-warm',   'GETTING WARM','warm', 'rgba(255,200,0,.08)',  '🔥','Getting Warm!','Things are heating up!',       'shake-light',  18, 1.2],
-  [50,  'level-hot',    'phase-hot',    'WILD!',       'hot',  'rgba(255,100,0,.14)',  '🌋','IT\'S GETTING WILD!','50 smashes of pure chaos!', 'shake-med',   24, 1.6],
-  [75,  'level-wild',   'phase-wild',   'ON FIRE 🔥',  'fire', 'rgba(255,30,0,.2)',    '💥','ABSOLUTE CHAOS!','75 keys of total destruction!','shake-hard',  32, 2.0],
-  [100, 'level-chaos',  'phase-chaos',  'CHAOS MODE',  'chaos','rgba(255,0,50,.25)',   '🌪️','CHAOS MODE!!!','100 SMASHES! LEGENDARY!!',    'shake-hard',  42, 2.6],
-  [150, 'level-legend', 'phase-legend', '🌌 LEGENDARY','legend','rgba(120,0,255,.3)', '🏆','LEGENDARY!!!','150+ smashes! You are unstoppable!','shake-hard',55, 3.2],
+  [25,  'level-warm',   'phase-warm',   'GETTING WARM','warm', 'rgba(255,200,0,.08)',  '','Getting Warm!','Things are heating up!',       'shake-light',  18, 1.2],
+  [50,  'level-hot',    'phase-hot',    'WILD!',       'hot',  'rgba(255,100,0,.14)',  '','IT\'S GETTING WILD!','50 smashes of pure chaos!', 'shake-med',   24, 1.6],
+  [75,  'level-wild',   'phase-wild',   'ON FIRE ',  'fire', 'rgba(255,30,0,.2)',    '','ABSOLUTE CHAOS!','75 keys of total destruction!','shake-hard',  32, 2.0],
+  [100, 'level-chaos',  'phase-chaos',  'CHAOS MODE',  'chaos','rgba(255,0,50,.25)',   '','CHAOS MODE!!!','100 SMASHES! LEGENDARY!!',    'shake-hard',  42, 2.6],
+  [150, 'level-legend', 'phase-legend', ' LEGENDARY','legend','rgba(120,0,255,.3)', '','LEGENDARY!!!','150+ smashes! You are unstoppable!','shake-hard',55, 3.2],
 ];
 
 let currentPhaseIdx = 0;
 let shakeTimeout = null;
 PHASES.push(
-  [220, 'level-legend', 'phase-legend', 'COSMIC MODE',  'legend','rgba(90,50,255,.34)',  '🌠','COSMIC MODE','220 taps! Sky high chaos!','shake-hard',68, 3.8],
-  [320, 'level-legend', 'phase-legend', 'MEGA MODE',    'legend','rgba(170,60,255,.38)', '🪐','MEGA MODE','320 taps! Nothing can stop this!','shake-hard',82, 4.5],
-  [500, 'level-legend', 'phase-legend', 'INFINITE MODE','legend','rgba(255,80,200,.42)','♾️','INFINITE MODE','500 taps! Endless energy!','shake-hard',96, 5.2],
-  [650, 'level-legend', 'phase-legend', 'COMET MODE',   'legend','rgba(110,180,255,.42)','☄️','COMET MODE','650 taps! Comet trail chaos!','shake-hard',112, 5.8],
-  [800, 'level-legend', 'phase-legend', 'GALAXY MODE',  'legend','rgba(90,120,255,.46)', '🌌','GALAXY MODE','800 taps! Galaxy power rising!','shake-hard',128, 6.4],
-  [1000, 'level-legend', 'phase-legend', 'NOVA MODE',   'legend','rgba(255,210,120,.5)', '⭐','NOVA MODE','1000 taps! Star power unleashed!','shake-hard',146, 7.0],
-  [1250, 'level-legend', 'phase-legend', 'CROWN MODE',  'legend','rgba(255,185,70,.54)', '👑','CROWN MODE','1250 taps! Crown-level tapping!','shake-hard',164, 7.8]
+  [220, 'level-legend', 'phase-legend', 'COSMIC MODE',  'legend','rgba(90,50,255,.34)',  '','COSMIC MODE','220 taps! Sky high chaos!','shake-hard',68, 3.8],
+  [320, 'level-legend', 'phase-legend', 'MEGA MODE',    'legend','rgba(170,60,255,.38)', '','MEGA MODE','320 taps! Nothing can stop this!','shake-hard',82, 4.5],
+  [500, 'level-legend', 'phase-legend', 'INFINITE MODE','legend','rgba(255,80,200,.42)','', 'INFINITE MODE','500 taps! Endless energy!','shake-hard',96, 5.2],
+  [650, 'level-legend', 'phase-legend', 'COMET MODE',   'legend','rgba(110,180,255,.42)','', 'COMET MODE','650 taps! Comet trail chaos!','shake-hard',112, 5.8],
+  [800, 'level-legend', 'phase-legend', 'GALAXY MODE',  'legend','rgba(90,120,255,.46)', '','GALAXY MODE','800 taps! Galaxy power rising!','shake-hard',128, 6.4],
+  [1000, 'level-legend', 'phase-legend', 'NOVA MODE',   'legend','rgba(255,210,120,.5)', '','NOVA MODE','1000 taps! Star power unleashed!','shake-hard',146, 7.0],
+  [1250, 'level-legend', 'phase-legend', 'CROWN MODE',  'legend','rgba(255,185,70,.54)', '','CROWN MODE','1250 taps! Crown-level tapping!','shake-hard',164, 7.8]
 );
 
 function getPhase(n) {
@@ -2663,24 +4652,12 @@ function showPhaseBanner(emoji, title, sub, color='#ff7a3d') {
   clearTimeout(showPhaseBanner._timer);
 }
 
-function showComboPop(text) {
-  if (reduceMotion) return;
-  const el = document.createElement('div');
-  el.className = 'combo-pop';
-  el.textContent = text;
-  const colors = theme.colors;
-  const c = colors[Math.floor(Math.random() * colors.length)];
-  el.style.color = c;
-  el.style.textShadow = `0 0 24px ${c}, 0 0 38px rgba(0,0,0,.5)`;
-  document.body.appendChild(el);
-  el.addEventListener('animationend', () => el.remove());
-}
-
 function showAchievementPop(emoji, label) {
   if (reduceMotion) return;
   const el = document.createElement('div');
   el.className = 'achievement-pop';
-  el.innerHTML = `<span class="achievement-pop-icon">${emoji}</span><div class="achievement-pop-title">Achievement Unlocked</div><div class="achievement-pop-label">${label}</div>`;
+  const iconHtml = emoji ? `<span class="achievement-pop-icon">${emoji}</span>` : '';
+  el.innerHTML = `${iconHtml}<div class="achievement-pop-title">Achievement Unlocked</div><div class="achievement-pop-label">${label}</div>`;
   const colors = theme.colors;
   const c = colors[Math.floor(Math.random() * colors.length)];
   el.querySelector('.achievement-pop-label').style.color = c;
@@ -2722,10 +4699,6 @@ function updateChaosPhase() {
     currentPhaseIdx = phaseIdx;
     const color = PHASE_COLORS[phase[4]] || '#ff7a3d';
 
-    // Big flash
-    doFlash(phase[5], 250);
-    setTimeout(() => doFlash(phase[5], 150), 300);
-
     // Keep shake only before chaos mode.
     if (n < 100) doShake(phase[9]);
 
@@ -2749,15 +4722,15 @@ function bumpCounter() {
   updateChaosPhase();
 }
 
-// ═══════════════════════════════════════════
+// 
 //  IDLE PROMPT
-// ═══════════════════════════════════════════
+// 
 const idlePrompt = document.getElementById('idle-prompt');
 const idleMascot = document.getElementById('idle-mascot');
 
-// ═══════════════════════════════════════════
+// 
 //  MAIN SMASH
-// ═══════════════════════════════════════════
+// 
 // keyType: 'letter' | 'number' | 'symbol' | 'touch'
 function doSmash(char, x, y, keyType='symbol') {
   if (!active) return;
@@ -2788,7 +4761,7 @@ function doSmash(char, x, y, keyType='symbol') {
       const colorName = chosen === '#ff7a3d' ? 'orange' : chosen === '#ffcd3c' ? 'yellow' : chosen === '#4d96ff' ? 'blue' : 'color';
       speak(colorName);
     }
-    char = '⬤';
+    char = '*';
   } else if (keyType === 'letter') {
     playLetter(char);
   } else if (keyType === 'number') {
@@ -2823,13 +4796,13 @@ function doSmash(char, x, y, keyType='symbol') {
   setTimeout(()=>cursor.classList.remove('big'), 150);
 }
 
-// ═══════════════════════════════════════════
+// 
 //  SPECIAL KEY SVG ILLUSTRATIONS
-// ═══════════════════════════════════════════
+// 
 const SPECIAL_KEYS = {
-  // key name → { svg, label, glow, size, extraBurst }
+  // key name  { svg, label, glow, size, extraBurst }
   'Shift': {
-    label: '⬆ SHIFT',
+    label: ' SHIFT',
     glow: 'rgba(255,220,50,.8)',
     size: 130,
     extraBurst: 22,
@@ -2854,7 +4827,7 @@ const SPECIAL_KEYS = {
     ]
   },
   'CapsLock': {
-    label: '🔒 CAPS',
+    label: ' CAPS',
     glow: 'rgba(100,200,255,.8)',
     size: 130,
     extraBurst: 25,
@@ -2885,7 +4858,7 @@ const SPECIAL_KEYS = {
     ]
   },
   'Control': {
-    label: '⚙ CTRL',
+    label: ' CTRL',
     glow: 'rgba(60,200,120,.8)',
     size: 130,
     extraBurst: 20,
@@ -2916,7 +4889,7 @@ const SPECIAL_KEYS = {
     ]
   },
   'Alt': {
-    label: '✦ ALT',
+    label: ' ALT',
     glow: 'rgba(255,120,200,.8)',
     size: 130,
     extraBurst: 18,
@@ -2947,7 +4920,7 @@ const SPECIAL_KEYS = {
     ]
   },
   'Meta': {
-    label: '⊞ WIN/CMD',
+    label: ' WIN/CMD',
     glow: 'rgba(100,180,255,.8)',
     size: 130,
     extraBurst: 20,
@@ -2984,7 +4957,7 @@ const SPECIAL_KEYS = {
     ]
   },
   'Tab': {
-    label: '↹ TAB',
+    label: ' TAB',
     glow: 'rgba(80,230,200,.8)',
     size: 130,
     extraBurst: 18,
@@ -3017,7 +4990,7 @@ const SPECIAL_KEYS = {
     ]
   },
   'Backspace': {
-    label: '⌫ DELETE',
+    label: ' DELETE',
     glow: 'rgba(255,80,80,.8)',
     size: 130,
     extraBurst: 28,
@@ -3043,7 +5016,7 @@ const SPECIAL_KEYS = {
     ]
   },
   'Enter': {
-    label: '↵ ENTER',
+    label: ' ENTER',
     glow: 'rgba(100,255,120,.8)',
     size: 130,
     extraBurst: 24,
@@ -3074,7 +5047,7 @@ const SPECIAL_KEYS = {
     ]
   },
   'Space': {
-    label: '⎵ SPACE',
+    label: ' SPACE',
     glow: 'rgba(120,220,255,.8)',
     size: 140,
     extraBurst: 26,
@@ -3106,7 +5079,7 @@ const SPECIAL_KEYS = {
     ]
   },
   'ArrowUp': {
-    label: '↑ UP',
+    label: ' UP',
     glow: 'rgba(100,255,180,.8)',
     size: 110,
     extraBurst: 16,
@@ -3122,7 +5095,7 @@ const SPECIAL_KEYS = {
     ]
   },
   'ArrowDown': {
-    label: '↓ DOWN',
+    label: ' DOWN',
     glow: 'rgba(255,180,60,.8)',
     size: 110,
     extraBurst: 16,
@@ -3137,7 +5110,7 @@ const SPECIAL_KEYS = {
     ]
   },
   'ArrowLeft': {
-    label: '← LEFT',
+    label: ' LEFT',
     glow: 'rgba(200,120,255,.8)',
     size: 110,
     extraBurst: 15,
@@ -3150,7 +5123,7 @@ const SPECIAL_KEYS = {
     ]
   },
   'ArrowRight': {
-    label: '→ RIGHT',
+    label: ' RIGHT',
     glow: 'rgba(255,200,60,.8)',
     size: 110,
     extraBurst: 15,
@@ -3163,7 +5136,7 @@ const SPECIAL_KEYS = {
     ]
   },
   'Fn': {
-    label: '⚡ FN',
+    label: ' FN',
     glow: 'rgba(255,240,60,.85)',
     size: 130,
     extraBurst: 22,
@@ -3212,14 +5185,683 @@ for(let i=1;i<=12;i++){
   };
 }
 
-function spawnSpecialKey(keyName, x, y) {
-  const def = SPECIAL_KEYS[keyName];
-  if (!def) return false;
+function createRewardArt(icon, accent = '#FDBA74', surface = '#1B1F2A', iconScale = 1) {
+  const safeAccent = accent;
+  const safeSurface = surface;
+  const size = Math.round(56 * iconScale);
+  return `<div style="
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:28px;
+    border:1px solid rgba(255,255,255,.14);
+    background:
+      radial-gradient(circle at 26% 22%, rgba(255,255,255,.16), transparent 24%),
+      radial-gradient(circle at 50% 60%, ${safeAccent}33, transparent 56%),
+      linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.015)),
+      ${safeSurface};
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.14),
+      inset 0 -20px 30px rgba(0,0,0,.18);">
+    <span style="
+      font-size:${size}px;
+      line-height:1;
+      transform:translateY(1px);
+      filter:drop-shadow(0 10px 16px rgba(0,0,0,.24));">${icon}</span>
+  </div>`;
+}
 
-  const svgList = def.svgs;
-  const svg = svgList[Math.floor(Math.random()*svgList.length)];
+function createEmojiRewardDef({
+  label,
+  icon,
+  glow,
+  size = 98,
+  extraBurst = 10,
+  sound = 'magic',
+  accent = '#FDBA74',
+  surface = '#1B1F2A',
+  tier = 'small',
+  iconScale = 1,
+}) {
+  return {
+    label,
+    glow,
+    size,
+    extraBurst,
+    sound,
+    tier,
+    flashColor: glow,
+    svgs: [createRewardArt(icon, accent, surface, iconScale)],
+  };
+}
 
-  // Trajectory vars
+const BONUS_TAP_KEYS = {
+  'A': {
+    label: 'PUPPY',
+    glow: 'rgba(255,176,114,.8)',
+    size: 98,
+    extraBurst: 10,
+    svgs: [`<svg width="98" height="98" viewBox="0 0 98 98" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="30" cy="31" rx="10" ry="15" fill="#8D5A3B"/>
+      <ellipse cx="68" cy="31" rx="10" ry="15" fill="#8D5A3B"/>
+      <circle cx="49" cy="49" r="26" fill="#D7A078"/>
+      <ellipse cx="49" cy="57" rx="14" ry="11" fill="#F8E6D6"/>
+      <circle cx="40" cy="46" r="3.2" fill="#2D1C13"/>
+      <circle cx="58" cy="46" r="3.2" fill="#2D1C13"/>
+      <circle cx="49" cy="54" r="4.2" fill="#2D1C13"/>
+      <path d="M43 61 Q49 66 55 61" fill="none" stroke="#2D1C13" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M46 61 Q49 69 52 61" fill="#FF7B9C"/>
+    </svg>`]
+  },
+  'S': {
+    label: 'STAR',
+    glow: 'rgba(255,220,90,.82)',
+    size: 94,
+    extraBurst: 9,
+    svgs: [`<svg width="94" height="94" viewBox="0 0 94 94" xmlns="http://www.w3.org/2000/svg">
+      <path d="M47 13 L56 33 L78 35 L61 50 L66 72 L47 61 L28 72 L33 50 L16 35 L38 33 Z" fill="#FFD54F" stroke="#FFB300" stroke-width="3" stroke-linejoin="round"/>
+      <circle cx="39" cy="43" r="2.6" fill="#7A4E00"/>
+      <circle cx="55" cy="43" r="2.6" fill="#7A4E00"/>
+      <path d="M40 51 Q47 57 54 51" fill="none" stroke="#7A4E00" stroke-width="2.6" stroke-linecap="round"/>
+    </svg>`]
+  },
+  'D': {
+    label: 'DUCK',
+    glow: 'rgba(255,200,84,.82)',
+    size: 96,
+    extraBurst: 10,
+    svgs: [`<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="44" cy="56" rx="22" ry="17" fill="#FFD54F"/>
+      <circle cx="60" cy="42" r="12" fill="#FFD54F"/>
+      <path d="M69 42 L84 47 L69 52 Q71 47 69 42Z" fill="#FF8A65"/>
+      <ellipse cx="41" cy="57" rx="11" ry="8" fill="#FFE082"/>
+      <circle cx="63" cy="39" r="2.4" fill="#3E2723"/>
+      <path d="M23 55 Q17 48 14 55 Q17 61 23 55Z" fill="#FFE082"/>
+    </svg>`]
+  },
+  'Q': {
+    label: 'LION',
+    glow: 'rgba(255,184,92,.84)',
+    size: 104,
+    extraBurst: 11,
+    svgs: [`<svg width="104" height="104" viewBox="0 0 104 104" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="52" cy="50" r="31" fill="#F29F3D"/>
+      <circle cx="52" cy="52" r="21" fill="#FFD39B"/>
+      <circle cx="44" cy="48" r="3.1" fill="#3B2314"/>
+      <circle cx="60" cy="48" r="3.1" fill="#3B2314"/>
+      <circle cx="52" cy="56" r="4.2" fill="#3B2314"/>
+      <path d="M45 63 Q52 69 59 63" fill="none" stroke="#3B2314" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M37 33 L31 24 L42 27Z" fill="#F6B45E"/>
+      <path d="M67 33 L73 24 L62 27Z" fill="#F6B45E"/>
+      <path d="M35 55 H23" stroke="#8A531C" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M69 55 H81" stroke="#8A531C" stroke-width="2.4" stroke-linecap="round"/>
+    </svg>`]
+  },
+  'W': {
+    label: 'TIGER',
+    glow: 'rgba(255,150,76,.84)',
+    size: 104,
+    extraBurst: 11,
+    svgs: [`<svg width="104" height="104" viewBox="0 0 104 104" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="52" cy="52" r="25" fill="#FFB04A"/>
+      <path d="M31 34 L23 22 L38 28Z" fill="#3A2417"/>
+      <path d="M73 34 L81 22 L66 28Z" fill="#3A2417"/>
+      <circle cx="44" cy="49" r="3" fill="#24160E"/>
+      <circle cx="60" cy="49" r="3" fill="#24160E"/>
+      <circle cx="52" cy="56" r="4" fill="#24160E"/>
+      <path d="M46 63 Q52 68 58 63" fill="none" stroke="#24160E" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M39 35 Q43 45 40 66" fill="none" stroke="#6B3B12" stroke-width="4" stroke-linecap="round"/>
+      <path d="M65 35 Q61 45 64 66" fill="none" stroke="#6B3B12" stroke-width="4" stroke-linecap="round"/>
+      <path d="M52 31 Q50 44 52 67" fill="none" stroke="#6B3B12" stroke-width="4" stroke-linecap="round"/>
+    </svg>`]
+  },
+  'E': {
+    label: 'ELEPHANT',
+    glow: 'rgba(164,181,204,.82)',
+    size: 108,
+    extraBurst: 12,
+    svgs: [`<svg width="108" height="108" viewBox="0 0 108 108" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="54" cy="48" r="26" fill="#B0BEC5"/>
+      <circle cx="31" cy="49" r="15" fill="#B0BEC5"/>
+      <circle cx="77" cy="49" r="15" fill="#B0BEC5"/>
+      <circle cx="45" cy="45" r="3" fill="#263238"/>
+      <circle cx="63" cy="45" r="3" fill="#263238"/>
+      <path d="M54 53 Q67 62 60 80 Q56 88 49 82 Q45 78 48 72 Q53 63 50 55" fill="none" stroke="#90A4AE" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="44" cy="58" r="4.5" fill="#ECEFF1" opacity=".7"/>
+      <circle cx="64" cy="58" r="4.5" fill="#ECEFF1" opacity=".7"/>
+    </svg>`]
+  },
+  'F': {
+    label: 'FISH',
+    glow: 'rgba(93,201,255,.82)',
+    size: 96,
+    extraBurst: 10,
+    svgs: [`<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="43" cy="49" rx="24" ry="16" fill="#4FC3F7"/>
+      <polygon points="66,49 86,35 86,63" fill="#29B6F6"/>
+      <path d="M34 35 Q43 20 52 35" fill="#81D4FA"/>
+      <circle cx="34" cy="47" r="3" fill="#0D2235"/>
+      <circle cx="35" cy="46" r="1.1" fill="#FFF"/>
+      <path d="M20 49 Q14 52 20 55" fill="none" stroke="#0288D1" stroke-width="2.6" stroke-linecap="round"/>
+    </svg>`]
+  },
+  'R': {
+    label: 'KITE',
+    glow: 'rgba(123,190,255,.84)',
+    size: 102,
+    extraBurst: 10,
+    svgs: [`<svg width="102" height="102" viewBox="0 0 102 102" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="51,16 82,48 51,80 20,48" fill="#FF7043"/>
+      <polygon points="51,16 66,48 51,80 36,48" fill="#FFD54F" opacity=".95"/>
+      <circle cx="51" cy="48" r="4" fill="#FFF3E0"/>
+      <path d="M51 80 Q60 89 50 97 Q44 90 48 84" fill="none" stroke="#E0E0E0" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M47 88 L41 94" stroke="#E0E0E0" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M54 92 L60 98" stroke="#E0E0E0" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>`]
+  },
+  'T': {
+    label: 'APPLE',
+    glow: 'rgba(255,117,117,.84)',
+    size: 98,
+    extraBurst: 10,
+    svgs: [`<svg width="98" height="98" viewBox="0 0 98 98" xmlns="http://www.w3.org/2000/svg">
+      <path d="M49 28 C39 18 23 27 23 46 C23 66 37 80 49 80 C61 80 75 66 75 46 C75 27 59 18 49 28Z" fill="#FF5A5F"/>
+      <path d="M49 28 C42 18 32 20 28 28" fill="none" stroke="#FCE4EC" stroke-width="2.6" stroke-linecap="round" opacity=".65"/>
+      <path d="M49 27 C48 16 53 10 62 10" fill="none" stroke="#6D4C41" stroke-width="4" stroke-linecap="round"/>
+      <path d="M54 16 C64 13 72 16 77 24 C67 29 58 27 54 16Z" fill="#66BB6A"/>
+      <circle cx="39" cy="43" r="4" fill="#FFF" opacity=".2"/>
+    </svg>`]
+  },
+  'Y': {
+    label: 'BIRD',
+    glow: 'rgba(124,200,255,.84)',
+    size: 100,
+    extraBurst: 10,
+    svgs: [`<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="47" cy="55" rx="23" ry="17" fill="#6EC6FF"/>
+      <circle cx="63" cy="45" r="11" fill="#81D4FA"/>
+      <polygon points="72,45 86,50 72,55" fill="#FFB74D"/>
+      <path d="M28 53 Q19 43 16 53 Q19 62 28 53Z" fill="#4FC3F7"/>
+      <circle cx="66" cy="43" r="2.7" fill="#1A237E"/>
+      <path d="M52 46 Q46 32 35 34 Q34 47 52 46Z" fill="#B3E5FC"/>
+      <path d="M41 70 L38 79" stroke="#FFB74D" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M50 70 L47 79" stroke="#FFB74D" stroke-width="2.6" stroke-linecap="round"/>
+    </svg>`]
+  },
+  'J': {
+    label: 'TEDDY',
+    glow: 'rgba(214,170,122,.82)',
+    size: 98,
+    extraBurst: 10,
+    svgs: [`<svg width="98" height="98" viewBox="0 0 98 98" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="31" cy="29" r="10" fill="#A56A43"/>
+      <circle cx="67" cy="29" r="10" fill="#A56A43"/>
+      <circle cx="49" cy="48" r="26" fill="#B97A4A"/>
+      <circle cx="49" cy="57" r="12" fill="#E8C39C"/>
+      <circle cx="40" cy="47" r="3" fill="#2C1C12"/>
+      <circle cx="58" cy="47" r="3" fill="#2C1C12"/>
+      <circle cx="49" cy="55" r="3.8" fill="#2C1C12"/>
+      <path d="M42 62 Q49 67 56 62" fill="none" stroke="#2C1C12" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M34 76 Q49 64 64 76" fill="none" stroke="#E8C39C" stroke-width="6" stroke-linecap="round"/>
+    </svg>`]
+  },
+  'K': {
+    label: 'BALLOON',
+    glow: 'rgba(255,120,164,.8)',
+    size: 96,
+    extraBurst: 9,
+    svgs: [`<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="49" cy="34" rx="22" ry="26" fill="#FF6F91"/>
+      <ellipse cx="42" cy="27" rx="7" ry="10" fill="#FFD1DC" opacity=".55"/>
+      <path d="M49 60 L49 74" stroke="#F8BBD0" stroke-width="3" stroke-linecap="round"/>
+      <path d="M49 74 Q39 80 46 87 Q56 81 51 74" fill="none" stroke="#F8BBD0" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="67" cy="65" r="8" fill="#FFD54F"/>
+      <path d="M67 73 L67 84" stroke="#FFE082" stroke-width="2.4" stroke-linecap="round"/>
+    </svg>`]
+  },
+  'U': {
+    label: 'BANANA',
+    glow: 'rgba(255,219,92,.84)',
+    size: 100,
+    extraBurst: 10,
+    svgs: [`<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M26 63 C35 83 61 88 78 72 C66 73 48 67 39 53 C34 45 33 36 35 27 C21 35 19 49 26 63Z" fill="#FFD54F"/>
+      <path d="M29 59 C38 74 57 79 70 69" fill="none" stroke="#FBC02D" stroke-width="4.2" stroke-linecap="round"/>
+      <path d="M35 27 L30 19" stroke="#6D4C41" stroke-width="3.5" stroke-linecap="round"/>
+      <circle cx="75" cy="71" r="3" fill="#8D6E63"/>
+    </svg>`]
+  },
+  'I': {
+    label: 'PEAR',
+    glow: 'rgba(168,219,92,.82)',
+    size: 98,
+    extraBurst: 10,
+    svgs: [`<svg width="98" height="98" viewBox="0 0 98 98" xmlns="http://www.w3.org/2000/svg">
+      <path d="M49 24 C61 24 67 34 64 45 C75 53 77 72 62 80 C52 86 39 86 30 80 C15 71 17 52 28 45 C24 34 34 24 49 24Z" fill="#A5D66D"/>
+      <path d="M49 24 C49 17 53 12 59 10" fill="none" stroke="#6D4C41" stroke-width="3.2" stroke-linecap="round"/>
+      <path d="M54 14 C61 12 68 14 72 20 C63 23 57 21 54 14Z" fill="#66BB6A"/>
+      <circle cx="40" cy="43" r="4" fill="#E8F5E9" opacity=".45"/>
+    </svg>`]
+  },
+  'L': {
+    label: 'ROCKET',
+    glow: 'rgba(255,143,90,.84)',
+    size: 98,
+    extraBurst: 11,
+    svgs: [`<svg width="98" height="98" viewBox="0 0 98 98" xmlns="http://www.w3.org/2000/svg">
+      <path d="M49 13 Q63 28 63 50 L35 50 Q35 28 49 13Z" fill="#FF7043"/>
+      <rect x="35" y="50" width="28" height="22" rx="5" fill="#CFD8DC"/>
+      <circle cx="49" cy="43" r="8" fill="#B3E5FC"/>
+      <path d="M35 56 L23 68 L30 74 L35 68Z" fill="#FFA726"/>
+      <path d="M63 56 L75 68 L68 74 L63 68Z" fill="#FFA726"/>
+      <path d="M39 72 L49 88 L59 72Z" fill="#FFB300"/>
+      <path d="M43 72 L49 81 L55 72Z" fill="#FFF176"/>
+    </svg>`]
+  },
+  '1': {
+    label: 'RAINBOW',
+    glow: 'rgba(255,204,92,.82)',
+    size: 102,
+    extraBurst: 10,
+    svgs: [`<svg width="102" height="102" viewBox="0 0 102 102" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 73 A31 31 0 0 1 82 73" fill="none" stroke="#FF7043" stroke-width="7" stroke-linecap="round"/>
+      <path d="M25 73 A26 26 0 0 1 77 73" fill="none" stroke="#FFD54F" stroke-width="7" stroke-linecap="round"/>
+      <path d="M30 73 A21 21 0 0 1 72 73" fill="none" stroke="#66BB6A" stroke-width="7" stroke-linecap="round"/>
+      <path d="M35 73 A16 16 0 0 1 67 73" fill="none" stroke="#42A5F5" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="25" cy="74" r="10" fill="#ECEFF1"/>
+      <circle cx="74" cy="74" r="12" fill="#ECEFF1"/>
+    </svg>`]
+  },
+  '2': {
+    label: 'CAR',
+    glow: 'rgba(255,92,104,.82)',
+    size: 100,
+    extraBurst: 10,
+    svgs: [`<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect x="18" y="49" width="64" height="24" rx="9" fill="#EF5350"/>
+      <path d="M31 49 L40 34 H62 L73 49Z" fill="#FF8A65"/>
+      <rect x="42" y="38" width="18" height="10" rx="3" fill="#B3E5FC"/>
+      <circle cx="33" cy="74" r="10" fill="#263238"/>
+      <circle cx="33" cy="74" r="5" fill="#90A4AE"/>
+      <circle cx="69" cy="74" r="10" fill="#263238"/>
+      <circle cx="69" cy="74" r="5" fill="#90A4AE"/>
+      <circle cx="84" cy="59" r="7" fill="#FFD54F"/>
+    </svg>`]
+  },
+  '3': {
+    label: 'BUBBLES',
+    glow: 'rgba(132,212,255,.84)',
+    size: 94,
+    extraBurst: 9,
+    svgs: [`<svg width="94" height="94" viewBox="0 0 94 94" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="34" cy="48" r="16" fill="#81D4FA" fill-opacity=".28" stroke="#B3E5FC" stroke-width="3"/>
+      <circle cx="57" cy="34" r="12" fill="#B3E5FC" fill-opacity=".24" stroke="#E1F5FE" stroke-width="3"/>
+      <circle cx="63" cy="58" r="18" fill="#4FC3F7" fill-opacity=".18" stroke="#B3E5FC" stroke-width="3"/>
+      <circle cx="28" cy="42" r="3" fill="#FFF" fill-opacity=".7"/>
+      <circle cx="53" cy="30" r="2.5" fill="#FFF" fill-opacity=".7"/>
+      <circle cx="57" cy="50" r="3.2" fill="#FFF" fill-opacity=".7"/>
+    </svg>`]
+  }
+};
+
+Object.assign(BONUS_TAP_KEYS, {
+  DOG: createEmojiRewardDef({
+    label: 'DOG',
+    icon: '🐶',
+    glow: 'rgba(255,183,120,.84)',
+    sound: 'dog',
+    accent: '#F59E0B',
+    surface: '#201A17',
+  }),
+  CAT: createEmojiRewardDef({
+    label: 'CAT',
+    icon: '🐱',
+    glow: 'rgba(255,183,138,.84)',
+    sound: 'cat',
+    accent: '#FB923C',
+    surface: '#241A18',
+  }),
+  BUTTERFLY: createEmojiRewardDef({
+    label: 'BUTTERFLY',
+    icon: '🦋',
+    glow: 'rgba(129,212,250,.84)',
+    sound: 'flutter',
+    accent: '#60A5FA',
+    surface: '#171E2A',
+    iconScale: 1.06,
+  }),
+  GRAPES: createEmojiRewardDef({
+    label: 'GRAPES',
+    icon: '🍇',
+    glow: 'rgba(187,134,252,.84)',
+    sound: 'chime',
+    accent: '#A78BFA',
+    surface: '#22192A',
+  }),
+  WATERMELON: createEmojiRewardDef({
+    label: 'WATERMELON',
+    icon: '🍉',
+    glow: 'rgba(255,110,120,.84)',
+    sound: 'chime',
+    accent: '#F87171',
+    surface: '#20191A',
+  }),
+  MANGO: createEmojiRewardDef({
+    label: 'MANGO',
+    icon: '🥭',
+    glow: 'rgba(255,175,82,.84)',
+    sound: 'chime',
+    accent: '#FB923C',
+    surface: '#241B18',
+  }),
+  STRAWBERRY: createEmojiRewardDef({
+    label: 'STRAWBERRY',
+    icon: '🍓',
+    glow: 'rgba(255,92,128,.84)',
+    sound: 'chime',
+    accent: '#F43F5E',
+    surface: '#24171C',
+  }),
+  SPARKLES: createEmojiRewardDef({
+    label: 'SPARKLES',
+    icon: '✨',
+    glow: 'rgba(255,222,118,.84)',
+    sound: 'magic',
+    accent: '#FCD34D',
+    surface: '#201D1A',
+    iconScale: 1.08,
+  }),
+  LIGHTFLASH: createEmojiRewardDef({
+    label: 'LIGHT FLASH',
+    icon: '⚡',
+    glow: 'rgba(255,230,92,.84)',
+    sound: 'zap',
+    accent: '#FDE047',
+    surface: '#1E1C1A',
+  }),
+  AIRPLANE: createEmojiRewardDef({
+    label: 'AIRPLANE',
+    icon: '✈️',
+    glow: 'rgba(147,197,253,.84)',
+    sound: 'whoosh',
+    accent: '#93C5FD',
+    surface: '#161E28',
+    iconScale: 1.06,
+  }),
+  TRAIN: createEmojiRewardDef({
+    label: 'TRAIN',
+    icon: '🚂',
+    glow: 'rgba(255,138,101,.84)',
+    sound: 'train',
+    accent: '#FB923C',
+    surface: '#211A18',
+  }),
+  HELICOPTER: createEmojiRewardDef({
+    label: 'HELICOPTER',
+    icon: '🚁',
+    glow: 'rgba(125,211,252,.84)',
+    sound: 'helicopter',
+    accent: '#7DD3FC',
+    surface: '#16202A',
+    iconScale: 1.04,
+  }),
+  LETTER_A: createEmojiRewardDef({
+    label: 'A FOR APPLE',
+    icon: 'A',
+    glow: 'rgba(255,186,90,.84)',
+    sound: 'learn',
+    accent: '#FDBA74',
+    surface: '#241B18',
+    iconScale: 1.12,
+    size: 92,
+  }),
+  LETTER_B: createEmojiRewardDef({
+    label: 'B FOR BIRD',
+    icon: 'B',
+    glow: 'rgba(125,211,252,.84)',
+    sound: 'learn',
+    accent: '#7DD3FC',
+    surface: '#17202A',
+    iconScale: 1.12,
+    size: 92,
+  }),
+  LETTER_C: createEmojiRewardDef({
+    label: 'C FOR CAR',
+    icon: 'C',
+    glow: 'rgba(255,160,122,.84)',
+    sound: 'learn',
+    accent: '#FDBA74',
+    surface: '#231B19',
+    iconScale: 1.12,
+    size: 92,
+  }),
+  NUM_1: createEmojiRewardDef({
+    label: 'NUMBER 1',
+    icon: '1',
+    glow: 'rgba(253,224,71,.84)',
+    sound: 'learn',
+    accent: '#FDE047',
+    surface: '#201F18',
+    iconScale: 1.12,
+    size: 90,
+  }),
+  NUM_2: createEmojiRewardDef({
+    label: 'NUMBER 2',
+    icon: '2',
+    glow: 'rgba(147,197,253,.84)',
+    sound: 'learn',
+    accent: '#93C5FD',
+    surface: '#171F29',
+    iconScale: 1.12,
+    size: 90,
+  }),
+  NUM_3: createEmojiRewardDef({
+    label: 'NUMBER 3',
+    icon: '3',
+    glow: 'rgba(196,181,253,.84)',
+    sound: 'learn',
+    accent: '#C4B5FD',
+    surface: '#1E1A2A',
+    iconScale: 1.12,
+    size: 90,
+  }),
+  SHAPE_CIRCLE: createEmojiRewardDef({
+    label: 'CIRCLE',
+    icon: '🔵',
+    glow: 'rgba(96,165,250,.84)',
+    sound: 'splash',
+    accent: '#60A5FA',
+    surface: '#16202B',
+  }),
+  SHAPE_TRIANGLE: createEmojiRewardDef({
+    label: 'TRIANGLE',
+    icon: '🔺',
+    glow: 'rgba(251,146,60,.84)',
+    sound: 'splash',
+    accent: '#FB923C',
+    surface: '#241A18',
+  }),
+  SHAPE_SQUARE: createEmojiRewardDef({
+    label: 'SQUARE',
+    icon: '🟩',
+    glow: 'rgba(74,222,128,.84)',
+    sound: 'splash',
+    accent: '#4ADE80',
+    surface: '#172019',
+  }),
+  PAINT_SPLASH: createEmojiRewardDef({
+    label: 'COLOR SPLASH',
+    icon: '🎨',
+    glow: 'rgba(196,181,253,.84)',
+    sound: 'splash',
+    accent: '#C4B5FD',
+    surface: '#1C1A2A',
+    iconScale: 1.04,
+  }),
+  FIREWORKS: createEmojiRewardDef({
+    label: 'FIREWORKS',
+    icon: '🎆',
+    glow: 'rgba(255,170,90,.9)',
+    sound: 'celebrate',
+    accent: '#FB923C',
+    surface: '#20181A',
+    tier: 'big',
+    size: 116,
+    extraBurst: 18,
+    iconScale: 1.08,
+  }),
+  CONFETTI: createEmojiRewardDef({
+    label: 'CONFETTI',
+    icon: '🎉',
+    glow: 'rgba(250,204,21,.9)',
+    sound: 'celebrate',
+    accent: '#FACC15',
+    surface: '#1F1B18',
+    tier: 'big',
+    size: 116,
+    extraBurst: 18,
+    iconScale: 1.08,
+  }),
+  GLOWPULSE: createEmojiRewardDef({
+    label: 'SCREEN GLOW',
+    icon: '🌟',
+    glow: 'rgba(255,241,118,.92)',
+    sound: 'magic',
+    accent: '#FDE68A',
+    surface: '#211E18',
+    tier: 'big',
+    size: 112,
+    extraBurst: 16,
+    iconScale: 1.04,
+  }),
+  MUSICAL_NOTES: createEmojiRewardDef({
+    label: 'MUSICAL NOTES',
+    icon: '🎵',
+    glow: 'rgba(129,140,248,.9)',
+    sound: 'learn',
+    accent: '#818CF8',
+    surface: '#181B28',
+    tier: 'big',
+    size: 112,
+    extraBurst: 16,
+    iconScale: 1.06,
+  }),
+});
+
+const BONUS_TAP_KEY_NAMES = Object.keys(BONUS_TAP_KEYS);
+const SMALL_REWARD_GROUPS = [
+  { name: 'animals', items: ['Q', 'W', 'E', 'DOG', 'CAT', 'Y', 'F', 'BUTTERFLY', 'D'] },
+  { name: 'fruits', items: ['T', 'U', 'GRAPES', 'WATERMELON', 'MANGO', 'STRAWBERRY'] },
+  { name: 'magic', items: ['1', 'S', 'SPARKLES', 'K', '3', 'LIGHTFLASH'] },
+  { name: 'vehicles', items: ['2', 'AIRPLANE', 'TRAIN', 'HELICOPTER'] },
+  { name: 'learning', items: ['LETTER_A', 'LETTER_B', 'LETTER_C', 'NUM_1', 'NUM_2', 'NUM_3'] },
+  { name: 'shapes', items: ['SHAPE_CIRCLE', 'SHAPE_TRIANGLE', 'SHAPE_SQUARE', 'PAINT_SPLASH'] },
+];
+const SMALL_REWARD_KEYS = SMALL_REWARD_GROUPS.flatMap(group => group.items);
+const BIG_SURPRISE_KEYS = ['FIREWORKS', 'CONFETTI', 'GLOWPULSE', 'MUSICAL_NOTES'];
+let nextSmallRewardAt = 0;
+let nextBigRewardAt = 0;
+let recentRewardNames = [];
+
+function randomBetween(min, max) {
+  return min + Math.floor(Math.random() * (max - min + 1));
+}
+
+function rememberRewardName(name) {
+  if (!name) return;
+  recentRewardNames.push(name);
+  if (recentRewardNames.length > 5) recentRewardNames.shift();
+}
+
+function getRewardCadenceWindow() {
+  if (streakCount >= 12) {
+    return { smallMin: 3, smallMax: 4, bigMin: 8, bigMax: 10 };
+  }
+  if (streakCount >= 6) {
+    return { smallMin: 4, smallMax: 5, bigMin: 9, bigMax: 12 };
+  }
+  return { smallMin: 4, smallMax: 5, bigMin: 10, bigMax: 15 };
+}
+
+function scheduleNextTapReward(kind) {
+  const pace = getRewardCadenceWindow();
+  if (kind === 'big') {
+    nextBigRewardAt = smashCount + randomBetween(pace.bigMin, pace.bigMax);
+  } else {
+    nextSmallRewardAt = smashCount + randomBetween(pace.smallMin, pace.smallMax);
+  }
+}
+
+function resetRewardCadence() {
+  recentRewardNames = [];
+  const pace = getRewardCadenceWindow();
+  nextSmallRewardAt = randomBetween(pace.smallMin, pace.smallMax);
+  nextBigRewardAt = randomBetween(pace.bigMin, pace.bigMax);
+}
+
+function pickRewardNameFromPool(pool, preferred = '') {
+  if (!pool || !pool.length) return '';
+  const withoutRecent = pool.filter(name => !recentRewardNames.includes(name));
+  const source = withoutRecent.length ? withoutRecent : pool;
+  if (preferred && source.includes(preferred) && Math.random() < 0.45) return preferred;
+  return source[Math.floor(Math.random() * source.length)];
+}
+
+function pickSmallRewardName(preferred = '') {
+  const availableGroups = SMALL_REWARD_GROUPS.filter(group =>
+    group.items.some(name => !recentRewardNames.includes(name))
+  );
+  const groupSource = availableGroups.length ? availableGroups : SMALL_REWARD_GROUPS;
+  const group = groupSource[Math.floor(Math.random() * groupSource.length)];
+  const preferredName = preferred && group.items.includes(preferred) ? preferred : '';
+  return pickRewardNameFromPool(group.items, preferredName);
+}
+
+function getDueTapRewardTier() {
+  if (smashCount < 4) return null;
+  if (smashCount >= nextBigRewardAt) {
+    scheduleNextTapReward('big');
+    if (nextSmallRewardAt <= smashCount) scheduleNextTapReward('small');
+    return 'big';
+  }
+  if (smashCount >= nextSmallRewardAt) {
+    scheduleNextTapReward('small');
+    return 'small';
+  }
+  return null;
+}
+
+function getRandomBonusTapDef({ tier = 'small', directKey = '', forceRandom = false } = {}) {
+  const normalized = directKey && directKey.length === 1 ? directKey.toUpperCase() : directKey;
+  const preferred = !forceRandom && tier === 'small' && SMALL_REWARD_KEYS.includes(normalized) ? normalized : '';
+  const name = tier === 'big'
+    ? pickRewardNameFromPool(BIG_SURPRISE_KEYS)
+    : pickSmallRewardName(preferred);
+  if (!name) return { name: '', def: null };
+  rememberRewardName(name);
+  return { name, def: BONUS_TAP_KEYS[name] };
+}
+
+function playRewardSound(def, tier = 'small') {
+  if (!soundOn || !def || !def.sound) return;
+  initAudio();
+  const packName = def.sound;
+  SOUND_PACKS[packName]?.();
+  if (tier === 'big' && packName !== 'celebrate') {
+    setTimeout(() => SOUND_PACKS.shimmer?.(), 90);
+  }
+}
+
+function spawnKeyVisual(def, x, y, { tier = 'small' } = {}) {
+  if (!def || !def.svgs || !def.svgs.length) return false;
+
+  const comboBoost = streakCount >= 12 ? 2 : streakCount >= 6 ? 1 : 0;
+  const tierScaleBoost = tier === 'big' ? .28 : comboBoost * .12;
+  const tierSizeBoost = tier === 'big' ? 18 : comboBoost * 8;
+  const tierBurstBoost = tier === 'big' ? 14 : comboBoost * 4;
+  const svg = def.svgs[Math.floor(Math.random()*def.svgs.length)];
   const dx  = ((Math.random()-.5)*220).toFixed(0);
   const dy  = (-(Math.random()*200+80)).toFixed(0);
   const dx2 = (parseFloat(dx)*1.5).toFixed(0);
@@ -3228,16 +5870,16 @@ function spawnSpecialKey(keyName, x, y) {
   const r1  = ((Math.random()-.5)*15).toFixed(0)+'deg';
   const r2  = ((Math.random()-.5)*50).toFixed(0)+'deg';
   const r3  = ((Math.random()-.5)*100).toFixed(0)+'deg';
-  const scale = (1.0 + Math.random()*.5).toFixed(2);
-  const dur = (1.2+Math.random()*.4).toFixed(2);
+  const scale = (1.0 + Math.random()*.5 + tierScaleBoost).toFixed(2);
+  const dur = (1.2 + Math.random()*.4 + (tier === 'big' ? .12 : comboBoost * .04)).toFixed(2);
+  const visualSize = (def.size || 96) + tierSizeBoost;
 
-  // SVG wrapper
   const el = document.createElement('div');
   el.className = 'special-card';
   el.innerHTML = svg;
   el.style.cssText = `
     left:${x}px; top:${y}px;
-    width:${def.size}px; height:${def.size}px;
+    width:${visualSize}px; height:${visualSize}px;
     --dur:${dur}s; --s:${scale};
     --dx:${dx}px; --dy:${dy}px;
     --dx2:${dx2}px; --dy2:${dy2}px;
@@ -3247,26 +5889,48 @@ function spawnSpecialKey(keyName, x, y) {
   document.body.appendChild(el);
   el.addEventListener('animationend', ()=>el.remove());
 
-  // Key label badge below the illustration
   const badge = document.createElement('div');
   badge.className = 'key-badge';
   badge.textContent = def.label;
-  badge.style.cssText = `left:${x}px; top:${y+def.size/2+10}px;`;
+  badge.style.cssText = `left:${x}px; top:${y+visualSize/2+10}px;`;
   document.body.appendChild(badge);
   badge.addEventListener('animationend', ()=>badge.remove());
 
-  // Extra big particle burst for special keys
-  spawnBurst(x, y, def.extraBurst);
-
-  // 3 ripple rings
-  for(let i=0;i<3;i++) setTimeout(()=>spawnRipple(x,y), i*120);
-
+  playRewardSound(def, tier);
+  spawnBurst(x, y, (def.extraBurst || 10) + tierBurstBoost);
+  const rippleCount = tier === 'big' ? 5 : 3 + comboBoost;
+  for(let i=0;i<rippleCount;i++) setTimeout(()=>spawnRipple(x,y), i*110);
   return true;
 }
 
-// ═══════════════════════════════════════════
+function spawnBonusTapVisual(keyName, x, y, { forceRandom = false } = {}) {
+  const tier = getDueTapRewardTier();
+  if (!tier) return false;
+  const normalized = keyName && keyName.length === 1 ? keyName.toUpperCase() : keyName;
+  let chosenName = !forceRandom && tier === 'small' && SMALL_REWARD_KEYS.includes(normalized) ? normalized : '';
+  let def = chosenName ? BONUS_TAP_KEYS[chosenName] : null;
+  if (!def) {
+    const randomReward = getRandomBonusTapDef({ tier, directKey: normalized, forceRandom });
+    chosenName = randomReward.name;
+    def = randomReward.def;
+  } else {
+    rememberRewardName(chosenName);
+  }
+  if (!def) return false;
+  return spawnKeyVisual(def, x, y, { tier });
+}
+
+function spawnSpecialKey(keyName, x, y) {
+  const def = SPECIAL_KEYS[keyName];
+  if (!def) return false;
+  return spawnKeyVisual(def, x, y);
+}
+
+resetRewardCadence();
+
+// 
 //  INPUT HANDLERS
-// ═══════════════════════════════════════════
+// 
 document.addEventListener('keydown', e => {
   if (e.repeat || !active) return;
   e.preventDefault();
@@ -3286,10 +5950,11 @@ document.addEventListener('keydown', e => {
     const keyType  = isLetter ? 'letter' : isNumber ? 'number' : 'symbol';
 
     const char = e.key.length === 1 ? e.key.toUpperCase() : (
-      e.key === 'Enter' ? '↵' : e.key === 'Backspace' ? '⌫' :
-      e.key === ' ' ? '⎵' : e.key.length <= 3 ? e.key : '?'
+      e.key === 'Enter' ? '' : e.key === 'Backspace' ? '' :
+      e.key === ' ' ? '' : e.key.length <= 3 ? e.key : '?'
     );
     doSmash(char, cx, cy, keyType);
+    spawnBonusTapVisual(e.key, cx, cy);
     return;
   }
 
@@ -3306,9 +5971,12 @@ document.addEventListener('touchstart', e => {
   if (!active) return;
   initAudio();
   Array.from(e.changedTouches).forEach(t => {
-    const chars = theme.emoji;
+    const chars = theme.emoji && theme.emoji.length
+      ? theme.emoji
+      : ['\u{1F436}','\u{1F9F8}','\u{1F388}','\u{2B50}','\u{1F697}'];
     const c = chars[Math.floor(Math.random()*chars.length)];
     doSmash(c, t.clientX, t.clientY, 'touch');
+    spawnBonusTapVisual('', t.clientX, t.clientY, { forceRandom: true });
   });
 }, { passive: true });
 
@@ -3317,28 +5985,283 @@ document.addEventListener('mousedown', e => {
   if (e.target.closest('#parent-panel,#ph,#end-card')) return;
   e.preventDefault();
   initAudio();
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%';
+  const useThemeCompanion = Math.random() < 0.35 && theme.emoji && theme.emoji.length;
+  const chars = useThemeCompanion ? theme.emoji : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%';
   const c = chars[Math.floor(Math.random()*chars.length)];
   doSmash(c, e.clientX, e.clientY, 'touch');
+  spawnBonusTapVisual('', e.clientX, e.clientY, { forceRandom: true });
 });
 
-// ═══════════════════════════════════════════
-//  START BUTTON
-// ═══════════════════════════════════════════
-document.getElementById('start-btn').addEventListener('click', () => {
+// 
+//  HERO DEMO WIDGET
+// 
+const heroDemoScreen = document.getElementById('hero-demo-screen');
+const HERO_DEMO_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+const HERO_DEMO_COLORS = ['#F4782A', '#FFD166', '#7CF29C', '#6FD3FF', '#FF8AD8', '#C39BFF'];
+let heroDemoAudioCtx = null;
+
+function heroDemoVisible() {
+  const landing = document.getElementById('landing');
+  return Boolean(landing && landing.style.display !== 'none' && !landing.classList.contains('fade-out') && !active);
+}
+
+function getHeroDemoChar(key = '') {
+  if (key.length === 1 && /[a-z0-9]/i.test(key)) {
+    return key.toUpperCase();
+  }
+  return HERO_DEMO_CHARS[Math.floor(Math.random() * HERO_DEMO_CHARS.length)];
+}
+
+function getHeroDemoAudioCtx() {
+  if (heroDemoAudioCtx) return heroDemoAudioCtx;
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  if (!AudioCtx) return null;
+  heroDemoAudioCtx = new AudioCtx();
+  return heroDemoAudioCtx;
+}
+
+function playHeroDemoBeep() {
+  const ctx = getHeroDemoAudioCtx();
+  if (!ctx) return;
+  if (ctx.state === 'suspended') {
+    ctx.resume().catch(() => {});
+  }
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  const now = ctx.currentTime;
+
+  osc.type = 'sine';
+  osc.frequency.value = 300 + Math.random() * 500;
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.exponentialRampToValueAtTime(0.06, now + 0.02);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.2);
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.start(now);
+  osc.stop(now + 0.22);
+}
+
+function spawnHeroDemoChar(char) {
+  if (!heroDemoScreen || !heroDemoVisible()) return;
+  const el = document.createElement('span');
+  el.className = 'hero-demo-char';
+  el.textContent = char;
+  el.style.left = `${12 + Math.random() * 76}%`;
+  el.style.top = `${18 + Math.random() * 58}%`;
+  el.style.fontSize = `${32 + Math.random() * 18}px`;
+  el.style.color = HERO_DEMO_COLORS[Math.floor(Math.random() * HERO_DEMO_COLORS.length)];
+  el.style.setProperty('--demo-rise', `${-34 - Math.random() * 28}px`);
+  heroDemoScreen.appendChild(el);
+  playHeroDemoBeep();
+  el.addEventListener('animationend', () => el.remove(), { once: true });
+}
+
+if (heroDemoScreen) {
+  heroDemoScreen.addEventListener('pointerdown', () => {
+    heroDemoScreen.focus();
+    spawnHeroDemoChar(getHeroDemoChar());
+  });
+
+  heroDemoScreen.addEventListener('keydown', e => {
+    if (e.repeat || ['Tab', 'Shift', 'Control', 'Alt', 'Meta'].includes(e.key)) return;
+    e.preventDefault();
+    spawnHeroDemoChar(getHeroDemoChar(e.key));
+  });
+
+  document.addEventListener('keydown', e => {
+    const target = e.target instanceof Element ? e.target : null;
+    if (!heroDemoVisible() || e.repeat) return;
+    if (['Tab', 'Shift', 'Control', 'Alt', 'Meta', 'Escape', 'F11'].includes(e.key)) return;
+    if (target?.closest('#parent-panel,#ph,#end-card')) return;
+    if (e.key === ' ') e.preventDefault();
+    spawnHeroDemoChar(getHeroDemoChar(e.key));
+  });
+}
+
+// 
+//  LANDING NAV
+// 
+const landing = document.getElementById('landing');
+const landingNav = document.getElementById('landing-nav-shell');
+const landingNavToggle = document.getElementById('lnav-toggle');
+const landingNavLinksWrap = document.getElementById('lnav-links-wrap');
+const landingNavLinks = landingNav ? Array.from(landingNav.querySelectorAll('[data-nav-link]')) : [];
+const landingNavToggleBars = landingNavToggle ? Array.from(landingNavToggle.querySelectorAll('span')) : [];
+
+function setLandingToggleVisual(isOpen) {
+  if (landingNavToggleBars.length < 3) return;
+  landingNavToggleBars[0].style.transform = isOpen ? 'translateY(0) rotate(45deg)' : 'translateY(-5px)';
+  landingNavToggleBars[1].style.opacity = isOpen ? '0' : '1';
+  landingNavToggleBars[2].style.transform = isOpen ? 'translateY(0) rotate(-45deg)' : 'translateY(5px)';
+}
+
+function closeLandingMenu() {
+  if (!landingNav || !landingNavToggle || !landingNavLinksWrap) return;
+  landingNavToggle.setAttribute('aria-expanded', 'false');
+  landingNavLinksWrap.classList.add('hidden');
+  landingNavLinksWrap.classList.remove('flex');
+  setLandingToggleVisual(false);
+}
+
+function syncLandingNavState() {
+  if (!landing || !landingNav) return;
+  const scrolled = landing.scrollTop > 8;
+  landingNav.style.background = scrolled ? 'rgba(13,13,18,.94)' : 'rgba(13,13,18,.82)';
+  landingNav.style.borderColor = scrolled ? 'rgba(255,255,255,.08)' : 'rgba(255,255,255,.10)';
+}
+
+landingNavToggle?.addEventListener('click', () => {
+  if (!landingNavLinksWrap) return;
+  const willOpen = landingNavLinksWrap.classList.contains('hidden');
+  landingNavToggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+  landingNavLinksWrap.classList.toggle('hidden', !willOpen);
+  landingNavLinksWrap.classList.toggle('flex', willOpen);
+  setLandingToggleVisual(willOpen);
+});
+
+landingNavLinks.forEach(link => {
+  link.addEventListener('click', closeLandingMenu);
+});
+
+landing?.addEventListener('scroll', syncLandingNavState, { passive: true });
+window.addEventListener('resize', () => {
+  if (!landingNavLinksWrap) return;
+  if (window.innerWidth > 767) {
+    landingNavLinksWrap.classList.remove('hidden', 'flex');
+    setLandingToggleVisual(false);
+    landingNavToggle?.setAttribute('aria-expanded', 'false');
+  } else {
+    landingNavLinksWrap.classList.add('hidden');
+    landingNavLinksWrap.classList.remove('flex');
+    setLandingToggleVisual(false);
+    landingNavToggle?.setAttribute('aria-expanded', 'false');
+  }
+});
+document.addEventListener('click', e => {
+  if (!landingNavLinksWrap || landingNavLinksWrap.classList.contains('hidden') || window.innerWidth > 767) return;
+  if (e.target instanceof Element && e.target.closest('#landing-nav-shell')) return;
+  closeLandingMenu();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLandingMenu();
+});
+if (window.innerWidth < 768) closeLandingMenu();
+syncLandingNavState();
+
+// 
+//  LANDING GSAP ANIMATION
+// 
+function initLandingAnimations() {
+  if (reduceMotion || !window.gsap) return;
+
+  const heroTitle = document.getElementById('hero-title');
+  const heroPreviewCard = document.getElementById('hero-preview-card');
+  const featuresTitle = document.getElementById('features-title');
+  const featureItems = gsap.utils.toArray('[data-gsap-detail]');
+  const footerCta = document.getElementById('landing-footer-cta');
+  const landingScroller = landing || window;
+
+  if (window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.defaults({
+      scroller: landingScroller
+    });
+  }
+
+  if (heroTitle) {
+    gsap.from(heroTitle, {
+      x: -48,
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power2.out'
+    });
+  }
+
+  if (heroPreviewCard) {
+    gsap.from(heroPreviewCard, {
+      x: 48,
+      opacity: 0,
+      duration: 0.82,
+      delay: 0.12,
+      ease: 'power2.out'
+    });
+  }
+
+  if (window.ScrollTrigger && featuresTitle) {
+    gsap.from(featuresTitle, {
+      y: 20,
+      opacity: 0,
+      duration: 0.4,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: featuresTitle,
+        start: 'top 88%',
+        once: true
+      }
+    });
+  }
+
+  if (window.ScrollTrigger && featureItems.length) {
+    gsap.from(featureItems, {
+      y: 20,
+      opacity: 0,
+      duration: 0.4,
+      ease: 'power2.out',
+      stagger: 0.15,
+      scrollTrigger: {
+        trigger: '#features-section',
+        start: 'top 82%',
+        once: true
+      }
+    });
+  }
+
+  if (window.ScrollTrigger && footerCta) {
+    gsap.from(footerCta, {
+      y: 20,
+      opacity: 0,
+      duration: 0.4,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: footerCta,
+        start: 'top 90%',
+        once: true
+      }
+    });
+  }
+
+  if (window.ScrollTrigger) {
+    ScrollTrigger.refresh();
+  }
+}
+initLandingAnimations();
+
+// 
+//  START BUTTONS
+// 
+function launchTotTaps() {
   initAudio();
   sessionStart = Date.now();
   bestStreak = 0; streakCount = 0; lastSmashTime = 0;
   snowActive = true;
-  const landing = document.getElementById('landing');
+  closeLandingMenu();
   landing.classList.add('fade-out');
-  setTimeout(() => { landing.style.display='none'; active = true; }, 600);
+  setTimeout(() => {
+    landing.style.display='none';
+    active = true;
+    syncGameCursorState();
+  }, 600);
   requestFullscreenSafe('start');
+}
+
+document.querySelectorAll('[data-launch-play="true"]').forEach(btn => {
+  btn.addEventListener('click', launchTotTaps);
 });
 
-// ═══════════════════════════════════════════
+// 
 //  PARENT PANEL
-// ═══════════════════════════════════════════
+// 
 const panel = document.getElementById('parent-panel');
 const panelFocusableSelector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 let lastFocusedBeforePanel = null;
@@ -3346,6 +6269,7 @@ function openPanel() {
   lastFocusedBeforePanel = document.activeElement;
   panel.classList.add('open');
   active = false;
+  syncGameCursorState();
   renderInsights();
   const firstFocusable = panel.querySelector(panelFocusableSelector);
   firstFocusable?.focus();
@@ -3353,6 +6277,7 @@ function openPanel() {
 function closePanel() {
   panel.classList.remove('open');
   active = true;
+  syncGameCursorState();
   if (lastFocusedBeforePanel && lastFocusedBeforePanel !== document.body) {
     lastFocusedBeforePanel.focus();
   }
@@ -3440,9 +6365,9 @@ applyAgePreset(agePreset, false);
 renderInsights();
 applyThemeVisuals('default', THEMES.default);
 
-// ═══════════════════════════════════════════
+// 
 //  TIMER
-// ═══════════════════════════════════════════
+// 
 const tbarWrap=document.getElementById('tbar-wrap'), tbar=document.getElementById('tbar');
 document.getElementById('timer-sel').addEventListener('change', e=>{
   timerDuration = parseInt(e.target.value);
@@ -3460,9 +6385,9 @@ function startTimer() {
   },1000);
 }
 
-// ═══════════════════════════════════════════
+// 
 //  SMASH REPORT CARD
-// ═══════════════════════════════════════════
+// 
 const endCard = document.getElementById('end-card');
 const rConfCanvas = document.getElementById('report-confetti');
 const rConfCtx = rConfCanvas.getContext('2d');
@@ -3476,16 +6401,21 @@ function formatDuration(ms) {
   return `${m}m ${rem}s`;
 }
 
-const THEME_ICONS = {
-  default:'🎉', jungle:'🌿', ocean:'🌊', space:'🚀', dino:'🦕', diwali:'🪔'
+const THEME_LABELS = {
+  default: 'Classic',
+  jungle: 'Jungle',
+  ocean: 'Ocean',
+  space: 'Space',
+  dino: 'Dino',
+  diwali: 'Diwali'
 };
 
 function getChaosInfo(n) {
-  // Use PHASES for report card — map to readable info
+  // Use PHASES for report card and map them to readable copy.
   const phase = getPhase(n);
   const labels = ['Just warming up!','Getting interesting!','Things are heating up!','Wild keyboard energy!','Absolute chaos!','LEGENDARY destruction!','UNMATCHABLE LEGEND!','Cosmic keyboard storm!','Mega smashing power!','Infinite tapping energy!','Comet-speed tapping!','Galaxy-size smashing!','Nova-level burst!','Crown-worthy tapping!'];
   const idx = PHASES.indexOf(phase);
-  return [phase[6] || '🎉', phase[3], labels[idx] || labels[0]];
+  return [phase[6] || '', phase[3], labels[idx] || labels[0]];
 }
 
 // Confetti system
@@ -3533,6 +6463,7 @@ function animateConfetti() {
 
 function showEnd(reason = 'timer') {
   active = false;
+  syncGameCursorState();
   const elapsed = Date.now() - sessionStart;
   const chaosInfo = getChaosInfo(smashCount);
   const currentThemeName = Object.keys(THEMES).find(k => THEMES[k] === theme) || 'default';
@@ -3546,16 +6477,22 @@ function showEnd(reason = 'timer') {
   });
 
   document.getElementById('rpt-score').textContent    = smashCount;
-  document.getElementById('rpt-chaos').textContent    = (chaosInfo[0]||'🎉') + ' ' + chaosInfo[1];
-  document.getElementById('rpt-emoji').textContent    = chaosInfo[0] || theme.emoji[0];
+  document.getElementById('rpt-chaos').textContent    = [chaosInfo[0], chaosInfo[1]].filter(Boolean).join(' ');
+  const rptEmojiEl = document.getElementById('rpt-emoji');
+  if (chaosInfo[0]) {
+    rptEmojiEl.textContent = chaosInfo[0];
+  } else {
+    rptEmojiEl.innerHTML = '<img src="tottaps-logo-icon.png" alt="TotTaps logo">';
+  }
   document.getElementById('rpt-duration').textContent = formatDuration(elapsed);
   document.getElementById('rpt-streak').textContent   = bestStreak;
-  document.getElementById('rpt-theme').textContent    = THEME_ICONS[currentThemeName] || '🎉';
+  document.getElementById('rpt-theme').textContent    = THEME_LABELS[currentThemeName] || 'Classic';
   document.getElementById('rpt-session-label').textContent = chaosInfo[2];
   const rewardEl = document.getElementById('rpt-reward');
   if (unlockedStickers.length) {
     const latest = unlockedStickers[unlockedStickers.length - 1];
-    rewardEl.textContent = `${latest.emoji} ${latest.label} · ${unlockedStickers.length} achievement${unlockedStickers.length > 1 ? 's' : ''} unlocked`;
+    const rewardPrefix = latest.emoji ? `${latest.emoji} ` : '';
+    rewardEl.textContent = `${rewardPrefix}${latest.label} - ${unlockedStickers.length} achievement${unlockedStickers.length > 1 ? 's' : ''} unlocked`;
   } else {
     rewardEl.textContent = 'No achievements yet. Keep tapping to unlock surprises!';
   }
@@ -3564,13 +6501,13 @@ function showEnd(reason = 'timer') {
   const playAgainBtn = document.getElementById('rpt-play-again');
   const newGameBtn   = document.getElementById('rpt-new-game');
   if (reason === 'escape' || reason === 'exit') {
-    // User pressed ESC / exited fullscreen — they clearly want to keep going
-    playAgainBtn.innerHTML = '🔄 Keep Tapping!';
+    // User pressed ESC / exited fullscreen  they clearly want to keep going
+    playAgainBtn.innerHTML = 'Keep Tapping!';
     playAgainBtn.style.display = 'flex';
-    newGameBtn.style.display   = 'none'; // hide new game — irrelevant on ESC
+    newGameBtn.style.display   = 'none'; // hide new game  irrelevant on ESC
   } else {
-    // Timer ended naturally — show both options
-    playAgainBtn.innerHTML = '🔄 Play Again';
+    // Timer ended naturally  show both options
+    playAgainBtn.innerHTML = 'Play Again';
     playAgainBtn.style.display = 'flex';
     newGameBtn.style.display   = 'flex';
   }
@@ -3585,6 +6522,7 @@ function resetSession() {
   lastSmashTime = 0; sessionStart = Date.now();
   unlockedStickers = [];
   currentPhaseIdx = 0;
+  resetRewardCadence();
   snowflakes = [];
   document.body.classList.remove('phase-calm','phase-warm','phase-hot','phase-wild','phase-chaos','phase-legend');
   document.body.classList.add('phase-calm');
@@ -3593,13 +6531,14 @@ function resetSession() {
   idleMascot.textContent = theme.mascot;
 }
 
-// ── Button handlers ──
+//  Button handlers 
 document.getElementById('rpt-play-again').addEventListener('click', () => {
   endCard.classList.remove('show');
   confettiRunning = false;
   resetSession();
   if (timerDuration > 0) startTimer();
   active = true;
+  syncGameCursorState();
   // Re-enter fullscreen
   if (!document.fullscreenElement) {
     requestFullscreenSafe('play-again');
@@ -3615,6 +6554,7 @@ document.getElementById('rpt-new-game').addEventListener('click', () => {
   clearInterval(timerInterval);
   document.getElementById('timer-sel').value = '0';
   active = true;
+  syncGameCursorState();
   // Re-enter fullscreen
   if (!document.fullscreenElement) {
     requestFullscreenSafe('new-game');
@@ -3624,14 +6564,14 @@ document.getElementById('rpt-new-game').addEventListener('click', () => {
 document.getElementById('rpt-copy').addEventListener('click', () => {
   const chaosInfo = getChaosInfo(smashCount);
   const elapsed = Date.now() - sessionStart;
-  const txt = `🐾 TotTaps Report\n\nScore: ${smashCount} keys tapped\nDuration: ${formatDuration(elapsed)}\nChaos level: ${chaosInfo[1]}\nBest streak: ${bestStreak}\n\n${chaosInfo[2]}\n\n👉 tottaps.com`;
+  const txt = `TotTaps Report\n\nScore: ${smashCount} keys tapped\nDuration: ${formatDuration(elapsed)}\nChaos level: ${chaosInfo[1]}\nBest streak: ${bestStreak}\n\n${chaosInfo[2]}\n\nhttps://tottaps.com`;
   navigator.clipboard?.writeText(txt);
-  _showCopied('rpt-copy', '✅ Copied to clipboard!');
+  _showCopied('rpt-copy', 'Copied to clipboard!');
 });
 
 document.getElementById('rpt-whatsapp').addEventListener('click', () => {
   const chaosInfo = getChaosInfo(smashCount);
-  const msg = encodeURIComponent(`🐾 My toddler just tapped ${smashCount} keys on TotTaps!\nChaos level: ${chaosInfo[1]} 😂\nBest streak: ${bestStreak} in a row!\nTry it free 👉 tottaps.com`);
+  const msg = encodeURIComponent(`My toddler just tapped ${smashCount} keys on TotTaps!\nChaos level: ${chaosInfo[1]}\nBest streak: ${bestStreak} in a row!\nTry it free: https://tottaps.com`);
   window.open(`https://wa.me/?text=${msg}`, '_blank');
 });
 
@@ -3671,9 +6611,9 @@ window.addEventListener('blur', () => {
   }
 });
 
-// ─── SHARE BUTTONS (landing) ─────────────
+//  SHARE BUTTONS (landing) 
 const SHARE_URL  = 'https://tottaps.com';
-const SHARE_TEXT = '🐾 My toddler is obsessed with TotTaps — a free, safe keyboard toy that turns every key press into colours and sounds! No ads, no account needed. Try it:';
+const SHARE_TEXT = ' My toddler is obsessed with TotTaps  a free, safe keyboard toy that turns every key press into colours and sounds! No ads, no account needed. Try it:';
 
 document.getElementById('share-wa').addEventListener('click', () => {
   window.open('https://wa.me/?text=' + encodeURIComponent(SHARE_TEXT + ' ' + SHARE_URL), '_blank');
@@ -3682,14 +6622,23 @@ document.getElementById('share-wa').addEventListener('click', () => {
 document.getElementById('share-copy').addEventListener('click', () => {
   navigator.clipboard.writeText(SHARE_URL).then(() => {
     const btn = document.getElementById('share-copy');
-    const orig = btn.innerHTML;
-    btn.innerHTML = '✅ Copied!';
+    const label = btn.querySelector('.share-btn__label');
+    const orig = label ? label.textContent : 'Copy Link';
+    if (label) label.textContent = 'Copied!';
     btn.style.color = '#6bcb77';
-    setTimeout(() => { btn.innerHTML = orig; btn.style.color = ''; }, 2000);
+    setTimeout(() => {
+      if (label) label.textContent = orig;
+      btn.style.color = '';
+    }, 2000);
   }).catch(() => {
     const btn = document.getElementById('share-copy');
-    btn.innerHTML = SHARE_URL;
-    setTimeout(() => { btn.innerHTML = '📋 Copy Link'; }, 3000);
+    const label = btn.querySelector('.share-btn__label');
+    if (label) label.textContent = 'Copy failed';
+    btn.style.color = '#FFB7A1';
+    setTimeout(() => {
+      if (label) label.textContent = 'Copy Link';
+      btn.style.color = '';
+    }, 3000);
   });
 });
 
@@ -3709,3 +6658,5 @@ updateFullscreenStatus();
 </script>
 </body>
 </html>
+
+
