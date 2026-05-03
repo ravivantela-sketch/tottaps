@@ -125,7 +125,7 @@ git push -u origin main
 - HTML5 Canvas for animations
 - Web Audio API for sounds
 - CSS3 animations
-- Single file (~2500 lines)
+- Static HTML-first architecture
 
 **Browser Support:**
 - Chrome/Edge 90+
@@ -138,6 +138,25 @@ git push -u origin main
 - No external dependencies (except fonts)
 - 60fps animations
 - Efficient particle system
+
+---
+
+## Asset Safety
+
+TotTaps games should use original, CC0, properly attributed CC-BY, or clearly licensed royalty-free assets only.
+
+Before adding sprites, UI art, sounds, or music, read [ASSET_POLICY.md](ASSET_POLICY.md).
+
+Preferred future game concepts:
+- Memory pairs
+- Sorting baskets
+- Bubble pop
+- Hide-and-seek
+- Pattern sequencing
+- Letter and number tracing
+- Connect the dots
+
+Avoid brand names, copied characters, ripped sprites, and unclear licenses.
 
 ---
 

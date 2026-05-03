@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "policy": "../ASSET_POLICY.md",
+  "assets": [
+    {
+      "id": "tottaps-generated-learning-sprites",
+      "type": "sprite",
+      "path": "assets/games/sprites/items/*.png",
+      "sourceUrl": "",
+      "author": "TotTaps / OpenAI image generation",
+      "license": "Original project asset",
+      "licenseUrl": "",
+      "createdAt": "2026-05-02",
+      "attributionRequired": false,
+      "attributionText": "",
+      "usage": "Toddler game sprites for Shadow Matcher, Find & Tap, and future learning games",
+      "notes": "Generated from original generic prompts for TotTaps. Avoids brand characters, logos, labels, and franchise-specific styles."
+    }
+  ],
+  "notes": [
+    "Add one entry per third-party asset before using it in TotTaps.",
+    "Prefer original or CC0 assets. Use CC-BY only when credits are published.",
+    "Do not add assets with unclear, personal-use-only, or brand-derived licenses."
+  ],
+  "entryTemplate": {
+    "id": "short-kebab-case-name",
+    "type": "image | audio | font | ui | sprite | model",
+    "path": "assets/cc0/example.png",
+    "sourceUrl": "https://example.com/asset",
+    "author": "Creator name or Unknown",
+    "license": "CC0 | CC-BY-4.0 | Royalty-Free",
+    "licenseUrl": "https://example.com/license",
+    "downloadedAt": "YYYY-MM-DD",
+    "attributionRequired": false,
+    "attributionText": "",
+    "usage": "Where this asset appears in TotTaps"
+  }
+}

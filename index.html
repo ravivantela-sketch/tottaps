@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -61,6 +61,7 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
+  --game-vh: 1vh;
   --brand: #f97316;
   --brand2: #fb923c;
   --bg-deep: #0d0d12;
@@ -110,6 +111,11 @@
   height: 100%;
   object-fit: cover;
 }
+.report-score-emoji .report-mode-img {
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
+}
 .brand-wordmark {
   color: #ffd2a6;
   letter-spacing: 0.01em;
@@ -145,6 +151,8 @@ body {
 }
 body.game-active {
   cursor: none;
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 body.game-active a[href],
 body.game-active button,
@@ -516,6 +524,14 @@ body.phase-legend #vignette { background:radial-gradient(ellipse at center,trans
   transition: opacity .5s;
 }
 #idle-prompt.hide { opacity: 0; }
+body.game-active.play-mode-shadowmatch #idle-prompt {
+  opacity: 0;
+  visibility: hidden;
+}
+body.game-active.play-mode-findtap #idle-prompt {
+  opacity: 0;
+  visibility: hidden;
+}
 .idle-mascot {
   font-size: clamp(80px,16vw,140px);
   animation: idleBob 2.5s ease-in-out infinite;
@@ -1704,6 +1720,466 @@ body.phase-legend #vignette { background:radial-gradient(ellipse at center,trans
 }
 
 
+/*  FIND & TAP MINI-GAME  */
+#findtap-game {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: calc(var(--game-vh, 1vh) * 100);
+  z-index: 18;
+  display: none;
+  pointer-events: none;
+  overflow: hidden;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+body.game-active #findtap-game.active {
+  display: block;
+}
+#findtap-game::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 84% 18%, #fff7ad 0 6%, rgba(255,247,173,.55) 7%, transparent 15%),
+    radial-gradient(ellipse 18% 7% at 18% 20%, rgba(255,255,255,.88) 0 46%, transparent 48%),
+    radial-gradient(ellipse 22% 8% at 58% 16%, rgba(255,255,255,.78) 0 46%, transparent 48%),
+    linear-gradient(180deg, #7dd3fc 0%, #bae6fd 44%, #bbf7d0 45%, #86efac 100%);
+  pointer-events: none;
+}
+#findtap-game::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 54% 19% at 14% 84%, rgba(22,163,74,.36) 0 48%, transparent 50%),
+    radial-gradient(ellipse 58% 18% at 88% 82%, rgba(21,128,61,.3) 0 48%, transparent 50%),
+    radial-gradient(circle at 10% 72%, #fb7185 0 1.1%, transparent 1.3%),
+    radial-gradient(circle at 17% 78%, #facc15 0 1%, transparent 1.2%),
+    radial-gradient(circle at 78% 70%, #60a5fa 0 1.1%, transparent 1.3%),
+    radial-gradient(circle at 86% 76%, #f472b6 0 1%, transparent 1.2%),
+    linear-gradient(180deg, transparent 0 62%, rgba(22,101,52,.16) 63% 100%);
+  pointer-events: none;
+}
+#shadowmatch-game {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: calc(var(--game-vh, 1vh) * 100);
+  z-index: 18;
+  display: none;
+  pointer-events: none;
+  overflow: hidden;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+body.game-active #shadowmatch-game.active {
+  display: block;
+}
+#shadowmatch-game::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(125,211,252,.95) 0%, rgba(191,219,254,.95) 42%, rgba(187,247,208,.96) 43%, rgba(74,222,128,.94) 100%);
+  pointer-events: none;
+}
+#shadowmatch-game::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 34% 12% at 16% 28%, rgba(255,255,255,.86) 0 38%, transparent 40%),
+    radial-gradient(ellipse 28% 10% at 78% 18%, rgba(255,255,255,.78) 0 38%, transparent 40%),
+    radial-gradient(ellipse 58% 18% at 22% 75%, rgba(22,163,74,.34) 0 48%, transparent 50%),
+    radial-gradient(ellipse 64% 20% at 82% 78%, rgba(21,128,61,.3) 0 48%, transparent 50%);
+  opacity: .95;
+  pointer-events: none;
+}
+.shadowmatch-panel {
+  position: fixed;
+  left: 50%;
+  top: max(env(safe-area-inset-top), clamp(54px, calc(var(--game-vh, 1vh) * 8), 104px));
+  transform: translateX(-50%);
+  width: min(900px, 92vw);
+  z-index: 1;
+  pointer-events: none;
+}
+.shadowmatch-prompt {
+  margin: 0 auto 18px;
+  width: min(620px, 100%);
+  border: 1px solid rgba(15,23,42,.12);
+  border-radius: 24px;
+  background: rgba(255,255,255,.88);
+  padding: 14px 20px;
+  color: #0f172a;
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(20px, 4vw, 32px);
+  font-weight: 900;
+  box-shadow: 0 22px 48px rgba(15,23,42,.16), inset 0 1px 0 rgba(255,255,255,.84);
+  backdrop-filter: blur(10px);
+}
+.shadowmatch-board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(10px, 2vw, 18px);
+  pointer-events: auto;
+}
+.shadowmatch-slot,
+.shadowmatch-card {
+  position: relative;
+  min-height: clamp(92px, 17vw, 148px);
+  border: 1px solid rgba(15,23,42,.1);
+  border-radius: 24px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.72));
+  display: grid;
+  place-items: center;
+  box-shadow: 0 18px 34px rgba(15,23,42,.14), inset 0 1px 0 rgba(255,255,255,.88);
+}
+.shadowmatch-slot {
+  border-style: dashed;
+  background: rgba(255,255,255,.48);
+}
+.shadowmatch-card {
+  margin-top: 16px;
+  cursor: pointer;
+  touch-action: none;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.shadowmatch-card.active {
+  border-color: rgba(249,115,22,.72);
+  background: rgba(255,237,213,.92);
+  transform: translateY(-4px) scale(1.03);
+}
+.shadowmatch-slot.matched,
+.shadowmatch-card.matched {
+  border-color: rgba(74,222,128,.58);
+  background: rgba(220,252,231,.9);
+}
+.shadowmatch-slot::after,
+.shadowmatch-card::after {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-family: 'Baloo 2', cursive;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0;
+  transform: scale(.72);
+  transition: opacity .16s ease, transform .16s ease;
+  pointer-events: none;
+}
+.shadowmatch-slot.matched::after {
+  content: "\2713";
+  background: #22c55e;
+  box-shadow: 0 10px 22px rgba(34,197,94,.32);
+  opacity: 1;
+  transform: scale(1);
+}
+.shadowmatch-slot.is-miss::after,
+.shadowmatch-card.is-miss::after {
+  content: "\00D7";
+  background: #ef4444;
+  box-shadow: 0 10px 22px rgba(239,68,68,.28);
+  opacity: 1;
+  transform: scale(1);
+}
+.shadowmatch-slot.is-miss {
+  animation: shadowmatch-slot-miss .36s ease both;
+}
+.shadowmatch-card.is-miss {
+  border-color: rgba(239,68,68,.62);
+  background: rgba(254,226,226,.92);
+  animation: shadowmatch-card-miss .36s ease both;
+}
+.shadowmatch-card.matched {
+  opacity: .42;
+  pointer-events: none;
+}
+@keyframes shadowmatch-card-miss {
+  0%, 100% { transform: translateY(-4px) scale(1.03); }
+  25% { transform: translate(-8px, -4px) scale(1.03); }
+  75% { transform: translate(8px, -4px) scale(1.03); }
+}
+@keyframes shadowmatch-slot-miss {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+.shadowmatch-art {
+  width: clamp(76px, 12vw, 118px);
+  height: clamp(76px, 12vw, 118px);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.shadowmatch-art svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.shadowmatch-art img,
+.findtap-target img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  pointer-events: none;
+}
+.shadowmatch-art.silhouette {
+  filter: brightness(0) opacity(.72) drop-shadow(0 12px 18px rgba(0,0,0,.34));
+}
+.findtap-prompt {
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  top: max(env(safe-area-inset-top), clamp(58px, calc(var(--game-vh, 1vh) * 9), 112px));
+  transform: translateX(-50%);
+  min-width: min(86vw, 520px);
+  padding: 14px 22px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 24px;
+  border-color: rgba(15,23,42,.12);
+  background: rgba(255,255,255,.88);
+  color: #0f172a;
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(19px, 4.4vw, 34px);
+  font-weight: 900;
+  text-align: center;
+  line-height: 1.1;
+  text-shadow: none;
+  box-shadow: 0 24px 54px rgba(15,23,42,.18), inset 0 1px 0 rgba(255,255,255,.86);
+  backdrop-filter: blur(12px);
+  pointer-events: none;
+}
+.findtap-progress {
+  display: block;
+  margin-bottom: 6px;
+  color: rgba(15,23,42,.58);
+  font-size: clamp(11px, 2vw, 14px);
+  font-weight: 800;
+  letter-spacing: .08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.findtap-target {
+  position: fixed;
+  z-index: 1;
+  width: clamp(94px, 22vw, 154px);
+  height: clamp(94px, 22vw, 154px);
+  border: 0;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 28% 22%, rgba(255,255,255,.9), transparent 30%),
+    linear-gradient(160deg, rgba(255,255,255,.96), rgba(255,255,255,.72));
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(48px, 12vw, 86px);
+  font-weight: 900;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  appearance: none;
+  box-shadow:
+    0 24px 54px rgba(15,23,42,.18),
+    0 0 0 1px rgba(15,23,42,.1) inset,
+    0 0 42px var(--find-glow, rgba(249,115,22,.38));
+  transform: translate(-50%, -50%);
+  touch-action: none;
+  animation: findtap-bob 2.8s ease-in-out infinite;
+  transition: border-color .16s ease, box-shadow .16s ease, background .16s ease;
+}
+.findtap-target::after {
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  width: 44px;
+  height: 44px;
+  border: 4px solid rgba(255,255,255,.9);
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-family: 'Baloo 2', cursive;
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0;
+  transform: scale(.62);
+  transition: opacity .14s ease, transform .14s ease;
+  pointer-events: none;
+}
+.findtap-target svg {
+  width: 86%;
+  height: 86%;
+  display: block;
+  pointer-events: none;
+  filter: drop-shadow(0 12px 18px rgba(0,0,0,.26));
+}
+.findtap-target img {
+  width: 86%;
+  height: 86%;
+  filter: drop-shadow(0 12px 18px rgba(0,0,0,.26));
+}
+.findtap-symbol {
+  pointer-events: none;
+  filter: drop-shadow(0 12px 18px rgba(0,0,0,.26));
+}
+.findtap-target:nth-child(odd) {
+  animation-delay: -.8s;
+}
+.findtap-target.is-correct {
+  background:
+    radial-gradient(circle at 28% 22%, rgba(255,255,255,.92), transparent 30%),
+    linear-gradient(160deg, rgba(220,252,231,.98), rgba(187,247,208,.84));
+  box-shadow:
+    0 28px 60px rgba(22,163,74,.28),
+    0 0 0 3px rgba(34,197,94,.58) inset,
+    0 0 50px rgba(34,197,94,.48);
+  animation: findtap-win .72s ease both;
+}
+.findtap-target.is-correct::after {
+  content: "\2713";
+  background: #22c55e;
+  opacity: 1;
+  transform: scale(1);
+}
+.findtap-target.is-miss {
+  background:
+    radial-gradient(circle at 28% 22%, rgba(255,255,255,.92), transparent 30%),
+    linear-gradient(160deg, rgba(254,226,226,.98), rgba(254,202,202,.82));
+  box-shadow:
+    0 24px 54px rgba(185,28,28,.18),
+    0 0 0 3px rgba(239,68,68,.52) inset,
+    0 0 40px rgba(239,68,68,.34);
+  animation: findtap-miss .36s ease both;
+}
+.findtap-target.is-miss::after {
+  content: "\00D7";
+  background: #ef4444;
+  opacity: 1;
+  transform: scale(1);
+}
+.findtap-target.is-dimmed {
+  opacity: .38;
+  transform: translate(-50%, -50%) scale(.94);
+  animation: none;
+}
+@keyframes findtap-bob {
+  0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(-1deg); }
+  50% { transform: translate(-50%, calc(-50% - 12px)) scale(1.04) rotate(1deg); }
+}
+@keyframes findtap-win {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  45% { transform: translate(-50%, -50%) scale(1.26) rotate(5deg); }
+  100% { transform: translate(-50%, -50%) scale(1.08); }
+}
+@keyframes findtap-miss {
+  0%, 100% { transform: translate(-50%, -50%); }
+  25% { transform: translate(calc(-50% - 9px), -50%); }
+  75% { transform: translate(calc(-50% + 9px), -50%); }
+}
+@media (max-width: 720px), (max-height: 560px) {
+  .shadowmatch-panel {
+    top: max(env(safe-area-inset-top), 48px);
+    width: min(560px, 94vw);
+  }
+  .shadowmatch-prompt {
+    margin-bottom: 10px;
+    padding: 10px 14px;
+    border-radius: 18px;
+    font-size: clamp(17px, 5vw, 24px);
+  }
+  .shadowmatch-board {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(6px, 1.7vw, 10px);
+  }
+  .shadowmatch-slot,
+  .shadowmatch-card {
+    min-height: clamp(66px, calc(var(--game-vh, 1vh) * 14), 96px);
+    border-radius: 18px;
+  }
+  .shadowmatch-card {
+    margin-top: 10px;
+  }
+  .shadowmatch-art {
+    width: clamp(50px, 15vw, 76px);
+    height: clamp(50px, 15vw, 76px);
+  }
+  .shadowmatch-slot::after,
+  .shadowmatch-card::after {
+    right: 5px;
+    top: 5px;
+    width: 28px;
+    height: 28px;
+    font-size: 19px;
+  }
+  .findtap-prompt {
+    top: max(env(safe-area-inset-top), 46px);
+    min-width: min(92vw, 420px);
+    max-width: 92vw;
+    padding: 10px 14px;
+    border-radius: 18px;
+    font-size: clamp(17px, 5.5vw, 25px);
+  }
+  .findtap-progress {
+    margin-bottom: 4px;
+    font-size: 10px;
+    letter-spacing: .06em;
+  }
+  .findtap-target {
+    width: clamp(78px, 25vw, 112px);
+    height: clamp(78px, 25vw, 112px);
+    border-radius: 22px;
+  }
+  .findtap-target::after {
+    right: -6px;
+    top: -6px;
+    width: 34px;
+    height: 34px;
+    border-width: 3px;
+    font-size: 24px;
+  }
+}
+@media (max-width: 420px), (max-height: 480px) {
+  .shadowmatch-board {
+    gap: 6px;
+  }
+  .shadowmatch-slot,
+  .shadowmatch-card {
+    min-height: clamp(58px, calc(var(--game-vh, 1vh) * 13), 78px);
+    border-radius: 16px;
+  }
+  .shadowmatch-art {
+    width: clamp(44px, 14vw, 62px);
+    height: clamp(44px, 14vw, 62px);
+  }
+  .findtap-target {
+    width: clamp(70px, 24vw, 96px);
+    height: clamp(70px, 24vw, 96px);
+  }
+}
+
 /*  PARENT PANEL  */
 #ph {
   position: fixed; top: 0; left: 0; width: 60px; height: 60px; z-index: 100; cursor: pointer;
@@ -1914,6 +2390,10 @@ select {
 #report-confetti {
   position: fixed; inset: 0;
   pointer-events: none; z-index: 401;
+  display: none;
+}
+body.report-open #report-confetti {
+  display: block;
 }
 
 .report-card {
@@ -2045,6 +2525,32 @@ select {
   line-height: 1.5;
   max-width: 36ch;
 }
+body.report-mode-shadowmatch .report-score-block {
+  display: grid;
+  grid-template-columns: 64px minmax(0, auto);
+  column-gap: 16px;
+  align-items: center;
+  justify-content: start;
+}
+body.report-mode-shadowmatch .report-score-emoji {
+  grid-row: 1 / span 2;
+  width: 64px;
+  height: 64px;
+  background: rgba(255,255,255,.08);
+}
+body.report-mode-shadowmatch .report-score-num {
+  margin: 0;
+}
+body.report-mode-shadowmatch .report-score-label {
+  align-self: start;
+}
+body.report-mode-shadowmatch .report-chaos-badge,
+body.report-mode-shadowmatch .report-reward {
+  grid-column: 1 / -1;
+}
+body.report-mode-shadowmatch .report-chaos-badge {
+  margin-top: 18px;
+}
 
 /* Stats row */
 .report-stats {
@@ -2125,6 +2631,9 @@ select {
   border: 1px solid rgba(255,255,255,.1);
   color: var(--muted);
   font-size: 15px;
+}
+.rpt-home {
+  grid-column: 1 / -1;
 }
 
 /* Footer */
@@ -2870,31 +3379,171 @@ select {
       <div class="pointer-events-none absolute inset-[10%_6%_14%] rounded-[42px] bg-[radial-gradient(circle_at_50%_50%,rgba(249,115,22,.16),transparent_58%)] blur-3xl opacity-90"></div>
       <div id="hero-preview-card" class="relative mx-auto w-full max-w-[460px] overflow-hidden rounded-[26px] border border-white/10 bg-[linear-gradient(180deg,rgba(26,28,34,0.98),rgba(21,23,28,0.98))] p-5 shadow-[0_24px_60px_rgba(0,0,0,0.34)] lg:p-6">
         <div class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,.04),transparent_28%),radial-gradient(circle_at_18%_12%,rgba(249,115,22,.1),transparent_28%),radial-gradient(circle_at_82%_18%,rgba(96,165,250,.08),transparent_24%)]"></div>
-        <div class="relative inline-flex items-center rounded-full border border-orange-300/15 bg-orange-400/10 px-3 py-1.5 text-[9px] font-extrabold uppercase tracking-[0.12em] text-orange-100/90">How it works</div>
-        <div id="preview-title" class="relative mt-3.5 max-w-[15ch] font-display text-[1.14rem] leading-[1.1] tracking-[-0.02em] text-white/92">Keyboard, mouse and touch all work.</div>
-        <p class="relative mt-2.5 text-[0.9rem] leading-[1.65] text-slate-300/80">Any key press, mouse click or screen tap gets an instant response, so parents can understand the experience at a glance.</p>
-        <div class="relative mt-4 rounded-[20px] border border-white/10 bg-white/[0.03] p-3.5">
-          <div class="hero-demo-screen relative min-h-[210px] overflow-hidden rounded-[20px] border border-white/10 md:min-h-[220px] lg:min-h-[238px]" id="hero-demo-screen" tabindex="0" role="button" aria-label="Interactive TotTaps demo. Press any key or click here to spawn playful letters and numbers.">
-            <div class="hero-demo-idle" aria-hidden="true">
-              <span class="hero-demo-ghost hero-demo-ghost--one">A</span>
-              <span class="hero-demo-ghost hero-demo-ghost--two">7</span>
-              <span class="hero-demo-ghost hero-demo-ghost--three">Z</span>
-              <span class="hero-demo-spark hero-demo-spark--one"></span>
-              <span class="hero-demo-spark hero-demo-spark--two"></span>
-              <span class="hero-demo-spark hero-demo-spark--three"></span>
-              <span class="hero-demo-spark hero-demo-spark--four"></span>
+        <div class="relative inline-flex items-center rounded-full border border-orange-300/15 bg-orange-400/10 px-3 py-1.5 text-[9px] font-extrabold uppercase tracking-[0.12em] text-orange-100/90">One play space</div>
+        <div id="preview-title" class="relative mt-3.5 max-w-[18ch] font-display text-[1.25rem] leading-[1.08] tracking-[-0.02em] text-white/92">TotTaps stays simple for every child.</div>
+        <p class="relative mt-2.5 text-[0.9rem] leading-[1.65] text-slate-300/80">The main experience is still instant tapping, colors, sounds, and safe chaos. Learning lives as optional modes inside the same toy.</p>
+        <div class="relative mt-5 rounded-[20px] border border-white/10 bg-white/[0.03] p-4">
+          <div class="flex items-start gap-3">
+            <span aria-hidden="true" class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#60a5fa]/15 text-[#93c5fd]">
+              <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 11.5 11 13.5 15.5 9"></path>
+                <rect x="4" y="4" width="16" height="16" rx="4"></rect>
+              </svg>
+            </span>
+            <div class="min-w-0">
+              <div class="text-[0.72rem] font-extrabold uppercase tracking-[0.12em] text-orange-100/75">Learning mode</div>
+              <div class="mt-1 text-[1.04rem] font-bold leading-tight text-white">Find &amp; Tap Quiz</div>
+              <p class="mt-2 text-[0.86rem] leading-6 text-slate-300/78">A simple 4-choice quiz for colors, shapes, animals, objects, letters, and numbers, built into the same safe tapping experience.</p>
             </div>
           </div>
-          <div class="mt-3 flex flex-wrap gap-1.5">
-            <span class="inline-flex items-center rounded-full border border-white/10 bg-white/[0.05] px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-slate-300/90">Keys</span>
-            <span class="inline-flex items-center rounded-full border border-white/10 bg-white/[0.05] px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-slate-300/90">Clicks</span>
-            <span class="inline-flex items-center rounded-full border border-white/10 bg-white/[0.05] px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-slate-300/90">Touches</span>
+          <div class="mt-4 grid gap-2 text-[0.82rem] leading-5 text-slate-300/75 sm:grid-cols-3">
+            <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-3">Free Play remains the default.</div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-3">Parents can switch modes anytime.</div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.04] p-3">Uses original TotTaps visuals.</div>
           </div>
-          <div class="mt-3 text-[0.86rem] leading-[1.4] text-slate-400">Try pressing any key ↑</div>
+          <button type="button" data-age-game="true" data-age-preset="18-36m" data-play-mode="findtap" class="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#f97316] px-5 py-3 text-[0.95rem] font-bold text-white shadow-[0_16px_32px_rgba(249,115,22,0.2)] transition duration-200 hover:bg-[#ea580c] active:scale-[0.98]">Try Find &amp; Tap Quiz</button>
         </div>
       </div>
     </aside>
   </main>
+  <section id="game-library-section" aria-labelledby="game-library-title" class="w-full border-t border-white/10 bg-[#0f1117] py-10">
+    <div class="mx-auto w-full max-w-[1220px] px-5 sm:px-6 md:px-10 lg:px-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <div class="mx-auto mb-3 h-0.5 w-10 rounded-full bg-[#f97316]"></div>
+        <h2 id="game-library-title" class="font-display text-[1.75rem] font-bold leading-tight text-white">More TotTaps games, one safe play space</h2>
+        <p class="mt-3 text-[0.98rem] leading-7 text-slate-300/72">TotTaps stays the main experience. New games will use simple, familiar mechanics with original TotTaps artwork, sounds, and code.</p>
+      </div>
+
+      <div class="mt-7 grid grid-cols-1 gap-5 lg:grid-cols-3">
+        <article class="rounded-[26px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015))] p-5 shadow-[0_18px_36px_rgba(0,0,0,0.12)]">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <div class="text-[0.72rem] font-extrabold uppercase tracking-[0.14em] text-orange-100/75">Learning games</div>
+              <h3 class="mt-2 text-[1.18rem] font-bold leading-tight text-white">Recognition &amp; matching</h3>
+            </div>
+            <span aria-hidden="true" class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#60a5fa]/15 text-[#93c5fd]">
+              <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="5" width="7" height="7" rx="2"></rect>
+                <rect x="13" y="12" width="7" height="7" rx="2"></rect>
+                <path d="M7.5 15.5 10 18l4.5-5"></path>
+              </svg>
+            </span>
+          </div>
+          <div class="mt-4 grid gap-3">
+            <div class="rounded-2xl border border-orange-300/20 bg-orange-400/10 p-3">
+              <div class="flex items-center justify-between gap-2">
+                <div class="font-bold text-white">Find &amp; Tap Quiz</div>
+                <span class="rounded-full bg-[#f97316] px-2 py-0.5 text-[0.64rem] font-extrabold uppercase tracking-[0.08em] text-white">Now</span>
+              </div>
+              <p class="mt-1 text-[0.82rem] leading-5 text-slate-300/78">4-choice questions for colors, shapes, animals, objects, letters, and numbers.</p>
+              <button type="button" data-age-game="true" data-age-preset="18-36m" data-play-mode="findtap" class="mt-3 inline-flex w-full items-center justify-center rounded-full bg-[#f97316] px-4 py-2.5 text-[0.86rem] font-bold text-white transition duration-200 hover:bg-[#ea580c] active:scale-[0.98]">Play Quiz</button>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+              <div class="flex items-center justify-between gap-2">
+                <div class="font-bold text-white/92">The Shadow Matcher</div>
+                <span class="rounded-full bg-[#f97316] px-2 py-0.5 text-[0.64rem] font-extrabold uppercase tracking-[0.08em] text-white">Now</span>
+              </div>
+              <p class="mt-1 text-[0.82rem] leading-5 text-slate-400">Match pictures, vehicles, fruits, and objects to their shadows.</p>
+              <button type="button" data-age-game="true" data-age-preset="18-36m" data-play-mode="shadowmatch" class="mt-3 inline-flex w-full items-center justify-center rounded-full bg-[linear-gradient(135deg,#22c55e,#14b8a6)] px-4 py-2.5 text-[0.86rem] font-extrabold text-white shadow-[0_14px_26px_rgba(20,184,166,0.2)] transition duration-200 hover:scale-[1.01] hover:shadow-[0_18px_34px_rgba(34,197,94,0.24)] active:scale-[0.98]">Play Shadow Matcher</button>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+              <div class="flex items-center justify-between gap-2">
+                <div class="font-bold text-white/92">Sorting Baskets</div>
+                <span class="rounded-full border border-white/10 bg-white/[0.06] px-2 py-0.5 text-[0.62rem] font-extrabold uppercase tracking-[0.08em] text-slate-300">Coming soon</span>
+              </div>
+              <p class="mt-1 text-[0.82rem] leading-5 text-slate-400">Sort fruits, colors, and shapes into matching bins.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-[26px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015))] p-5 shadow-[0_18px_36px_rgba(0,0,0,0.12)]">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <div class="text-[0.72rem] font-extrabold uppercase tracking-[0.14em] text-orange-100/75">Fun games</div>
+              <h3 class="mt-2 text-[1.18rem] font-bold leading-tight text-white">Open-ended play</h3>
+            </div>
+            <span aria-hidden="true" class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#f97316]/15 text-[#fb923c]">
+              <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v3"></path>
+                <path d="M12 18v3"></path>
+                <path d="M3 12h3"></path>
+                <path d="M18 12h3"></path>
+                <path d="m5.6 5.6 2.1 2.1"></path>
+                <path d="m16.3 16.3 2.1 2.1"></path>
+                <circle cx="12" cy="12" r="3.5"></circle>
+              </svg>
+            </span>
+          </div>
+          <div class="mt-4 grid gap-3">
+            <div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+              <div class="flex items-center justify-between gap-2">
+                <div class="font-bold text-white/92">Tiny Tap Party</div>
+                <span class="rounded-full bg-[#f97316] px-2 py-0.5 text-[0.62rem] font-extrabold uppercase tracking-[0.08em] text-white">Core</span>
+              </div>
+              <p class="mt-1 text-[0.82rem] leading-5 text-slate-400">The classic TotTaps tap-and-burst experience.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+              <div class="flex items-center justify-between gap-2">
+                <div class="font-bold text-white/92">Bubble Pop</div>
+                <span class="rounded-full border border-white/10 bg-white/[0.06] px-2 py-0.5 text-[0.62rem] font-extrabold uppercase tracking-[0.08em] text-slate-300">Coming soon</span>
+              </div>
+              <p class="mt-1 text-[0.82rem] leading-5 text-slate-400">Large bubbles, gentle sounds, and simple cause-effect play.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+              <div class="flex items-center justify-between gap-2">
+                <div class="font-bold text-white/92">Hide &amp; Seek</div>
+                <span class="rounded-full border border-white/10 bg-white/[0.06] px-2 py-0.5 text-[0.62rem] font-extrabold uppercase tracking-[0.08em] text-slate-300">Coming soon</span>
+              </div>
+              <p class="mt-1 text-[0.82rem] leading-5 text-slate-400">Find a friendly TotTaps character behind boxes and bushes.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+              <div class="flex items-center justify-between gap-2">
+                <div class="font-bold text-white/92">Hop Tap Trail</div>
+                <span class="rounded-full border border-white/10 bg-white/[0.06] px-2 py-0.5 text-[0.62rem] font-extrabold uppercase tracking-[0.08em] text-slate-300">Coming soon</span>
+              </div>
+              <p class="mt-1 text-[0.82rem] leading-5 text-slate-400">Tap numbered tiles in order to move across a path.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-[26px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.015))] p-5 shadow-[0_18px_36px_rgba(0,0,0,0.12)]">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <div class="text-[0.72rem] font-extrabold uppercase tracking-[0.14em] text-orange-100/75">Educational games</div>
+              <h3 class="mt-2 text-[1.18rem] font-bold leading-tight text-white">Early thinking skills</h3>
+            </div>
+            <span aria-hidden="true" class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#a78bfa]/15 text-2xl">A</span>
+          </div>
+          <div class="mt-4 grid gap-3">
+            <div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+              <div class="flex items-center justify-between gap-2">
+                <div class="font-bold text-white/92">Pattern Parade</div>
+                <span class="rounded-full border border-white/10 bg-white/[0.06] px-2 py-0.5 text-[0.62rem] font-extrabold uppercase tracking-[0.08em] text-slate-300">Coming soon</span>
+              </div>
+              <p class="mt-1 text-[0.82rem] leading-5 text-slate-400">Repeat colors and shapes in simple sequences.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+              <div class="flex items-center justify-between gap-2">
+                <div class="font-bold text-white/92">Trace &amp; Glow</div>
+                <span class="rounded-full border border-white/10 bg-white/[0.06] px-2 py-0.5 text-[0.62rem] font-extrabold uppercase tracking-[0.08em] text-slate-300">Coming soon</span>
+              </div>
+              <p class="mt-1 text-[0.82rem] leading-5 text-slate-400">Follow dotted paths to trace letters and numbers.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+              <div class="flex items-center justify-between gap-2">
+                <div class="font-bold text-white/92">Connect the Dots</div>
+                <span class="rounded-full border border-white/10 bg-white/[0.06] px-2 py-0.5 text-[0.62rem] font-extrabold uppercase tracking-[0.08em] text-slate-300">Coming soon</span>
+              </div>
+              <p class="mt-1 text-[0.82rem] leading-5 text-slate-400">Tap dots in sequence to reveal a simple picture.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="mt-5 rounded-[22px] border border-white/10 bg-white/[0.035] p-4 text-center text-[0.88rem] leading-6 text-slate-300/75">
+        All planned games are based on generic childhood mechanics and will use original TotTaps visuals, sounds, names, and code.
+      </div>
+    </div>
+  </section>
   <section id="features-section" aria-labelledby="features-title" class="w-full border-y border-white/10 bg-[#111318] py-10">
     <div class="mx-auto w-full max-w-[1220px] px-5 sm:px-6 md:px-10 lg:px-20">
       <h2 id="features-title" class="relative mb-3 text-center font-display text-[1.65rem] font-bold leading-tight text-white before:mb-3 before:mx-auto before:block before:h-0.5 before:w-10 before:rounded-full before:bg-[#f97316] before:content-['']">What makes it magical</h2>
@@ -2994,6 +3643,7 @@ select {
           <a href="tottaps-guides.html" class="text-sm text-slate-300 transition duration-200 hover:text-white">Guides</a>
           <a href="tottaps-about.html" class="text-sm text-slate-300 transition duration-200 hover:text-white">About</a>
           <a href="privacy.html" class="text-sm text-slate-300 transition duration-200 hover:text-white">Privacy</a>
+          <a href="credits.html" class="text-sm text-slate-300 transition duration-200 hover:text-white">Credits</a>
           <a href="mailto:ravibvs91@gmail.com" class="text-sm text-slate-300 transition duration-200 hover:text-white">Contact support</a>
         </nav>
       </div>
@@ -3001,7 +3651,7 @@ select {
         <h2 class="font-display text-3xl font-bold leading-none text-white">Ready to play?</h2>
         <button id="footer-start-btn" data-launch-play="true" type="button" class="inline-flex select-none items-center justify-center gap-2 rounded-full bg-[#f97316] px-7 py-3.5 text-base font-semibold text-white shadow-[0_16px_32px_rgba(249,115,22,0.22)] transition duration-200 hover:scale-[1.02] hover:bg-[#ea580c] hover:shadow-[0_18px_36px_rgba(234,88,12,0.24)] active:scale-[0.98]">Start Free <span aria-hidden="true">&rarr;</span></button>
         <div class="mt-4 flex w-full flex-col items-center gap-3 text-center">
-          <span class="text-[15px] font-semibold text-[rgba(240,240,248,0.86)]">Share TotTaps with another parent 💛</span>
+          <span class="text-[15px] font-semibold text-[rgba(240,240,248,0.86)]">Share TotTaps with another parent</span>
           <div class="flex flex-wrap items-center justify-center gap-2.5">
             <button id="share-wa" type="button" class="inline-flex min-h-[46px] items-center gap-2 rounded-full border border-[#25D366] bg-[#25D366] px-[14px] py-[10px] text-[13px] font-extrabold text-white shadow-[0_14px_28px_rgba(0,0,0,0.14)] transition duration-200 hover:-translate-y-px hover:bg-[#1fb85a] hover:shadow-[0_18px_32px_rgba(0,0,0,0.2)]">
               <span aria-hidden="true" class="inline-flex h-4 w-4 items-center justify-center">
@@ -3057,6 +3707,8 @@ select {
   <div id="counter-badge">CALM</div>
 </div>
 <div id="tbar-wrap"><div id="tbar"></div></div>
+<div id="findtap-game" aria-live="polite" aria-label="Find and Tap game"></div>
+<div id="shadowmatch-game" aria-live="polite" aria-label="Shadow Matcher game"></div>
 <div id="app-toast" role="status" aria-live="polite"></div>
 
 <!-- Parent panel hotspot -->
@@ -3080,6 +3732,8 @@ select {
         <option value="letters">Learn Letters</option>
         <option value="numbers">Learn Numbers</option>
         <option value="colors">Learn Colors</option>
+        <option value="findtap">Find &amp; Tap</option>
+        <option value="shadowmatch">Shadow Matcher</option>
       </select>
       </div>
       <div class="prow">
@@ -3153,7 +3807,7 @@ select {
           <span aria-hidden="true" class="brand-mark brand-mark--report"><img src="tottaps-logo-icon.png" alt="" class="brand-mark__img"></span>
           <div class="report-logo-name brand-wordmark">TotTaps</div>
         </div>
-        <div class="report-title">TotTaps Report</div>
+        <div class="report-title" id="rpt-title">TotTaps Report</div>
         <div class="report-subtitle" id="rpt-session-label">Session complete!</div>
       </div>
 
@@ -3161,7 +3815,7 @@ select {
       <div class="report-score-block">
         <div class="report-score-emoji" id="rpt-emoji"></div>
         <div class="report-score-num" id="rpt-score">0</div>
-        <div class="report-score-label">keys tapped</div>
+        <div class="report-score-label" id="rpt-score-label">keys tapped</div>
         <div class="report-chaos-badge" id="rpt-chaos">Tiny Chaos</div>
         <div class="report-reward" id="rpt-reward">No stickers yet</div>
       </div>
@@ -3173,7 +3827,7 @@ select {
           <div class="stat-cell-val" id="rpt-duration">0s</div>
         </div>
         <div class="stat-cell">
-          <div class="stat-cell-label">Best streak</div>
+          <div class="stat-cell-label" id="rpt-streak-label">Best streak</div>
           <div class="stat-cell-val highlight" id="rpt-streak">0</div>
         </div>
         <div class="stat-cell">
@@ -3204,6 +3858,10 @@ select {
         <button class="rpt-btn rpt-ghost" id="rpt-new-game" type="button">
            New Game
         </button>
+
+        <button class="rpt-btn rpt-ghost rpt-home" id="rpt-home" type="button">
+           Back to Home
+        </button>
       </div>
 
       <!-- Footer -->
@@ -3217,6 +3875,9 @@ select {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/art/animal-art.js"></script>
+<script src="js/games/find-tap.js"></script>
+<script src="js/games/shadow-matcher.js"></script>
 <script>
 // 
 //  THEMES
@@ -3351,7 +4012,12 @@ function applyAgePreset(preset, persist = true) {
 
 function applyPlayMode(mode, persist = true) {
   playMode = mode;
+  Array.from(document.body.classList).forEach(cls => {
+    if (cls.startsWith('play-mode-')) document.body.classList.remove(cls);
+  });
+  document.body.classList.add(`play-mode-${playMode}`);
   if (persist) localStorage.setItem('tottaps.playMode', playMode);
+  syncLearningGameLayers();
 }
 
 function showToast(message, ms = 2200) {
@@ -3418,7 +4084,9 @@ const MODE_LABELS = {
   fun: 'Fun Chaos',
   letters: 'Learn Letters',
   numbers: 'Learn Numbers',
-  colors: 'Learn Colors'
+  colors: 'Learn Colors',
+  findtap: 'Find & Tap',
+  shadowmatch: 'Shadow Matcher'
 };
 
 function persistInsights() {
@@ -3870,6 +4538,16 @@ function rebuildStarDots() {
 }
 
 //  All classes defined  safe to initialise and start 
+function syncMobileViewportHeight() {
+  const height = window.visualViewport?.height || window.innerHeight || document.documentElement.clientHeight || 0;
+  if (height) document.documentElement.style.setProperty('--game-vh', `${height * 0.01}px`);
+}
+syncMobileViewportHeight();
+window.visualViewport?.addEventListener('resize', syncMobileViewportHeight);
+window.visualViewport?.addEventListener('scroll', syncMobileViewportHeight);
+window.addEventListener('orientationchange', () => setTimeout(syncMobileViewportHeight, 120));
+window.addEventListener('resize', syncMobileViewportHeight);
+
 initBg();
 animateBg();
 window.addEventListener('resize', initBg);
@@ -4727,6 +5405,10 @@ function bumpCounter() {
 // 
 const idlePrompt = document.getElementById('idle-prompt');
 const idleMascot = document.getElementById('idle-mascot');
+function syncLearningGameLayers() {
+  window.TotTapsFindTap?.sync();
+  window.TotTapsShadowMatcher?.sync();
+}
 
 // 
 //  MAIN SMASH
@@ -5189,6 +5871,8 @@ function createRewardArt(icon, accent = '#FDBA74', surface = '#1B1F2A', iconScal
   const safeAccent = accent;
   const safeSurface = surface;
   const size = Math.round(56 * iconScale);
+  const iconValue = String(icon || '').trim();
+  const isSvgIcon = iconValue.startsWith('<svg');
   return `<div style="
     width:100%;
     height:100%;
@@ -5205,11 +5889,16 @@ function createRewardArt(icon, accent = '#FDBA74', surface = '#1B1F2A', iconScal
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,.14),
       inset 0 -20px 30px rgba(0,0,0,.18);">
-    <span style="
+    ${isSvgIcon ? `<div style="
+      width:${size + 18}px;
+      height:${size + 18}px;
+      display:grid;
+      place-items:center;
+      filter:drop-shadow(0 10px 16px rgba(0,0,0,.24));">${iconValue}</div>` : `<span style="
       font-size:${size}px;
       line-height:1;
       transform:translateY(1px);
-      filter:drop-shadow(0 10px 16px rgba(0,0,0,.24));">${icon}</span>
+      filter:drop-shadow(0 10px 16px rgba(0,0,0,.24));">${iconValue}</span>`}
   </div>`;
 }
 
@@ -5391,20 +6080,17 @@ const BONUS_TAP_KEYS = {
     </svg>`]
   },
   'J': {
-    label: 'TEDDY',
-    glow: 'rgba(214,170,122,.82)',
+    label: 'KITE',
+    glow: 'rgba(123,190,255,.84)',
     size: 98,
     extraBurst: 10,
     svgs: [`<svg width="98" height="98" viewBox="0 0 98 98" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="31" cy="29" r="10" fill="#A56A43"/>
-      <circle cx="67" cy="29" r="10" fill="#A56A43"/>
-      <circle cx="49" cy="48" r="26" fill="#B97A4A"/>
-      <circle cx="49" cy="57" r="12" fill="#E8C39C"/>
-      <circle cx="40" cy="47" r="3" fill="#2C1C12"/>
-      <circle cx="58" cy="47" r="3" fill="#2C1C12"/>
-      <circle cx="49" cy="55" r="3.8" fill="#2C1C12"/>
-      <path d="M42 62 Q49 67 56 62" fill="none" stroke="#2C1C12" stroke-width="2.4" stroke-linecap="round"/>
-      <path d="M34 76 Q49 64 64 76" fill="none" stroke="#E8C39C" stroke-width="6" stroke-linecap="round"/>
+      <polygon points="49,12 82,46 49,80 16,46" fill="#FF7043"/>
+      <polygon points="49,12 65,46 49,80 33,46" fill="#FFD54F" opacity=".95"/>
+      <circle cx="49" cy="46" r="4.4" fill="#FFF3E0"/>
+      <path d="M49 80 Q60 89 48 96 Q42 90 46 84" fill="none" stroke="#E0E0E0" stroke-width="2.8" stroke-linecap="round"/>
+      <path d="M45 88 L39 94" stroke="#E0E0E0" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M54 92 L61 98" stroke="#E0E0E0" stroke-width="2.4" stroke-linecap="round"/>
     </svg>`]
   },
   'K': {
@@ -5509,7 +6195,16 @@ const BONUS_TAP_KEYS = {
 Object.assign(BONUS_TAP_KEYS, {
   DOG: createEmojiRewardDef({
     label: 'DOG',
-    icon: '🐶',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="21" cy="23" rx="8" ry="13" fill="#8D5A3B"/>
+      <ellipse cx="53" cy="23" rx="8" ry="13" fill="#8D5A3B"/>
+      <circle cx="37" cy="38" r="21" fill="#D7A078"/>
+      <ellipse cx="37" cy="45" rx="11" ry="8" fill="#F8E6D6"/>
+      <circle cx="30" cy="35" r="2.5" fill="#2D1C13"/>
+      <circle cx="44" cy="35" r="2.5" fill="#2D1C13"/>
+      <circle cx="37" cy="42" r="3.4" fill="#2D1C13"/>
+      <path d="M32 48 Q37 53 42 48" fill="none" stroke="#2D1C13" stroke-width="2.4" stroke-linecap="round"/>
+    </svg>`,
     glow: 'rgba(255,183,120,.84)',
     sound: 'dog',
     accent: '#F59E0B',
@@ -5517,7 +6212,16 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   CAT: createEmojiRewardDef({
     label: 'CAT',
-    icon: '🐱',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 28 L18 12 L31 22 Z" fill="#FB923C"/>
+      <path d="M54 28 L56 12 L43 22 Z" fill="#FB923C"/>
+      <circle cx="37" cy="39" r="22" fill="#FDBA74"/>
+      <circle cx="29" cy="36" r="2.7" fill="#2D1C13"/>
+      <circle cx="45" cy="36" r="2.7" fill="#2D1C13"/>
+      <path d="M37 41 L33 46 H41 Z" fill="#2D1C13"/>
+      <path d="M31 50 Q37 55 43 50" fill="none" stroke="#2D1C13" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M24 43 H12 M24 48 H13 M50 43 H62 M50 48 H61" stroke="#2D1C13" stroke-width="2" stroke-linecap="round"/>
+    </svg>`,
     glow: 'rgba(255,183,138,.84)',
     sound: 'cat',
     accent: '#FB923C',
@@ -5525,7 +6229,15 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   BUTTERFLY: createEmojiRewardDef({
     label: 'BUTTERFLY',
-    icon: '🦋',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="24" cy="31" rx="16" ry="19" fill="#60A5FA"/>
+      <ellipse cx="50" cy="31" rx="16" ry="19" fill="#F472B6"/>
+      <ellipse cx="25" cy="51" rx="12" ry="13" fill="#A78BFA"/>
+      <ellipse cx="49" cy="51" rx="12" ry="13" fill="#FBBF24"/>
+      <rect x="34" y="22" width="6" height="35" rx="3" fill="#1F2937"/>
+      <circle cx="37" cy="19" r="5" fill="#1F2937"/>
+      <path d="M34 15 Q26 8 21 14 M40 15 Q48 8 53 14" fill="none" stroke="#1F2937" stroke-width="2" stroke-linecap="round"/>
+    </svg>`,
     glow: 'rgba(129,212,250,.84)',
     sound: 'flutter',
     accent: '#60A5FA',
@@ -5534,7 +6246,17 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   GRAPES: createEmojiRewardDef({
     label: 'GRAPES',
-    icon: '🍇',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <path d="M39 16 C45 10 54 11 60 18 C51 22 44 22 39 16Z" fill="#65A30D"/>
+      <path d="M37 16 L35 25" stroke="#713F12" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="30" cy="29" r="9" fill="#A78BFA"/>
+      <circle cx="44" cy="29" r="9" fill="#8B5CF6"/>
+      <circle cx="23" cy="43" r="9" fill="#7C3AED"/>
+      <circle cx="37" cy="43" r="9" fill="#A78BFA"/>
+      <circle cx="51" cy="43" r="9" fill="#8B5CF6"/>
+      <circle cx="30" cy="56" r="9" fill="#8B5CF6"/>
+      <circle cx="44" cy="56" r="9" fill="#7C3AED"/>
+    </svg>`,
     glow: 'rgba(187,134,252,.84)',
     sound: 'chime',
     accent: '#A78BFA',
@@ -5542,7 +6264,14 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   WATERMELON: createEmojiRewardDef({
     label: 'WATERMELON',
-    icon: '🍉',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <path d="M13 45 A24 24 0 0 0 61 45 Z" fill="#16A34A"/>
+      <path d="M19 44 A18 18 0 0 0 55 44 Z" fill="#BBF7D0"/>
+      <path d="M23 43 A14 14 0 0 0 51 43 Z" fill="#F87171"/>
+      <circle cx="32" cy="49" r="2.2" fill="#1F2937"/>
+      <circle cx="42" cy="48" r="2.2" fill="#1F2937"/>
+      <circle cx="37" cy="55" r="2.2" fill="#1F2937"/>
+    </svg>`,
     glow: 'rgba(255,110,120,.84)',
     sound: 'chime',
     accent: '#F87171',
@@ -5550,7 +6279,12 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   MANGO: createEmojiRewardDef({
     label: 'MANGO',
-    icon: '🥭',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <path d="M42 17 C61 24 60 50 44 60 C29 69 13 57 17 40 C20 25 29 13 42 17Z" fill="#FBBF24"/>
+      <path d="M42 17 C55 27 53 45 42 55" fill="none" stroke="#FB923C" stroke-width="5" stroke-linecap="round"/>
+      <path d="M42 17 C48 9 57 9 63 15 C55 21 48 22 42 17Z" fill="#22C55E"/>
+      <circle cx="31" cy="34" r="4" fill="#FEF3C7" opacity=".55"/>
+    </svg>`,
     glow: 'rgba(255,175,82,.84)',
     sound: 'chime',
     accent: '#FB923C',
@@ -5558,7 +6292,14 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   STRAWBERRY: createEmojiRewardDef({
     label: 'STRAWBERRY',
-    icon: '🍓',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <path d="M37 19 C55 19 62 33 55 49 C50 61 39 66 37 66 C35 66 24 61 19 49 C12 33 19 19 37 19Z" fill="#F43F5E"/>
+      <path d="M29 22 L24 12 L35 18 L37 8 L40 18 L50 12 L45 22Z" fill="#22C55E"/>
+      <circle cx="29" cy="36" r="2" fill="#FEF3C7"/>
+      <circle cx="42" cy="34" r="2" fill="#FEF3C7"/>
+      <circle cx="36" cy="47" r="2" fill="#FEF3C7"/>
+      <circle cx="47" cy="48" r="2" fill="#FEF3C7"/>
+    </svg>`,
     glow: 'rgba(255,92,128,.84)',
     sound: 'chime',
     accent: '#F43F5E',
@@ -5566,7 +6307,11 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   SPARKLES: createEmojiRewardDef({
     label: 'SPARKLES',
-    icon: '✨',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <path d="M38 8 L45 29 L66 36 L45 43 L38 66 L31 43 L9 36 L31 29Z" fill="#FCD34D"/>
+      <path d="M16 10 L19 19 L28 22 L19 25 L16 34 L13 25 L4 22 L13 19Z" fill="#F472B6"/>
+      <path d="M58 6 L61 14 L69 17 L61 20 L58 29 L55 20 L47 17 L55 14Z" fill="#7DD3FC"/>
+    </svg>`,
     glow: 'rgba(255,222,118,.84)',
     sound: 'magic',
     accent: '#FCD34D',
@@ -5575,7 +6320,9 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   LIGHTFLASH: createEmojiRewardDef({
     label: 'LIGHT FLASH',
-    icon: '⚡',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <path d="M43 5 L17 42 H35 L29 69 L58 29 H40Z" fill="#FDE047" stroke="#F59E0B" stroke-width="3" stroke-linejoin="round"/>
+    </svg>`,
     glow: 'rgba(255,230,92,.84)',
     sound: 'zap',
     accent: '#FDE047',
@@ -5583,7 +6330,11 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   AIRPLANE: createEmojiRewardDef({
     label: 'AIRPLANE',
-    icon: '✈️',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 41 L66 16 L54 58 L38 45 L24 59 L28 40Z" fill="#93C5FD"/>
+      <path d="M28 40 L66 16 L38 45" fill="none" stroke="#1D4ED8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M24 59 L31 47" stroke="#1D4ED8" stroke-width="3" stroke-linecap="round"/>
+    </svg>`,
     glow: 'rgba(147,197,253,.84)',
     sound: 'whoosh',
     accent: '#93C5FD',
@@ -5592,7 +6343,15 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   TRAIN: createEmojiRewardDef({
     label: 'TRAIN',
-    icon: '🚂',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <rect x="13" y="24" width="48" height="31" rx="7" fill="#EF4444"/>
+      <rect x="19" y="15" width="36" height="18" rx="5" fill="#FB923C"/>
+      <rect x="23" y="20" width="10" height="10" rx="2" fill="#BAE6FD"/>
+      <rect x="41" y="20" width="10" height="10" rx="2" fill="#BAE6FD"/>
+      <circle cx="25" cy="57" r="7" fill="#111827"/>
+      <circle cx="49" cy="57" r="7" fill="#111827"/>
+      <path d="M8 65 H66" stroke="#92400E" stroke-width="5" stroke-linecap="round"/>
+    </svg>`,
     glow: 'rgba(255,138,101,.84)',
     sound: 'train',
     accent: '#FB923C',
@@ -5600,7 +6359,13 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   HELICOPTER: createEmojiRewardDef({
     label: 'HELICOPTER',
-    icon: '🚁',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22 38 C22 27 34 22 46 27 L60 34 C66 37 64 47 57 48 H29 C25 48 22 44 22 38Z" fill="#38BDF8"/>
+      <rect x="33" y="30" width="15" height="10" rx="3" fill="#DBEAFE"/>
+      <path d="M37 25 V14 M15 14 H59" stroke="#0F172A" stroke-width="4" stroke-linecap="round"/>
+      <path d="M60 34 L70 27 M60 34 L70 42" stroke="#0F172A" stroke-width="4" stroke-linecap="round"/>
+      <path d="M28 48 L21 60 M50 48 L57 60 M18 60 H60" stroke="#0F172A" stroke-width="4" stroke-linecap="round"/>
+    </svg>`,
     glow: 'rgba(125,211,252,.84)',
     sound: 'helicopter',
     accent: '#7DD3FC',
@@ -5669,7 +6434,9 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   SHAPE_CIRCLE: createEmojiRewardDef({
     label: 'CIRCLE',
-    icon: '🔵',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="37" cy="37" r="24" fill="#60A5FA" stroke="#DBEAFE" stroke-width="6"/>
+    </svg>`,
     glow: 'rgba(96,165,250,.84)',
     sound: 'splash',
     accent: '#60A5FA',
@@ -5677,7 +6444,9 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   SHAPE_TRIANGLE: createEmojiRewardDef({
     label: 'TRIANGLE',
-    icon: '🔺',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <path d="M37 10 L65 61 H9 Z" fill="#FB923C" stroke="#FED7AA" stroke-width="6" stroke-linejoin="round"/>
+    </svg>`,
     glow: 'rgba(251,146,60,.84)',
     sound: 'splash',
     accent: '#FB923C',
@@ -5685,7 +6454,9 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   SHAPE_SQUARE: createEmojiRewardDef({
     label: 'SQUARE',
-    icon: '🟩',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <rect x="14" y="14" width="46" height="46" rx="9" fill="#4ADE80" stroke="#DCFCE7" stroke-width="6"/>
+    </svg>`,
     glow: 'rgba(74,222,128,.84)',
     sound: 'splash',
     accent: '#4ADE80',
@@ -5693,7 +6464,13 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   PAINT_SPLASH: createEmojiRewardDef({
     label: 'COLOR SPLASH',
-    icon: '🎨',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 44 C4 34 18 21 31 28 C36 12 58 17 53 34 C70 35 67 58 49 54 C39 69 21 61 27 48 C24 48 21 47 18 44Z" fill="#A78BFA"/>
+      <circle cx="28" cy="36" r="6" fill="#F472B6"/>
+      <circle cx="41" cy="31" r="6" fill="#FCD34D"/>
+      <circle cx="48" cy="44" r="6" fill="#60A5FA"/>
+      <circle cx="32" cy="50" r="5" fill="#4ADE80"/>
+    </svg>`,
     glow: 'rgba(196,181,253,.84)',
     sound: 'splash',
     accent: '#C4B5FD',
@@ -5702,7 +6479,14 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   FIREWORKS: createEmojiRewardDef({
     label: 'FIREWORKS',
-    icon: '🎆',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <g stroke-linecap="round" stroke-width="5">
+        <path d="M37 12 V25 M37 49 V62 M12 37 H25 M49 37 H62" stroke="#FDE047"/>
+        <path d="M19 19 L28 28 M46 46 L55 55 M55 19 L46 28 M28 46 L19 55" stroke="#FB923C"/>
+      </g>
+      <circle cx="37" cy="37" r="10" fill="#F472B6"/>
+      <circle cx="37" cy="37" r="4" fill="#FFF7ED"/>
+    </svg>`,
     glow: 'rgba(255,170,90,.9)',
     sound: 'celebrate',
     accent: '#FB923C',
@@ -5714,7 +6498,14 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   CONFETTI: createEmojiRewardDef({
     label: 'CONFETTI',
-    icon: '🎉',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <path d="M27 66 L39 24 L57 54 Z" fill="#F59E0B" stroke="#FED7AA" stroke-width="3" stroke-linejoin="round"/>
+      <rect x="14" y="14" width="8" height="8" rx="2" fill="#F472B6" transform="rotate(-18 18 18)"/>
+      <rect x="48" y="10" width="8" height="8" rx="2" fill="#60A5FA" transform="rotate(24 52 14)"/>
+      <rect x="57" y="31" width="7" height="7" rx="2" fill="#4ADE80" transform="rotate(-12 60 34)"/>
+      <circle cx="31" cy="15" r="4" fill="#FDE047"/>
+      <path d="M18 40 Q30 29 22 20 M43 28 Q56 20 57 10" fill="none" stroke="#E879F9" stroke-width="3" stroke-linecap="round"/>
+    </svg>`,
     glow: 'rgba(250,204,21,.9)',
     sound: 'celebrate',
     accent: '#FACC15',
@@ -5726,7 +6517,12 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   GLOWPULSE: createEmojiRewardDef({
     label: 'SCREEN GLOW',
-    icon: '🌟',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="37" cy="37" r="10" fill="#FDE68A"/>
+      <circle cx="37" cy="37" r="21" fill="none" stroke="#FDE047" stroke-width="5" opacity=".85"/>
+      <circle cx="37" cy="37" r="31" fill="none" stroke="#FDBA74" stroke-width="4" opacity=".55"/>
+      <path d="M37 4 V15 M37 59 V70 M4 37 H15 M59 37 H70" stroke="#FEF3C7" stroke-width="4" stroke-linecap="round"/>
+    </svg>`,
     glow: 'rgba(255,241,118,.92)',
     sound: 'magic',
     accent: '#FDE68A',
@@ -5738,7 +6534,13 @@ Object.assign(BONUS_TAP_KEYS, {
   }),
   MUSICAL_NOTES: createEmojiRewardDef({
     label: 'MUSICAL NOTES',
-    icon: '🎵',
+    icon: `<svg width="74" height="74" viewBox="0 0 74 74" xmlns="http://www.w3.org/2000/svg">
+      <path d="M28 16 V50" stroke="#818CF8" stroke-width="7" stroke-linecap="round"/>
+      <path d="M28 16 L54 10 V44" stroke="#818CF8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse cx="22" cy="53" rx="12" ry="9" fill="#A78BFA"/>
+      <ellipse cx="48" cy="47" rx="12" ry="9" fill="#F472B6"/>
+      <path d="M31 26 L54 21" stroke="#E0E7FF" stroke-width="4" stroke-linecap="round"/>
+    </svg>`,
     glow: 'rgba(129,140,248,.9)',
     sound: 'learn',
     accent: '#818CF8',
@@ -5927,10 +6729,58 @@ function spawnSpecialKey(keyName, x, y) {
 }
 
 resetRewardCadence();
+window.TotTapsFindTap?.init({
+  getPlayMode: () => playMode,
+  isActive: () => active,
+  soundOn: () => soundOn,
+  speak,
+  initAudio,
+  doSmash,
+  playPop: () => SOUND_PACKS.pop?.(),
+  getRewardSvg: reward => BONUS_TAP_KEYS?.[reward]?.svgs?.[0] || '',
+  spawnReward: (reward, x, y, tier = 'big') => {
+    const def = BONUS_TAP_KEYS[reward] || BONUS_TAP_KEYS.CONFETTI;
+    spawnKeyVisual(def, x, y, { tier });
+  },
+});
+window.TotTapsShadowMatcher?.init({
+  getPlayMode: () => playMode,
+  isActive: () => active,
+  soundOn: () => soundOn,
+  speak,
+  shuffle: items => window.TotTapsFindTap?.shuffle?.(items) || [...items],
+  initAudio,
+  doSmash,
+  playSelect: playSmash,
+  playPop: playSmash,
+  spawnReward: (reward, x, y) => {
+    const def = BONUS_TAP_KEYS[reward] || BONUS_TAP_KEYS.CONFETTI;
+    spawnKeyVisual(def, x, y, { tier: 'small' });
+  },
+});
 
 // 
 //  INPUT HANDLERS
 // 
+let keyboardScatterIndex = 0;
+
+function getKeyboardScatterPoint() {
+  const w = window.innerWidth || 1024;
+  const h = window.innerHeight || 768;
+  const marginX = Math.min(130, Math.max(64, w * .09));
+  const marginY = Math.min(120, Math.max(72, h * .11));
+  const usableW = Math.max(120, w - marginX * 2);
+  const usableH = Math.max(120, h - marginY * 2);
+  const n = keyboardScatterIndex++;
+  const golden = .61803398875;
+  const xSeed = (n * golden + Math.random() * .18) % 1;
+  const ySeed = (n * .41421356237 + Math.random() * .22) % 1;
+  return {
+    x: Math.round(marginX + xSeed * usableW),
+    y: Math.round(marginY + ySeed * usableH),
+  };
+}
+
 document.addEventListener('keydown', e => {
   if (e.repeat || !active) return;
   e.preventDefault();
@@ -5938,8 +6788,13 @@ document.addEventListener('keydown', e => {
   initAudio();
   if (['F11','Escape'].includes(e.key)) return;
 
-  const cx = window.innerWidth/2  + (Math.random()-.5)*window.innerWidth*.5;
-  const cy = window.innerHeight/2 + (Math.random()-.5)*window.innerHeight*.4;
+  const keyPoint = getKeyboardScatterPoint();
+  const cx = keyPoint.x;
+  const cy = keyPoint.y;
+
+  if (window.TotTapsFindTap?.handleKey?.(e, cx, cy)) {
+    return;
+  }
 
   // Check if it's a special key
   const isSpecial = spawnSpecialKey(e.key, cx, cy);
@@ -5969,6 +6824,7 @@ document.addEventListener('keydown', e => {
 
 document.addEventListener('touchstart', e => {
   if (!active) return;
+  if (e.target.closest('#findtap-game,#shadowmatch-game')) return;
   initAudio();
   Array.from(e.changedTouches).forEach(t => {
     const chars = theme.emoji && theme.emoji.length
@@ -5982,7 +6838,7 @@ document.addEventListener('touchstart', e => {
 
 document.addEventListener('mousedown', e => {
   if (!active) return;
-  if (e.target.closest('#parent-panel,#ph,#end-card')) return;
+  if (e.target.closest('#parent-panel,#ph,#end-card,#findtap-game,#shadowmatch-game')) return;
   e.preventDefault();
   initAudio();
   const useThemeCompanion = Math.random() < 0.35 && theme.emoji && theme.emoji.length;
@@ -5991,6 +6847,20 @@ document.addEventListener('mousedown', e => {
   doSmash(c, e.clientX, e.clientY, 'touch');
   spawnBonusTapVisual('', e.clientX, e.clientY, { forceRandom: true });
 });
+
+document.getElementById('findtap-game')?.addEventListener('pointerdown', e => {
+  window.TotTapsFindTap?.handlePointer(e);
+});
+document.getElementById('findtap-game')?.addEventListener('touchmove', e => {
+  if (active && playMode === 'findtap') e.preventDefault();
+}, { passive: false });
+
+document.getElementById('shadowmatch-game')?.addEventListener('pointerdown', e => {
+  window.TotTapsShadowMatcher?.handlePointer(e);
+});
+document.getElementById('shadowmatch-game')?.addEventListener('touchmove', e => {
+  if (active && playMode === 'shadowmatch') e.preventDefault();
+}, { passive: false });
 
 // 
 //  HERO DEMO WIDGET
@@ -6240,7 +7110,12 @@ initLandingAnimations();
 // 
 //  START BUTTONS
 // 
-function launchTotTaps() {
+function launchTotTaps({ mode = null, persistMode = true } = {}) {
+  if (mode) {
+    applyPlayMode(mode, persistMode);
+    const modeSel = document.getElementById('mode-sel');
+    if (modeSel) modeSel.value = mode;
+  }
   initAudio();
   sessionStart = Date.now();
   bestStreak = 0; streakCount = 0; lastSmashTime = 0;
@@ -6251,12 +7126,46 @@ function launchTotTaps() {
     landing.style.display='none';
     active = true;
     syncGameCursorState();
+    syncLearningGameLayers();
   }, 600);
   requestFullscreenSafe('start');
 }
 
+function returnToHomeFromReport() {
+  closeReportCard();
+  active = false;
+  snowActive = false;
+  clearInterval(timerInterval);
+  timerLeft = 0;
+  tbarWrap.style.display = 'none';
+  syncGameCursorState();
+  syncLearningGameLayers();
+  closeLandingMenu();
+  landing.classList.remove('fade-out');
+  landing.style.display = 'flex';
+  landing.scrollTo({ top: 0, behavior: 'smooth' });
+  syncLandingNavState();
+  if (document.fullscreenElement) {
+    document.exitFullscreen?.().catch(() => {});
+  }
+}
+
 document.querySelectorAll('[data-launch-play="true"]').forEach(btn => {
-  btn.addEventListener('click', launchTotTaps);
+  btn.addEventListener('click', () => launchTotTaps({ mode: 'fun', persistMode: true }));
+});
+
+document.querySelectorAll('[data-age-game="true"]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const age = btn.dataset.agePreset || '18-36m';
+    const mode = btn.dataset.playMode || 'fun';
+    applyAgePreset(age);
+    applyPlayMode(mode);
+    const ageSel = document.getElementById('age-sel');
+    const modeSel = document.getElementById('mode-sel');
+    if (ageSel) ageSel.value = age;
+    if (modeSel) modeSel.value = mode;
+    launchTotTaps();
+  });
 });
 
 // 
@@ -6270,6 +7179,7 @@ function openPanel() {
   panel.classList.add('open');
   active = false;
   syncGameCursorState();
+  syncLearningGameLayers();
   renderInsights();
   const firstFocusable = panel.querySelector(panelFocusableSelector);
   firstFocusable?.focus();
@@ -6278,6 +7188,7 @@ function closePanel() {
   panel.classList.remove('open');
   active = true;
   syncGameCursorState();
+  syncLearningGameLayers();
   if (lastFocusedBeforePanel && lastFocusedBeforePanel !== document.body) {
     lastFocusedBeforePanel.focus();
   }
@@ -6352,6 +7263,7 @@ document.getElementById('mode-sel').addEventListener('change', e => {
 document.getElementById('age-sel').value = agePreset;
 document.getElementById('age-sel').addEventListener('change', e => {
   applyAgePreset(e.target.value);
+  syncLearningGameLayers();
   showToast(`Age preset: ${e.target.options[e.target.selectedIndex].text}`);
 });
 
@@ -6391,6 +7303,8 @@ function startTimer() {
 const endCard = document.getElementById('end-card');
 const rConfCanvas = document.getElementById('report-confetti');
 const rConfCtx = rConfCanvas.getContext('2d');
+document.body.classList.remove('report-open');
+rConfCtx.clearRect(0, 0, rConfCanvas.width, rConfCanvas.height);
 let confettiPieces = [];
 let confettiRunning = false;
 
@@ -6410,6 +7324,17 @@ const THEME_LABELS = {
   diwali: 'Diwali'
 };
 
+function getFindTapReportStats() {
+  return window.TotTapsFindTap?.getStats?.() || {
+    total: 50,
+    completed: 0,
+    correct: 0,
+    attempts: 0,
+    accuracy: 0,
+    currentSet: 1,
+  };
+}
+
 function getChaosInfo(n) {
   // Use PHASES for report card and map them to readable copy.
   const phase = getPhase(n);
@@ -6420,6 +7345,7 @@ function getChaosInfo(n) {
 
 // Confetti system
 function launchConfetti() {
+  document.body.classList.add('report-open');
   rConfCanvas.width  = window.innerWidth;
   rConfCanvas.height = window.innerHeight;
   confettiPieces = [];
@@ -6442,6 +7368,13 @@ function launchConfetti() {
   animateConfetti();
 }
 
+function closeReportCard() {
+  endCard.classList.remove('show');
+  document.body.classList.remove('report-open');
+  confettiRunning = false;
+  rConfCtx.clearRect(0, 0, rConfCanvas.width, rConfCanvas.height);
+}
+
 function animateConfetti() {
   if (!confettiRunning) return;
   rConfCtx.clearRect(0, 0, rConfCanvas.width, rConfCanvas.height);
@@ -6458,38 +7391,69 @@ function animateConfetti() {
     rConfCtx.restore();
   }
   if (confettiPieces.length > 0) requestAnimationFrame(animateConfetti);
-  else { confettiRunning = false; rConfCtx.clearRect(0,0,rConfCanvas.width,rConfCanvas.height); }
+  else { confettiRunning = false; document.body.classList.remove('report-open'); rConfCtx.clearRect(0,0,rConfCanvas.width,rConfCanvas.height); }
 }
 
 function showEnd(reason = 'timer') {
   active = false;
   syncGameCursorState();
+  syncLearningGameLayers();
+  document.body.classList.remove('report-mode-findtap', 'report-mode-shadowmatch', 'report-mode-freeplay');
   const elapsed = Date.now() - sessionStart;
+  const isQuizReport = playMode === 'findtap';
+  const isShadowReport = playMode === 'shadowmatch';
+  document.body.classList.add(isQuizReport ? 'report-mode-findtap' : isShadowReport ? 'report-mode-shadowmatch' : 'report-mode-freeplay');
   const chaosInfo = getChaosInfo(smashCount);
   const currentThemeName = Object.keys(THEMES).find(k => THEMES[k] === theme) || 'default';
+  const quizStats = getFindTapReportStats();
+  const shadowStats = window.TotTapsShadowMatcher?.getStats?.() || {
+    roundCorrect: 0,
+    sessionCorrect: 0,
+    sessionAttempts: 0,
+    accuracy: 0,
+  };
 
   recordSessionInsight({
     durationMs: elapsed,
-    score: smashCount,
+    score: isQuizReport ? quizStats.completed : isShadowReport ? shadowStats.sessionCorrect : smashCount,
     mode: playMode,
     themeKey: currentThemeName,
     reason,
   });
 
-  document.getElementById('rpt-score').textContent    = smashCount;
-  document.getElementById('rpt-chaos').textContent    = [chaosInfo[0], chaosInfo[1]].filter(Boolean).join(' ');
+  document.getElementById('rpt-score').textContent = isQuizReport ? `${quizStats.completed}/${quizStats.total}` : isShadowReport ? shadowStats.sessionCorrect : smashCount;
+  document.getElementById('rpt-score-label').textContent = isQuizReport ? 'questions complete' : isShadowReport ? 'matches made' : 'keys tapped';
+  document.getElementById('rpt-chaos').textContent = isQuizReport ? `Quiz accuracy ${quizStats.accuracy}%` : isShadowReport ? `Match accuracy ${shadowStats.accuracy}%` : [chaosInfo[0], chaosInfo[1]].filter(Boolean).join(' ');
+  document.getElementById('rpt-title').textContent = isQuizReport ? 'Find & Tap Quiz Report' : isShadowReport ? 'Shadow Matcher Report' : 'TotTaps Report';
   const rptEmojiEl = document.getElementById('rpt-emoji');
-  if (chaosInfo[0]) {
+  if (isQuizReport) {
+    rptEmojiEl.innerHTML = '<img class="report-mode-img" src="assets/games/sprites/items/star.png" alt="">';
+  } else if (isShadowReport) {
+    rptEmojiEl.innerHTML = '<img class="report-mode-img" src="assets/games/sprites/items/star.png" alt="">';
+  } else if (chaosInfo[0]) {
     rptEmojiEl.textContent = chaosInfo[0];
   } else {
     rptEmojiEl.innerHTML = '<img src="tottaps-logo-icon.png" alt="TotTaps logo">';
   }
   document.getElementById('rpt-duration').textContent = formatDuration(elapsed);
-  document.getElementById('rpt-streak').textContent   = bestStreak;
-  document.getElementById('rpt-theme').textContent    = THEME_LABELS[currentThemeName] || 'Classic';
-  document.getElementById('rpt-session-label').textContent = chaosInfo[2];
+  document.getElementById('rpt-streak-label').textContent = isQuizReport ? 'Correct' : isShadowReport ? 'Attempts' : 'Best streak';
+  document.getElementById('rpt-streak').textContent = isQuizReport ? `${quizStats.correct}/${quizStats.attempts || 0}` : isShadowReport ? shadowStats.sessionAttempts : bestStreak;
+  document.getElementById('rpt-theme').textContent = isQuizReport ? `Set ${quizStats.currentSet}/5` : isShadowReport ? 'Shadow Matcher' : (THEME_LABELS[currentThemeName] || 'Classic');
+  document.getElementById('rpt-session-label').textContent = isQuizReport
+    ? (quizStats.completed >= quizStats.total ? 'Quiz cycle complete!' : 'Quiz session paused')
+    : isShadowReport
+      ? (shadowStats.roundCorrect >= 4 ? 'Matching round complete!' : 'Matching session paused')
+    : chaosInfo[2];
   const rewardEl = document.getElementById('rpt-reward');
-  if (unlockedStickers.length) {
+  if (isQuizReport) {
+    rewardEl.textContent = quizStats.completed >= quizStats.total
+      ? 'All 50 quiz questions finished. Great focus!'
+      : `${quizStats.total - quizStats.completed} questions left in this quiz cycle.`;
+  } else if (isShadowReport) {
+    rewardEl.textContent = shadowStats.sessionCorrect
+      ? `${shadowStats.sessionCorrect} total match${shadowStats.sessionCorrect === 1 ? '' : 'es'} made with original TotTaps picture art.`
+      : 'Pick an animal, then tap its matching shadow.';
+  } else if (unlockedStickers.length) {
     const latest = unlockedStickers[unlockedStickers.length - 1];
     const rewardPrefix = latest.emoji ? `${latest.emoji} ` : '';
     rewardEl.textContent = `${rewardPrefix}${latest.label} - ${unlockedStickers.length} achievement${unlockedStickers.length > 1 ? 's' : ''} unlocked`;
@@ -6500,14 +7464,16 @@ function showEnd(reason = 'timer') {
   // Issue 1: Show the right primary button depending on how session ended
   const playAgainBtn = document.getElementById('rpt-play-again');
   const newGameBtn   = document.getElementById('rpt-new-game');
+  const copyBtn = document.getElementById('rpt-copy');
+  copyBtn.innerHTML = isQuizReport ? 'Copy Quiz Report' : isShadowReport ? 'Copy Match Report' : 'Copy This Chaos';
   if (reason === 'escape' || reason === 'exit') {
     // User pressed ESC / exited fullscreen  they clearly want to keep going
-    playAgainBtn.innerHTML = 'Keep Tapping!';
+    playAgainBtn.innerHTML = isQuizReport ? 'Keep Quizzing!' : isShadowReport ? 'Keep Matching!' : 'Keep Tapping!';
     playAgainBtn.style.display = 'flex';
     newGameBtn.style.display   = 'none'; // hide new game  irrelevant on ESC
   } else {
     // Timer ended naturally  show both options
-    playAgainBtn.innerHTML = 'Play Again';
+    playAgainBtn.innerHTML = isQuizReport ? 'Resume Quiz' : isShadowReport ? 'Resume Matching' : 'Play Again';
     playAgainBtn.style.display = 'flex';
     newGameBtn.style.display   = 'flex';
   }
@@ -6523,22 +7489,25 @@ function resetSession() {
   unlockedStickers = [];
   currentPhaseIdx = 0;
   resetRewardCadence();
+  if (playMode === 'findtap') window.TotTapsFindTap?.resetSession();
+  if (playMode === 'shadowmatch') window.TotTapsShadowMatcher?.resetSession();
   snowflakes = [];
   document.body.classList.remove('phase-calm','phase-warm','phase-hot','phase-wild','phase-chaos','phase-legend');
   document.body.classList.add('phase-calm');
   bumpCounter();
   idlePrompt.classList.remove('hide');
   idleMascot.textContent = theme.mascot;
+  syncLearningGameLayers();
 }
 
 //  Button handlers 
 document.getElementById('rpt-play-again').addEventListener('click', () => {
-  endCard.classList.remove('show');
-  confettiRunning = false;
+  closeReportCard();
   resetSession();
   if (timerDuration > 0) startTimer();
   active = true;
   syncGameCursorState();
+  syncLearningGameLayers();
   // Re-enter fullscreen
   if (!document.fullscreenElement) {
     requestFullscreenSafe('play-again');
@@ -6546,8 +7515,7 @@ document.getElementById('rpt-play-again').addEventListener('click', () => {
 });
 
 document.getElementById('rpt-new-game').addEventListener('click', () => {
-  endCard.classList.remove('show');
-  confettiRunning = false;
+  closeReportCard();
   resetSession();
   timerDuration = 0;
   tbarWrap.style.display = 'none';
@@ -6555,23 +7523,45 @@ document.getElementById('rpt-new-game').addEventListener('click', () => {
   document.getElementById('timer-sel').value = '0';
   active = true;
   syncGameCursorState();
+  syncLearningGameLayers();
   // Re-enter fullscreen
   if (!document.fullscreenElement) {
     requestFullscreenSafe('new-game');
   }
 });
 
+document.getElementById('rpt-home').addEventListener('click', returnToHomeFromReport);
+
 document.getElementById('rpt-copy').addEventListener('click', () => {
-  const chaosInfo = getChaosInfo(smashCount);
   const elapsed = Date.now() - sessionStart;
-  const txt = `TotTaps Report\n\nScore: ${smashCount} keys tapped\nDuration: ${formatDuration(elapsed)}\nChaos level: ${chaosInfo[1]}\nBest streak: ${bestStreak}\n\n${chaosInfo[2]}\n\nhttps://tottaps.com`;
+  let txt;
+  if (playMode === 'findtap') {
+    const quizStats = getFindTapReportStats();
+    txt = `TotTaps Quiz Report\n\nProgress: ${quizStats.completed}/${quizStats.total} questions\nCorrect taps: ${quizStats.correct}/${quizStats.attempts || 0}\nAccuracy: ${quizStats.accuracy}%\nDuration: ${formatDuration(elapsed)}\n\nhttps://tottaps.com`;
+  } else if (playMode === 'shadowmatch') {
+    const shadowStats = window.TotTapsShadowMatcher?.getStats?.() || { sessionCorrect: 0, sessionAttempts: 0, accuracy: 0 };
+    txt = `TotTaps Shadow Matcher Report\n\nMatches: ${shadowStats.sessionCorrect}\nAttempts: ${shadowStats.sessionAttempts}\nAccuracy: ${shadowStats.accuracy}%\nDuration: ${formatDuration(elapsed)}\n\nhttps://tottaps.com`;
+  } else {
+    const chaosInfo = getChaosInfo(smashCount);
+    txt = `TotTaps Report\n\nScore: ${smashCount} keys tapped\nDuration: ${formatDuration(elapsed)}\nChaos level: ${chaosInfo[1]}\nBest streak: ${bestStreak}\n\n${chaosInfo[2]}\n\nhttps://tottaps.com`;
+  }
   navigator.clipboard?.writeText(txt);
   _showCopied('rpt-copy', 'Copied to clipboard!');
 });
 
 document.getElementById('rpt-whatsapp').addEventListener('click', () => {
-  const chaosInfo = getChaosInfo(smashCount);
-  const msg = encodeURIComponent(`My toddler just tapped ${smashCount} keys on TotTaps!\nChaos level: ${chaosInfo[1]}\nBest streak: ${bestStreak} in a row!\nTry it free: https://tottaps.com`);
+  let shareText;
+  if (playMode === 'findtap') {
+    const quizStats = getFindTapReportStats();
+    shareText = `My toddler completed ${quizStats.completed}/${quizStats.total} TotTaps quiz questions with ${quizStats.accuracy}% accuracy!\nTry it free: https://tottaps.com`;
+  } else if (playMode === 'shadowmatch') {
+    const shadowStats = window.TotTapsShadowMatcher?.getStats?.() || { sessionCorrect: 0, accuracy: 0 };
+    shareText = `My toddler made ${shadowStats.sessionCorrect} Shadow Matcher matches on TotTaps with ${shadowStats.accuracy}% accuracy!\nTry it free: https://tottaps.com`;
+  } else {
+    const chaosInfo = getChaosInfo(smashCount);
+    shareText = `My toddler just tapped ${smashCount} keys on TotTaps!\nChaos level: ${chaosInfo[1]}\nBest streak: ${bestStreak} in a row!\nTry it free: https://tottaps.com`;
+  }
+  const msg = encodeURIComponent(shareText);
   window.open(`https://wa.me/?text=${msg}`, '_blank');
 });
 
